@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Showcase. Websites & Automatisierung für lokale Betriebe</title>
+  <meta name="description" content="Beispiel-Websites und einfache Erklärung wie Automatisierung im Betrieb wirklich aussieht." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0a0a0a; --fg: #f5f5f5; --muted: #a1a1aa; --accent: #f59e0b; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; }
+    .serif { font-family: 'Playfair Display', serif; }
+    .grain::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .04; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .glow {
+      background: radial-gradient(60% 50% at 50% 0%, rgba(245,158,11,0.18), transparent 70%),
+                  radial-gradient(40% 40% at 80% 30%, rgba(56,189,248,0.10), transparent 70%);
+    }
+    .card { background: #111113; border: 1px solid #1f1f23; transition: transform .35s ease, border-color .35s ease, background .35s ease; }
+    .card:hover { transform: translateY(-4px); border-color: #2a2a30; background: #131316; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: #1a1a1f; border: 1px solid #2a2a30; font-size: 11px; font-weight: 500; color: #a1a1aa; letter-spacing: .04em; text-transform: uppercase; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .step-line { position: absolute; left: 23px; top: 48px; bottom: -24px; width: 2px; background: linear-gradient(180deg, #2a2a30, transparent); }
+    .step-num { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #f59e0b, #d97706); color: #0a0a0a; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; }
+    .phone {
+      width: 260px; height: 540px; border-radius: 38px; background: #18181b; border: 12px solid #000;
+      position: relative; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 0 1px #2a2a30;
+    }
+    .phone::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 90px; height: 22px; background: #000; border-radius: 999px; z-index: 10; }
+    .pulse-dot { width: 8px; height: 8px; border-radius: 999px; background: #22c55e; box-shadow: 0 0 0 0 rgba(34,197,94,.6); animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(34,197,94,.6); }
+      70% { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+    .gradient-text { background: linear-gradient(135deg, #f59e0b, #f97316); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  </style>
+</head>
+<body class="grain">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-black/60 border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#top" class="font-bold tracking-tight text-lg">SHOWCASE<span class="text-amber-500">.</span></a>
+      <div class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
+        <a href="#websites" class="hover:text-white transition">Websites</a>
+        <a href="#automation" class="hover:text-white transition">Automatisierung</a>
+        <a href="#kontakt" class="hover:text-white transition">Kontakt</a>
+      </div>
+      <a href="#kontakt" class="text-xs font-semibold bg-amber-500 text-black px-4 py-2 rounded-full hover:bg-amber-400 transition">Gespräch starten</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="top" class="relative pt-40 pb-24 overflow-hidden">
+    <div class="absolute inset-0 glow"></div>
+    <div class="relative max-w-6xl mx-auto px-6 text-center">
+      <span class="badge mb-6"><span class="pulse-dot"></span> Live Beispiele</span>
+      <h1 class="serif text-5xl md:text-7xl font-bold leading-tight mb-6">
+        Websites die <span class="gradient-text">arbeiten</span>.<br>
+        Auch wenn Sie schlafen.
+      </h1>
+      <p class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10">
+        Sieben echte Beispiel-Seiten zum Anklicken. Plus eine einfache Erklärung, was im Hintergrund passiert. Ohne Fachchinesisch.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#websites" class="bg-amber-500 text-black font-semibold px-6 py-3 rounded-full hover:bg-amber-400 transition">Beispiele ansehen</a>
+        <a href="#automation" class="border border-white/20 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/5 transition">Wie funktioniert das?</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- WEBSITES GRID -->
+  <section id="websites" class="py-24 relative">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal mb-16 text-center">
+        <span class="badge mb-4">Sieben Branchen</span>
+        <h2 class="serif text-4xl md:text-5xl font-bold mb-4">Alle Beispiele zum Anklicken.</h2>
+        <p class="text-zinc-400 max-w-xl mx-auto">Jede Seite ist live. Klicken Sie sich durch wie ein echter Kunde.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Restaurant -->
+        <a href="restaurant/" target="_blank" class="card reveal rounded-2xl overflow-hidden group">
+          <div class="aspect-[4/3] overflow-hidden bg-zinc-900">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Restaurant" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy">
+          </div>
+          <div class="p-6">
+            <span class="badge mb-3">Gastronomie</span>
+            <h3 class="text-xl font-bold mb-1">Trattoria Bella Luna</h3>
+            <p class="text-sm text-zinc-400">Italienisches Restaurant mit Online Reservierung.</p>
+          </div>
+        </a>
+
+        <!-- Fitness -->
+        <a href="fitness/" target="_blank" class="card reveal rounded-2xl overflow-hidden group">
+          <div class="aspect-[4/3] overflow-hidden bg-zinc-900">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80" alt="Fitness" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy">
+          </div>
+          <div class="p-6">
+            <span class="badge mb-3">Sport & Fitness</span>
+            <h3 class="text-xl font-bold mb-1">PULSE Fitness Studio</h3>
+            <p class="text-sm text-zinc-400">Fitnessstudio mit Probetraining und Kursplan.</p>
+          </div>
+        </a>
+
+        <!-- Salon -->
+        <a href="salon/" target="_blank" class="card reveal rounded-2xl overflow-hidden group">
+          <div class="aspect-[4/3] overflow-hidden bg-zinc-900">
+            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80" alt="Salon" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy">
+          </div>
+          <div class="p-6">
+            <span class="badge mb-3">Beauty & Hair</span>
+            <h3 class="text-xl font-bold mb-1">MAISON Beauty & Hair</h3>
+            <p class="text-sm text-zinc-400">Friseur und Beauty Salon mit Online Buchung.</p>
+          </div>
+        </a>
+
+        <!-- Steuerberater -->
+        <a href="steuerberater/" target="_blank" class="card reveal rounded-2xl overflow-hidden group">
+          <div class="aspect-[4/3] overflow-hidden bg-zinc-900">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" alt="Steuerberater" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy">
+          </div>
+          <div class="p-6">
+            <span class="badge mb-3">Beratung</span>
+            <h3 class="text-xl font-bold mb-1">Kanzlei Hoffmann & Partner</h3>
+            <p class="text-sm text-zinc-400">Steuerkanzlei mit Erstgespräch online.</p>
+          </div>
+        </a>
+
+        <!-- Krüger Dach -->
+        <a href="https://mark1anthony.github.io/krueger-dach/" target="_blank" class="card reveal rounded-2xl overflow-hidden group">
+          <div class="aspect-[4/3] overflow-hidden bg-zinc-900">
+            <img src="https://images.unsplash.com/photo-1632154897063-9b30b94f47eb?w=800&q=80" alt="Dachdecker" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy">
+          </div>
+          <div class="p-6">
+            <span class="badge mb-3">Handwerk</span>
+            <h3 class="text-xl font-bold mb-1">Krüger Dach</h3>
+            <p class="text-sm text-zinc-400">Dachdeckerei mit Anfragenformular.</p>
+          </div>
+        </a>
+
+        <!-- Strahlkraft -->
+        <a href="https://mark1anthony.github.io/strahlkraft-clean/" target="_blank" class="card reveal rounded-2xl overflow-hidden group">
+          <div class="aspect-[4/3] overflow-hidden bg-zinc-900">
+            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80" alt="Reinigung" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy">
+          </div>
+          <div class="p-6">
+            <span class="badge mb-3">Reinigung</span>
+            <h3 class="text-xl font-bold mb-1">Strahlkraft Clean</h3>
+            <p class="text-sm text-zinc-400">Reinigungsbetrieb mit Angebotsanfrage.</p>
+          </div>
+        </a>
+
+        <!-- Glanz & Klar -->
+        <a href="https://mark1anthony.github.io/glanz-klar/" target="_blank" class="card reveal rounded-2xl overflow-hidden group md:col-span-2 lg:col-span-1">
+          <div class="aspect-[4/3] overflow-hidden bg-zinc-900">
+            <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?w=800&q=80" alt="Glanz und Klar" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" loading="lazy">
+          </div>
+          <div class="p-6">
+            <span class="badge mb-3">Reinigung Premium</span>
+            <h3 class="text-xl font-bold mb-1">Glanz & Klar</h3>
+            <p class="text-sm text-zinc-400">Premium Gebäudereinigung mit Buchungsstrecke.</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTOMATION -->
+  <section id="automation" class="py-24 relative border-t border-white/5">
+    <div class="absolute inset-0 glow opacity-50"></div>
+    <div class="relative max-w-6xl mx-auto px-6">
+
+      <div class="reveal mb-16 text-center">
+        <span class="badge mb-4">Was passiert hinter den Kulissen</span>
+        <h2 class="serif text-4xl md:text-5xl font-bold mb-4">Eine Anfrage. <span class="gradient-text">Sechs Schritte</span>. Null Aufwand.</h2>
+        <p class="text-zinc-400 max-w-2xl mx-auto">
+          So sieht es aus, wenn ein Kunde auf Ihrer Website eine Anfrage stellt. Sie machen nichts. Die Website kümmert sich um den Rest.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-[1fr,auto] gap-16 items-start">
+
+        <!-- Steps -->
+        <div class="space-y-10">
+
+          <div class="reveal flex gap-5 relative">
+            <div class="step-num">1</div>
+            <div class="step-line"></div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Ein Kunde besucht Ihre Website</h3>
+              <p class="text-zinc-400">Sonntag Abend, 22 Uhr. Frau Müller sucht einen Dachdecker. Sie findet Ihre Seite, sie sieht modern und vertrauenswürdig aus. Sie bleibt.</p>
+            </div>
+          </div>
+
+          <div class="reveal flex gap-5 relative">
+            <div class="step-num">2</div>
+            <div class="step-line"></div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Sie füllt das Formular aus</h3>
+              <p class="text-zinc-400">Name, Telefon, was sie braucht. Sie klickt auf "Anfrage senden". Das war es schon für Frau Müller.</p>
+            </div>
+          </div>
+
+          <div class="reveal flex gap-5 relative">
+            <div class="step-num">3</div>
+            <div class="step-line"></div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Die Website schickt die Anfrage los</h3>
+              <p class="text-zinc-400">In dem Moment passiert im Hintergrund eine Menge. Aber für Sie sieht es einfach aus: die Anfrage geht direkt dorthin, wo Sie sie brauchen.</p>
+            </div>
+          </div>
+
+          <div class="reveal flex gap-5 relative">
+            <div class="step-num">4</div>
+            <div class="step-line"></div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Sie bekommen sofort eine Nachricht</h3>
+              <p class="text-zinc-400">Auf Ihrem Handy klingelt es. Eine Mail. Oder eine WhatsApp Nachricht. Oder beides. Sie wissen sofort: neue Anfrage, das hier sind die Details.</p>
+            </div>
+          </div>
+
+          <div class="reveal flex gap-5 relative">
+            <div class="step-num">5</div>
+            <div class="step-line"></div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Frau Müller bekommt automatisch eine Bestätigung</h3>
+              <p class="text-zinc-400">Eine freundliche Mail im Namen Ihres Betriebs: "Vielen Dank für Ihre Anfrage, wir melden uns morgen früh." Sie weiß, sie ist in guten Händen. Geschrieben haben Sie diese Mail nie.</p>
+            </div>
+          </div>
+
+          <div class="reveal flex gap-5 relative">
+            <div class="step-num">6</div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Alles wird sauber abgelegt</h3>
+              <p class="text-zinc-400">Die Anfrage landet automatisch in einer übersichtlichen Liste. Mit Datum, Status, Notizen. Keine verlorenen Zettel mehr. Keine vergessenen Rückrufe. Keine Kunden die abspringen weil niemand reagiert hat.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Phone Mockup -->
+        <div class="reveal hidden lg:block sticky top-32">
+          <div class="phone">
+            <div class="absolute inset-0 pt-12 pb-6 px-4 flex flex-col gap-3">
+              <div class="text-center text-xs text-zinc-500 font-medium">Heute 22:14</div>
+
+              <div class="bg-zinc-800 rounded-2xl p-4 border border-zinc-700">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 rounded-md bg-amber-500 flex items-center justify-center text-black text-xs font-bold">!</div>
+                  <div class="text-xs text-zinc-400 font-semibold">NEUE ANFRAGE</div>
+                </div>
+                <div class="text-white text-sm font-bold mb-1">Frau Müller</div>
+                <div class="text-zinc-400 text-xs leading-relaxed">Dachreparatur nach Sturm. Ruft gerne morgen Vormittag zurück.</div>
+              </div>
+
+              <div class="bg-zinc-800 rounded-2xl p-4 border border-zinc-700">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 rounded-md bg-green-500 flex items-center justify-center text-black text-xs font-bold">✓</div>
+                  <div class="text-xs text-zinc-400 font-semibold">BESTÄTIGUNG GESENDET</div>
+                </div>
+                <div class="text-zinc-300 text-xs leading-relaxed">Frau Müller hat eine Eingangsbestätigung per Mail erhalten.</div>
+              </div>
+
+              <div class="bg-zinc-800 rounded-2xl p-4 border border-zinc-700">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="w-6 h-6 rounded-md bg-sky-500 flex items-center justify-center text-black text-xs font-bold">＋</div>
+                  <div class="text-xs text-zinc-400 font-semibold">IM SYSTEM ABGELEGT</div>
+                </div>
+                <div class="text-zinc-300 text-xs leading-relaxed">Anfrage Nr. 247. Status: offen. Wartet auf Rückruf.</div>
+              </div>
+
+              <div class="mt-auto text-center">
+                <div class="inline-flex items-center gap-2 text-[10px] text-zinc-500">
+                  <span class="pulse-dot"></span> Live im Hintergrund
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom value -->
+      <div class="reveal mt-20 grid md:grid-cols-3 gap-6">
+        <div class="card rounded-2xl p-6">
+          <div class="text-amber-500 text-3xl serif font-bold mb-2">24/7</div>
+          <h4 class="font-bold mb-1">Immer erreichbar</h4>
+          <p class="text-sm text-zinc-400">Auch nachts, am Wochenende, im Urlaub. Die Website nimmt Anfragen entgegen. Immer.</p>
+        </div>
+        <div class="card rounded-2xl p-6">
+          <div class="text-amber-500 text-3xl serif font-bold mb-2">0 Min</div>
+          <h4 class="font-bold mb-1">Kein Aufwand für Sie</h4>
+          <p class="text-sm text-zinc-400">Keine Software die Sie lernen müssen. Sie machen Ihre Arbeit. Die Website macht ihre.</p>
+        </div>
+        <div class="card rounded-2xl p-6">
+          <div class="text-amber-500 text-3xl serif font-bold mb-2">∞</div>
+          <h4 class="font-bold mb-1">Nichts geht verloren</h4>
+          <p class="text-sm text-zinc-400">Jede Anfrage wird automatisch festgehalten. Keine Zettel, keine vergessenen Rückrufe.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="kontakt" class="py-32 relative border-t border-white/5">
+    <div class="absolute inset-0 glow"></div>
+    <div class="relative max-w-3xl mx-auto px-6 text-center">
+      <span class="badge mb-6">Bereit?</span>
+      <h2 class="serif text-4xl md:text-6xl font-bold mb-6 leading-tight">
+        Lassen Sie uns 15 Minuten<br>über Ihre Website sprechen.
+      </h2>
+      <p class="text-lg text-zinc-400 mb-10 max-w-xl mx-auto">
+        Kein Verkaufsgespräch. Kein Druck. Wir schauen uns gemeinsam an, was für Ihren Betrieb Sinn ergibt und was nicht.
+      </p>
+      <a href="mailto:markamaechi.dev@gmail.com?subject=Anfrage%20Website%20%26%20Automatisierung" class="inline-block bg-amber-500 text-black font-bold px-8 py-4 rounded-full hover:bg-amber-400 transition text-lg">
+        Erstgespräch anfragen
+      </a>
+      <p class="text-xs text-zinc-500 mt-6">markamaechi.dev@gmail.com</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-zinc-500">
+      <div>SHOWCASE<span class="text-amber-500">.</span></div>
+      <div>Beispielseiten. Alle Betriebsnamen sind fiktiv.</div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>

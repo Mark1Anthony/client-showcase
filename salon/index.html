@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MAISON Beauty & Hair | Elegantes Salon Studio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blush: #f7e4df;
+    --cream: #fbf6f0;
+    --ivory: #fffdf9;
+    --gold: #c8a96a;
+    --gold-dark: #a8894f;
+    --charcoal: #2b2420;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--ivory);
+    color: var(--charcoal);
+  }
+  h1, h2, h3, h4, .serif {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .gold { color: var(--gold); }
+  .bg-gold { background-color: var(--gold); }
+  .bg-blush { background-color: var(--blush); }
+  .bg-cream { background-color: var(--cream); }
+  .bg-ivory { background-color: var(--ivory); }
+  .border-gold { border-color: var(--gold); }
+
+  .btn-gold {
+    background-color: var(--gold);
+    color: #fff;
+    padding: 0.9rem 2rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    transition: all 0.4s ease;
+    border: 1px solid var(--gold);
+  }
+  .btn-gold:hover {
+    background-color: transparent;
+    color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200,169,106,0.25);
+  }
+  .btn-outline-gold {
+    background-color: transparent;
+    color: var(--gold);
+    padding: 0.9rem 2rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    border: 1px solid var(--gold);
+    transition: all 0.4s ease;
+  }
+  .btn-outline-gold:hover {
+    background-color: var(--gold);
+    color: #fff;
+  }
+
+  .hero {
+    background: linear-gradient(rgba(43,36,32,0.35), rgba(43,36,32,0.55)),
+      url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+  }
+
+  .nav-link {
+    position: relative;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 0; height: 1px;
+    background-color: var(--gold);
+    transition: width 0.4s ease;
+  }
+  .nav-link:hover { color: var(--gold); }
+  .nav-link:hover::after { width: 100%; }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem auto 2rem;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background-color: var(--gold);
+  }
+  .divider span {
+    margin: 0 1rem;
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .card {
+    background-color: #fff;
+    border: 1px solid rgba(200,169,106,0.2);
+    transition: all 0.5s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(43,36,32,0.08);
+    border-color: var(--gold);
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    position: relative;
+  }
+  .gallery-item img {
+    transition: transform 0.8s ease;
+  }
+  .gallery-item:hover img {
+    transform: scale(1.08);
+  }
+  .gallery-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(43,36,32,0.25), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .gallery-item:hover::after { opacity: 1; }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.7rem 0;
+    border-bottom: 1px dotted rgba(200,169,106,0.35);
+  }
+  .price-row:last-child { border-bottom: none; }
+  .price-row .name { font-weight: 400; }
+  .price-row .price { color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; }
+
+  input, select {
+    background-color: var(--ivory);
+    border: 1px solid rgba(200,169,106,0.35);
+    padding: 0.9rem 1rem;
+    width: 100%;
+    font-size: 0.9rem;
+    transition: border 0.3s ease;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+</style>
+</head>
+<body class="bg-ivory">
+
+<!-- NAVIGATION -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-ivory/95 backdrop-blur border-b border-gold/20">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <a href="#home" class="serif text-2xl tracking-wide">
+      <span class="gold">MAISON</span> <span class="text-sm tracking-[0.3em] text-charcoal">BEAUTY & HAIR</span>
+    </a>
+    <div class="hidden md:flex items-center space-x-10">
+      <a href="#about" class="nav-link">Studio</a>
+      <a href="#leistungen" class="nav-link">Leistungen</a>
+      <a href="#galerie" class="nav-link">Galerie</a>
+      <a href="#team" class="nav-link">Team</a>
+      <a href="#termin" class="nav-link">Termin</a>
+      <a href="#kontakt" class="nav-link">Kontakt</a>
+    </div>
+    <a href="#termin" class="hidden md:inline-block btn-gold">Termin buchen</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero min-h-screen flex items-center justify-center text-center text-white px-6">
+  <div class="max-w-3xl">
+    <p class="gold tracking-[0.35em] text-xs mb-6">SEIT 2012 IN MÜNCHEN</p>
+    <h1 class="text-5xl md:text-7xl leading-tight mb-6">Schönheit, die<br><em class="gold">bleibt</em>.</h1>
+    <p class="text-lg md:text-xl font-light max-w-xl mx-auto mb-10 opacity-90">
+      Willkommen im MAISON. Ein Atelier für Haar und Beauty, in dem Eleganz, Ruhe und handwerkliche Präzision zusammenfinden.
+    </p>
+    <a href="#termin" class="btn-gold inline-block">Termin online buchen</a>
+  </div>
+</section>
+
+<!-- ÜBER DAS STUDIO -->
+<section id="about" class="py-24 px-6 bg-cream">
+  <div class="max-w-5xl mx-auto text-center fade-in">
+    <p class="gold tracking-[0.3em] text-xs">ÜBER DAS STUDIO</p>
+    <div class="divider"><span>MAISON</span></div>
+    <h2 class="text-4xl md:text-5xl mb-8">Ein Atelier für Ihre Schönheit</h2>
+    <p class="text-lg leading-relaxed text-charcoal/80 max-w-3xl mx-auto mb-6">
+      Das MAISON ist mehr als ein Salon. Es ist ein Rückzugsort, an dem Sie zur Ruhe kommen und sich einer Erfahrung hingeben, die auf Sie zugeschnitten ist. Unser Team vereint klassische Friseurkunst mit modernen Beauty Treatments.
+    </p>
+    <p class="text-lg leading-relaxed text-charcoal/80 max-w-3xl mx-auto">
+      Wir arbeiten mit ausgewählten Produkten, nehmen uns Zeit für eine ausführliche Beratung und gestalten jeden Besuch als kleines Ritual. Diskretion, Qualität und ein Sinn für Details bestimmen alles, was wir tun.
+    </p>
+  </div>
+</section>
+
+<!-- LEISTUNGEN -->
+<section id="leistungen" class="py-24 px-6 bg-ivory">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center fade-in">
+      <p class="gold tracking-[0.3em] text-xs">LEISTUNGEN</p>
+      <div class="divider"><span>Preisliste</span></div>
+      <h2 class="text-4xl md:text-5xl mb-4">Unsere Services</h2>
+      <p class="text-charcoal/70 max-w-2xl mx-auto mb-16">Eine Auswahl unserer Behandlungen. Gerne stellen wir auf Wunsch ein individuelles Paket für Sie zusammen.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Haarschnitt -->
+      <div class="card p-10 fade-in">
+        <h3 class="text-3xl mb-2">Haarschnitt</h3>
+        <p class="text-sm text-charcoal/60 italic mb-6">Präzision trifft Persönlichkeit</p>
+        <div class="price-row"><span class="name">Damen Schnitt inkl. Waschen & Föhnen</span><span class="price">ab 79 €</span></div>
+        <div class="price-row"><span class="name">Herren Schnitt klassisch</span><span class="price">ab 49 €</span></div>
+        <div class="price-row"><span class="name">Pony Nachschnitt</span><span class="price">15 €</span></div>
+        <div class="price-row"><span class="name">Kinder Schnitt (bis 12 Jahre)</span><span class="price">35 €</span></div>
+      </div>
+
+      <!-- Coloration -->
+      <div class="card p-10 fade-in">
+        <h3 class="text-3xl mb-2">Coloration</h3>
+        <p class="text-sm text-charcoal/60 italic mb-6">Farbe mit Charakter</p>
+        <div class="price-row"><span class="name">Ansatzfarbe</span><span class="price">ab 69 €</span></div>
+        <div class="price-row"><span class="name">Komplettfarbe</span><span class="price">ab 95 €</span></div>
+        <div class="price-row"><span class="name">Balayage & Highlights</span><span class="price">ab 180 €</span></div>
+        <div class="price-row"><span class="name">Glossing & Toner</span><span class="price">ab 45 €</span></div>
+      </div>
+
+      <!-- Pflege -->
+      <div class="card p-10 fade-in">
+        <h3 class="text-3xl mb-2">Pflege</h3>
+        <p class="text-sm text-charcoal/60 italic mb-6">Rituale für gesundes Haar</p>
+        <div class="price-row"><span class="name">Intensiv Haarkur</span><span class="price">ab 39 €</span></div>
+        <div class="price-row"><span class="name">Kopfhaut Treatment</span><span class="price">55 €</span></div>
+        <div class="price-row"><span class="name">Keratin Glätten</span><span class="price">ab 220 €</span></div>
+        <div class="price-row"><span class="name">Olaplex Bonding</span><span class="price">ab 45 €</span></div>
+      </div>
+
+      <!-- Styling -->
+      <div class="card p-10 fade-in">
+        <h3 class="text-3xl mb-2">Styling</h3>
+        <p class="text-sm text-charcoal/60 italic mb-6">Für besondere Anlässe</p>
+        <div class="price-row"><span class="name">Blow Dry Styling</span><span class="price">ab 45 €</span></div>
+        <div class="price-row"><span class="name">Hochsteckfrisur</span><span class="price">ab 95 €</span></div>
+        <div class="price-row"><span class="name">Braut Styling inkl. Probe</span><span class="price">ab 220 €</span></div>
+        <div class="price-row"><span class="name">Make up klassisch</span><span class="price">ab 75 €</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="galerie" class="py-24 px-6 bg-blush/40">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center fade-in">
+      <p class="gold tracking-[0.3em] text-xs">GALERIE</p>
+      <div class="divider"><span>Impressionen</span></div>
+      <h2 class="text-4xl md:text-5xl mb-16">Einblicke ins Atelier</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 fade-in">
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" alt="Salon Interieur" class="w-full h-72 object-cover"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80" alt="Haarstyling" class="w-full h-72 object-cover"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=800&q=80" alt="Coloration" class="w-full h-72 object-cover"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=800&q=80" alt="Beauty Produkte" class="w-full h-72 object-cover"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=800&q=80" alt="Waschplatz" class="w-full h-72 object-cover"></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=800&q=80" alt="Elegantes Styling" class="w-full h-72 object-cover"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="py-24 px-6 bg-ivory">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center fade-in">
+      <p class="gold tracking-[0.3em] text-xs">UNSER TEAM</p>
+      <div class="divider"><span>Stylisten</span></div>
+      <h2 class="text-4xl md:text-5xl mb-16">Die Hände hinter MAISON</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="text-center fade-in">
+        <div class="overflow-hidden mb-6">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" alt="Isabelle Laurent" class="w-full h-96 object-cover transition-transform duration-700 hover:scale-105">
+        </div>
+        <h3 class="text-3xl">Isabelle Laurent</h3>
+        <p class="gold tracking-[0.2em] text-xs mt-2 mb-4">GRÜNDERIN & MASTER STYLIST</p>
+        <p class="text-charcoal/70 text-sm px-4">Spezialistin für Präzisionsschnitte und natürliche Balayage. Ausgebildet in Paris und London.</p>
+      </div>
+      <div class="text-center fade-in">
+        <div class="overflow-hidden mb-6">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" alt="Clara Hoffmann" class="w-full h-96 object-cover transition-transform duration-700 hover:scale-105">
+        </div>
+        <h3 class="text-3xl">Clara Hoffmann</h3>
+        <p class="gold tracking-[0.2em] text-xs mt-2 mb-4">COLORISTIN</p>
+        <p class="text-charcoal/70 text-sm px-4">Expertin für feine Farbverläufe, Glossing und pflegende Colorationen mit natürlichen Pigmenten.</p>
+      </div>
+      <div class="text-center fade-in">
+        <div class="overflow-hidden mb-6">
+          <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=600&q=80" alt="Mia Seeberg" class="w-full h-96 object-cover transition-transform duration-700 hover:scale-105">
+        </div>
+        <h3 class="text-3xl">Mia Seeberg</h3>
+        <p class="gold tracking-[0.2em] text-xs mt-2 mb-4">STYLING & MAKE UP</p>
+        <p class="text-charcoal/70 text-sm px-4">Verantwortlich für Braut Styling, Hochsteckfrisuren und klassisches Make up für besondere Anlässe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONLINE TERMIN -->
+<section id="termin" class="py-24 px-6 bg-cream">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center fade-in">
+      <p class="gold tracking-[0.3em] text-xs">ONLINE BUCHUNG</p>
+      <div class="divider"><span>Termin</span></div>
+      <h2 class="text-4xl md:text-5xl mb-4">Ihren Termin reservieren</h2>
+      <p class="text-charcoal/70 mb-12">Hinterlassen Sie uns Ihre Wünsche, wir bestätigen Ihren Termin innerhalb eines Werktags.</p>
+    </div>
+    <form class="bg-ivory p-10 border border-gold/30 fade-in" onsubmit="event.preventDefault(); alert('Vielen Dank. Dies ist eine Demo Buchung.');">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <label>Name</label>
+          <input type="text" placeholder="Ihr vollständiger Name" required>
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" placeholder="ihre@email.de" required>
+        </div>
+        <div>
+          <label>Telefon</label>
+          <input type="tel" placeholder="+49 ...">
+        </div>
+        <div>
+          <label>Wunschtermin</label>
+          <input type="datetime-local">
+        </div>
+        <div class="md:col-span-2">
+          <label>Gewünschte Leistung</label>
+          <select required>
+            <option value="">Bitte auswählen</option>
+            <option>Haarschnitt Damen</option>
+            <option>Haarschnitt Herren</option>
+            <option>Ansatzfarbe</option>
+            <option>Balayage & Highlights</option>
+            <option>Intensiv Haarkur</option>
+            <option>Keratin Glätten</option>
+            <option>Hochsteckfrisur</option>
+            <option>Braut Styling</option>
+            <option>Beratungsgespräch</option>
+          </select>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <button type="submit" class="btn-gold">Termin anfragen</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- KONTAKT & ÖFFNUNGSZEITEN -->
+<section id="kontakt" class="py-24 px-6 bg-ivory">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
+    <div class="fade-in">
+      <p class="gold tracking-[0.3em] text-xs">BESUCHEN SIE UNS</p>
+      <h2 class="text-4xl md:text-5xl mt-4 mb-8">Kontakt & Adresse</h2>
+      <div class="space-y-5 text-charcoal/80">
+        <p class="serif text-2xl">MAISON Beauty & Hair</p>
+        <p>Maximilianstraße 28<br>80539 München</p>
+        <p><span class="gold tracking-widest text-xs">TELEFON</span><br>+49 89 1234 5678</p>
+        <p><span class="gold tracking-widest text-xs">EMAIL</span><br>hallo@maison-beauty.de</p>
+      </div>
+    </div>
+    <div class="fade-in bg-blush/40 p-10 border border-gold/20">
+      <p class="gold tracking-[0.3em] text-xs">ÖFFNUNGSZEITEN</p>
+      <h3 class="text-3xl mt-3 mb-8">Wir sind für Sie da</h3>
+      <div class="space-y-3 text-charcoal/80">
+        <div class="flex justify-between border-b border-gold/20 pb-2"><span>Montag</span><span>geschlossen</span></div>
+        <div class="flex justify-between border-b border-gold/20 pb-2"><span>Dienstag</span><span>10:00 . 19:00</span></div>
+        <div class="flex justify-between border-b border-gold/20 pb-2"><span>Mittwoch</span><span>10:00 . 19:00</span></div>
+        <div class="flex justify-between border-b border-gold/20 pb-2"><span>Donnerstag</span><span>10:00 . 20:00</span></div>
+        <div class="flex justify-between border-b border-gold/20 pb-2"><span>Freitag</span><span>09:00 . 20:00</span></div>
+        <div class="flex justify-between border-b border-gold/20 pb-2"><span>Samstag</span><span>09:00 . 17:00</span></div>
+        <div class="flex justify-between"><span>Sonntag</span><span>geschlossen</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-charcoal text-white/80 py-14 px-6" style="background-color: #2b2420;">
+  <div class="max-w-6xl mx-auto text-center">
+    <p class="serif text-3xl"><span class="gold">MAISON</span> Beauty & Hair</p>
+    <div class="divider"><span style="color:#c8a96a">Seit 2012</span></div>
+    <div class="flex flex-wrap justify-center gap-8 text-xs tracking-[0.2em] uppercase mb-8">
+      <a href="#about" class="hover:text-white transition">Studio</a>
+      <a href="#leistungen" class="hover:text-white transition">Leistungen</a>
+      <a href="#galerie" class="hover:text-white transition">Galerie</a>
+      <a href="#team" class="hover:text-white transition">Team</a>
+      <a href="#termin" class="hover:text-white transition">Termin</a>
+      <a href="#kontakt" class="hover:text-white transition">Kontakt</a>
+    </div>
+    <p class="text-xs text-white/50">© 2026 MAISON Beauty & Hair. Alle Rechte vorbehalten. Impressum . Datenschutz</p>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

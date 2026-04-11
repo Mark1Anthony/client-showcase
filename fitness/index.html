@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PULSE Fitness Studio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neon: #b6ff1a;
+    --neon-glow: rgba(182, 255, 26, 0.55);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0a0a;
+    color: #f5f5f5;
+  }
+  h1, h2, h3, .display {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.04em;
+  }
+  .neon-text { color: var(--neon); text-shadow: 0 0 12px var(--neon-glow); }
+  .neon-btn {
+    background: var(--neon);
+    color: #0a0a0a;
+    font-weight: 700;
+    box-shadow: 0 0 20px var(--neon-glow), 0 0 40px rgba(182,255,26,0.25);
+    transition: all 0.3s ease;
+  }
+  .neon-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 30px var(--neon-glow), 0 0 60px rgba(182,255,26,0.45);
+  }
+  .neon-border {
+    border: 1px solid rgba(182,255,26,0.3);
+    transition: all 0.3s ease;
+  }
+  .neon-border:hover {
+    border-color: var(--neon);
+    box-shadow: 0 0 25px rgba(182,255,26,0.25);
+    transform: translateY(-4px);
+  }
+  .hero-bg {
+    background-image: linear-gradient(rgba(10,10,10,0.75), rgba(10,10,10,0.9)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .card-img {
+    transition: transform 0.5s ease;
+  }
+  .card-hover:hover .card-img { transform: scale(1.08); }
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--neon);
+    transition: width 0.3s;
+  }
+  .nav-link:hover::after { width: 100%; }
+  input, textarea, select {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    color: #f5f5f5;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--neon);
+    box-shadow: 0 0 15px rgba(182,255,26,0.25);
+  }
+  .pricing-featured {
+    background: linear-gradient(180deg, rgba(182,255,26,0.08), rgba(10,10,10,0.3));
+    border: 1px solid var(--neon);
+    box-shadow: 0 0 40px rgba(182,255,26,0.15);
+  }
+</style>
+</head>
+<body class="bg-neutral-950 text-neutral-100">
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-neutral-950/85 backdrop-blur-md border-b border-neutral-800">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#home" class="display text-2xl tracking-widest">
+      <span class="neon-text">PULSE</span><span class="text-white"> FITNESS</span>
+    </a>
+    <ul class="hidden md:flex gap-8 text-sm font-medium">
+      <li><a class="nav-link hover:text-white text-neutral-300" href="#ueber">Über uns</a></li>
+      <li><a class="nav-link hover:text-white text-neutral-300" href="#kurse">Kurse</a></li>
+      <li><a class="nav-link hover:text-white text-neutral-300" href="#trainer">Trainer</a></li>
+      <li><a class="nav-link hover:text-white text-neutral-300" href="#preise">Mitgliedschaft</a></li>
+      <li><a class="nav-link hover:text-white text-neutral-300" href="#kontakt">Kontakt</a></li>
+    </ul>
+    <a href="#probetraining" class="neon-btn px-5 py-2 rounded-full text-sm">Probetraining</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero-bg min-h-screen flex items-center justify-center relative">
+  <div class="max-w-5xl px-6 text-center">
+    <p class="neon-text text-sm md:text-base tracking-[0.4em] mb-6 font-semibold">DEIN KÖRPER. DEIN TEMPO. DEIN PULSE.</p>
+    <h1 class="display text-6xl md:text-8xl lg:text-9xl font-black leading-none mb-6">
+      STÄRKER. SCHNELLER. <span class="neon-text">BESSER.</span>
+    </h1>
+    <p class="text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto mb-10 font-light">
+      Modernes Training in einem Studio, das dich fordert und fördert. Finde deine beste Version.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#probetraining" class="neon-btn px-8 py-4 rounded-full text-base uppercase tracking-wide">Probetraining buchen</a>
+      <a href="#kurse" class="px-8 py-4 rounded-full text-base uppercase tracking-wide border border-neutral-600 hover:border-white hover:bg-white/5 transition">Kurse ansehen</a>
+    </div>
+  </div>
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-neutral-500 text-xs tracking-widest">SCROLL</div>
+</section>
+
+<!-- ÜBER UNS -->
+<section id="ueber" class="py-24 px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center fade-in">
+    <div>
+      <p class="neon-text text-sm tracking-[0.3em] mb-4 font-semibold">ÜBER UNS</p>
+      <h2 class="display text-5xl md:text-6xl mb-6">Unsere Philosophie</h2>
+      <p class="text-neutral-300 leading-relaxed mb-4">
+        Im PULSE Fitness Studio glauben wir, dass Training mehr ist als nur Gewichte bewegen. Es geht um Energie, Fokus und die tägliche Entscheidung, besser werden zu wollen.
+      </p>
+      <p class="text-neutral-300 leading-relaxed mb-4">
+        Unser Studio vereint moderne Geräte, durchdachte Kursformate und ein Team, das dich auf deinem Weg begleitet. Ob Einsteiger oder erfahrener Athlet: Hier findest du den Raum, in dem du wachsen kannst.
+      </p>
+      <p class="text-neutral-300 leading-relaxed">
+        Kein Leistungsdruck, keine leeren Versprechen. Nur ehrliches Training, klare Struktur und eine Atmosphäre, in der du gerne trainierst.
+      </p>
+    </div>
+    <div class="relative">
+      <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=900&q=80" alt="Training im Studio" class="rounded-2xl w-full h-[500px] object-cover" />
+      <div class="absolute -bottom-6 -left-6 bg-neutral-900 border border-neutral-800 rounded-xl p-6 shadow-2xl">
+        <p class="display text-4xl neon-text">24/7</p>
+        <p class="text-sm text-neutral-400">Zugang für Unlimited Mitglieder</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KURSE -->
+<section id="kurse" class="py-24 px-6 bg-neutral-900/40">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 fade-in">
+      <p class="neon-text text-sm tracking-[0.3em] mb-4 font-semibold">KURSANGEBOT</p>
+      <h2 class="display text-5xl md:text-6xl">Unsere Kurse</h2>
+      <p class="text-neutral-400 mt-4 max-w-2xl mx-auto">Sechs Formate, unzählige Möglichkeiten. Wähle das Training, das zu dir passt.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- HIIT -->
+      <div class="card-hover neon-border rounded-2xl overflow-hidden bg-neutral-900 fade-in">
+        <div class="h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80" alt="HIIT" class="card-img w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="display text-2xl">HIIT</h3>
+            <span class="text-xs neon-text font-semibold">45 MIN</span>
+          </div>
+          <p class="text-neutral-400 text-sm">Intensive Intervalle, die Ausdauer und Kraft gleichzeitig pushen. Maximaler Effekt in kurzer Zeit.</p>
+        </div>
+      </div>
+      <!-- Yoga -->
+      <div class="card-hover neon-border rounded-2xl overflow-hidden bg-neutral-900 fade-in">
+        <div class="h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=80" alt="Yoga" class="card-img w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="display text-2xl">Yoga</h3>
+            <span class="text-xs neon-text font-semibold">60 MIN</span>
+          </div>
+          <p class="text-neutral-400 text-sm">Beweglichkeit, Atmung und mentale Ruhe. Die perfekte Balance zum harten Training.</p>
+        </div>
+      </div>
+      <!-- Krafttraining -->
+      <div class="card-hover neon-border rounded-2xl overflow-hidden bg-neutral-900 fade-in">
+        <div class="h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=800&q=80" alt="Krafttraining" class="card-img w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="display text-2xl">Krafttraining</h3>
+            <span class="text-xs neon-text font-semibold">75 MIN</span>
+          </div>
+          <p class="text-neutral-400 text-sm">Gezielter Muskelaufbau mit freien Gewichten und geführter Technik für jedes Level.</p>
+        </div>
+      </div>
+      <!-- Spinning -->
+      <div class="card-hover neon-border rounded-2xl overflow-hidden bg-neutral-900 fade-in">
+        <div class="h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80" alt="Spinning" class="card-img w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="display text-2xl">Spinning</h3>
+            <span class="text-xs neon-text font-semibold">50 MIN</span>
+          </div>
+          <p class="text-neutral-400 text-sm">Rhythmisches Indoor Cycling mit treibender Musik. Pure Ausdauer und Energie im Takt.</p>
+        </div>
+      </div>
+      <!-- Boxen -->
+      <div class="card-hover neon-border rounded-2xl overflow-hidden bg-neutral-900 fade-in">
+        <div class="h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&w=800&q=80" alt="Boxen" class="card-img w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="display text-2xl">Boxen</h3>
+            <span class="text-xs neon-text font-semibold">60 MIN</span>
+          </div>
+          <p class="text-neutral-400 text-sm">Technik, Koordination und Power. Ein Ganzkörpertraining mit Kopf und Körper.</p>
+        </div>
+      </div>
+      <!-- Functional -->
+      <div class="card-hover neon-border rounded-2xl overflow-hidden bg-neutral-900 fade-in">
+        <div class="h-56 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=800&q=80" alt="Functional" class="card-img w-full h-full object-cover" />
+        </div>
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="display text-2xl">Functional</h3>
+            <span class="text-xs neon-text font-semibold">55 MIN</span>
+          </div>
+          <p class="text-neutral-400 text-sm">Bewegungen aus dem Alltag, intensiviert und strukturiert. Für mehr Stabilität und Athletik.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINER -->
+<section id="trainer" class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 fade-in">
+      <p class="neon-text text-sm tracking-[0.3em] mb-4 font-semibold">UNSER TEAM</p>
+      <h2 class="display text-5xl md:text-6xl">Trainer</h2>
+      <p class="text-neutral-400 mt-4 max-w-2xl mx-auto">Zertifizierte Profis, die dich mit Wissen, Erfahrung und Leidenschaft begleiten.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="neon-border rounded-2xl overflow-hidden bg-neutral-900 fade-in">
+        <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=600&q=80" alt="Trainer" class="w-full h-72 object-cover" />
+        <div class="p-5">
+          <h3 class="display text-2xl">Marco Berger</h3>
+          <p class="text-sm neon-text mb-2">Head Coach, Krafttraining</p>
+          <p class="text-xs text-neutral-400">Spezialisiert auf Kraftaufbau und funktionelle Bewegungsmuster.</p>
+        </div>
+      </div>
+      <div class="neon-border rounded-2xl overflow-hidden bg-neutral-900 fade-in">
+        <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=600&q=80" alt="Trainer" class="w-full h-72 object-cover" />
+        <div class="p-5">
+          <h3 class="display text-2xl">Lina Vogt</h3>
+          <p class="text-sm neon-text mb-2">Yoga, Mobility</p>
+          <p class="text-xs text-neutral-400">Fokus auf Beweglichkeit, Atemtechnik und mentale Stärke.</p>
+        </div>
+      </div>
+      <div class="neon-border rounded-2xl overflow-hidden bg-neutral-900 fade-in">
+        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=600&q=80" alt="Trainer" class="w-full h-72 object-cover" />
+        <div class="p-5">
+          <h3 class="display text-2xl">Samir Kaya</h3>
+          <p class="text-sm neon-text mb-2">HIIT, Boxen</p>
+          <p class="text-xs text-neutral-400">Ehemaliger Amateurboxer mit Schwerpunkt auf Technik und Ausdauer.</p>
+        </div>
+      </div>
+      <div class="neon-border rounded-2xl overflow-hidden bg-neutral-900 fade-in">
+        <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=600&q=80" alt="Trainer" class="w-full h-72 object-cover" />
+        <div class="p-5">
+          <h3 class="display text-2xl">Julia Hartmann</h3>
+          <p class="text-sm neon-text mb-2">Spinning, Functional</p>
+          <p class="text-xs text-neutral-400">Leidenschaftliche Ausdauersportlerin und zertifizierte Cycling Instructor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MITGLIEDSCHAFT -->
+<section id="preise" class="py-24 px-6 bg-neutral-900/40">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 fade-in">
+      <p class="neon-text text-sm tracking-[0.3em] mb-4 font-semibold">MITGLIEDSCHAFT</p>
+      <h2 class="display text-5xl md:text-6xl">Deine Mitgliedschaft</h2>
+      <p class="text-neutral-400 mt-4 max-w-2xl mx-auto">Transparente Preise. Faire Konditionen. Keine versteckten Kosten.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- BASIC -->
+      <div class="rounded-2xl p-8 bg-neutral-900 border border-neutral-800 fade-in hover:border-neutral-700 transition">
+        <h3 class="display text-3xl mb-2">Basic</h3>
+        <p class="text-neutral-400 text-sm mb-6">Ideal für den Einstieg</p>
+        <div class="mb-6">
+          <span class="display text-5xl">29</span>
+          <span class="text-neutral-400">€ / Monat</span>
+        </div>
+        <ul class="space-y-3 text-sm text-neutral-300 mb-8">
+          <li class="flex gap-2"><span class="neon-text">›</span> Zugang zum Gerätebereich</li>
+          <li class="flex gap-2"><span class="neon-text">›</span> Umkleiden und Duschen</li>
+          <li class="flex gap-2"><span class="neon-text">›</span> Einführungstermin</li>
+          <li class="flex gap-2 text-neutral-600"><span>›</span> Kurse nicht inklusive</li>
+          <li class="flex gap-2 text-neutral-600"><span>›</span> Mo bis Fr, 8 bis 20 Uhr</li>
+        </ul>
+        <a href="#probetraining" class="block text-center w-full py-3 rounded-full border border-neutral-700 hover:border-white hover:bg-white/5 transition font-semibold text-sm">Wählen</a>
+      </div>
+      <!-- PREMIUM -->
+      <div class="rounded-2xl p-8 pricing-featured fade-in relative">
+        <span class="absolute top-4 right-4 neon-btn text-xs px-3 py-1 rounded-full">BELIEBT</span>
+        <h3 class="display text-3xl mb-2">Premium</h3>
+        <p class="text-neutral-300 text-sm mb-6">Unser Standardpaket</p>
+        <div class="mb-6">
+          <span class="display text-5xl neon-text">49</span>
+          <span class="text-neutral-400">€ / Monat</span>
+        </div>
+        <ul class="space-y-3 text-sm text-neutral-200 mb-8">
+          <li class="flex gap-2"><span class="neon-text">›</span> Alles aus Basic</li>
+          <li class="flex gap-2"><span class="neon-text">›</span> Alle Kurse inklusive</li>
+          <li class="flex gap-2"><span class="neon-text">›</span> Sauna und Wellnessbereich</li>
+          <li class="flex gap-2"><span class="neon-text">›</span> Getränkeflatrate</li>
+          <li class="flex gap-2"><span class="neon-text">›</span> Öffnungszeiten komplett</li>
+        </ul>
+        <a href="#probetraining" class="block text-center w-full neon-btn py-3 rounded-full text-sm">Wählen</a>
+      </div>
+      <!-- UNLIMITED -->
+      <div class="rounded-2xl p-8 bg-neutral-900 border border-neutral-800 fade-in hover:border-neutral-700 transition">
+        <h3 class="display text-3xl mb-2">Unlimited</h3>
+        <p class="text-neutral-400 text-sm mb-6">Für maximale Flexibilität</p>
+        <div class="mb-6">
+          <span class="display text-5xl">79</span>
+          <span class="text-neutral-400">€ / Monat</span>
+        </div>
+        <ul class="space-y-3 text-sm text-neutral-300 mb-8">
+          <li class="flex gap-2"><span class="neon-text">›</span> Alles aus Premium</li>
+          <li class="flex gap-2"><span class="neon-text">›</span> 24/7 Studiozugang</li>
+          <li class="flex gap-2"><span class="neon-text">›</span> Personal Coaching Einheiten</li>
+          <li class="flex gap-2"><span class="neon-text">›</span> Trainingsplan individuell</li>
+          <li class="flex gap-2"><span class="neon-text">›</span> Gast Pass für Freunde</li>
+        </ul>
+        <a href="#probetraining" class="block text-center w-full py-3 rounded-full border border-neutral-700 hover:border-white hover:bg-white/5 transition font-semibold text-sm">Wählen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBETRAINING -->
+<section id="probetraining" class="py-24 px-6">
+  <div class="max-w-4xl mx-auto fade-in">
+    <div class="text-center mb-12">
+      <p class="neon-text text-sm tracking-[0.3em] mb-4 font-semibold">KOSTENLOS UND UNVERBINDLICH</p>
+      <h2 class="display text-5xl md:text-6xl">Probetraining buchen</h2>
+      <p class="text-neutral-400 mt-4">Schreib uns und wir melden uns zur Terminabstimmung.</p>
+    </div>
+    <form class="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 md:p-10 space-y-6" onsubmit="event.preventDefault(); alert('Demo Formular. Bitte per Telefon oder E Mail anfragen.');">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm mb-2 text-neutral-300">Name</label>
+          <input type="text" required class="w-full rounded-lg px-4 py-3" placeholder="Vor und Nachname" />
+        </div>
+        <div>
+          <label class="block text-sm mb-2 text-neutral-300">E Mail</label>
+          <input type="email" required class="w-full rounded-lg px-4 py-3" placeholder="name@email.de" />
+        </div>
+        <div>
+          <label class="block text-sm mb-2 text-neutral-300">Telefon</label>
+          <input type="tel" class="w-full rounded-lg px-4 py-3" placeholder="+49 ..." />
+        </div>
+        <div>
+          <label class="block text-sm mb-2 text-neutral-300">Gewünschtes Datum</label>
+          <input type="date" class="w-full rounded-lg px-4 py-3" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm mb-2 text-neutral-300">Nachricht (optional)</label>
+        <textarea rows="4" class="w-full rounded-lg px-4 py-3" placeholder="Worauf legst du Wert?"></textarea>
+      </div>
+      <button type="submit" class="neon-btn w-full py-4 rounded-full uppercase tracking-wide">Anfrage senden</button>
+    </form>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt" class="py-24 px-6 bg-neutral-900/40">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 fade-in">
+    <div>
+      <p class="neon-text text-sm tracking-[0.3em] mb-4 font-semibold">ÖFFNUNGSZEITEN</p>
+      <h2 class="display text-5xl mb-8">Wann wir da sind</h2>
+      <ul class="divide-y divide-neutral-800 text-neutral-300">
+        <li class="flex justify-between py-4"><span>Montag bis Freitag</span><span class="neon-text font-semibold">06:00 bis 23:00</span></li>
+        <li class="flex justify-between py-4"><span>Samstag</span><span class="neon-text font-semibold">08:00 bis 22:00</span></li>
+        <li class="flex justify-between py-4"><span>Sonntag und Feiertag</span><span class="neon-text font-semibold">09:00 bis 20:00</span></li>
+        <li class="flex justify-between py-4"><span>Unlimited Mitglieder</span><span class="neon-text font-semibold">24 / 7</span></li>
+      </ul>
+    </div>
+    <div>
+      <p class="neon-text text-sm tracking-[0.3em] mb-4 font-semibold">KONTAKT</p>
+      <h2 class="display text-5xl mb-8">So erreichst du uns</h2>
+      <div class="space-y-5 text-neutral-300">
+        <div>
+          <p class="text-xs uppercase tracking-widest text-neutral-500 mb-1">Adresse</p>
+          <p>Industriestraße 42, 10179 Berlin</p>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-widest text-neutral-500 mb-1">Telefon</p>
+          <p>+49 30 1234 5678</p>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-widest text-neutral-500 mb-1">E Mail</p>
+          <p>hallo@pulse-fitness.de</p>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-widest text-neutral-500 mb-1">Anfahrt</p>
+          <p>U Bahn Heinrich Heine Straße, 5 Gehminuten. Parkplätze vor dem Studio.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-neutral-800 py-12 px-6 bg-neutral-950">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-10">
+    <div>
+      <p class="display text-2xl tracking-widest mb-3"><span class="neon-text">PULSE</span> FITNESS</p>
+      <p class="text-sm text-neutral-500">Dein Studio für echtes Training. In Berlin.</p>
+    </div>
+    <div>
+      <p class="text-sm font-semibold mb-3 text-white">Studio</p>
+      <ul class="space-y-2 text-sm text-neutral-500">
+        <li><a href="#ueber" class="hover:text-white">Über uns</a></li>
+        <li><a href="#kurse" class="hover:text-white">Kurse</a></li>
+        <li><a href="#trainer" class="hover:text-white">Trainer</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-sm font-semibold mb-3 text-white">Service</p>
+      <ul class="space-y-2 text-sm text-neutral-500">
+        <li><a href="#preise" class="hover:text-white">Mitgliedschaft</a></li>
+        <li><a href="#probetraining" class="hover:text-white">Probetraining</a></li>
+        <li><a href="#kontakt" class="hover:text-white">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-sm font-semibold mb-3 text-white">Rechtliches</p>
+      <ul class="space-y-2 text-sm text-neutral-500">
+        <li><a href="#" class="hover:text-white">Impressum</a></li>
+        <li><a href="#" class="hover:text-white">Datenschutz</a></li>
+        <li><a href="#" class="hover:text-white">AGB</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-10 pt-6 border-t border-neutral-900 text-center text-xs text-neutral-600">
+    © 2026 PULSE Fitness Studio. Alle Rechte vorbehalten.
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
