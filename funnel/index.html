@@ -11,34 +11,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: { 50:'#f0fdf4', 100:'#dcfce7', 200:'#bbf7d0', 500:'#22c55e', 600:'#16a34a', 700:'#15803d', 800:'#166534', 900:'#14532d' }
-          }
-        }
-      }
+      theme: { extend: { colors: {
+        brand: { 50:'#f0fdf4', 100:'#dcfce7', 200:'#bbf7d0', 500:'#22c55e', 600:'#16a34a', 700:'#15803d', 800:'#166534', 900:'#14532d' }
+      }}}
     }
   </script>
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; -webkit-font-smoothing: antialiased; }
     .serif { font-family: 'Playfair Display', serif; }
-
-    /* Step transitions */
     .step-panel { display: none; opacity: 0; transform: translateX(30px); }
     .step-panel.active { display: block; animation: slideIn 0.4s ease forwards; }
     .step-panel.exit { display: block; animation: slideOut 0.3s ease forwards; }
     @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
     @keyframes slideOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-30px); } }
-
-    /* Option cards */
     .opt-card { cursor: pointer; border: 2px solid #e5e7eb; border-radius: 16px; padding: 20px; transition: all 0.25s ease; background: white; }
     .opt-card:hover { border-color: #86efac; background: #f0fdf4; }
     .opt-card.selected { border-color: #22c55e; background: #f0fdf4; box-shadow: 0 0 0 3px rgba(34,197,94,0.15); }
     .opt-card.selected .opt-check { background: #22c55e; border-color: #22c55e; color: white; }
     .opt-check { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #d1d5db; display: flex; align-items: center; justify-content: center; transition: all 0.25s ease; flex-shrink: 0; }
-
-    /* Upsell cards */
     .upsell-card { cursor: pointer; border: 2px solid #e5e7eb; border-radius: 12px; padding: 16px; transition: all 0.25s ease; background: white; }
     .upsell-card:hover { border-color: #86efac; }
     .upsell-card.added { border-color: #22c55e; background: #f0fdf4; }
@@ -46,39 +36,45 @@
     .upsell-card.added .upsell-toggle::after { transform: translateX(18px); }
     .upsell-toggle { width: 42px; height: 24px; border-radius: 12px; background: #d1d5db; position: relative; transition: all 0.25s ease; flex-shrink: 0; }
     .upsell-toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: white; transition: transform 0.25s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-
-    /* Progress bar */
     .progress-fill { transition: width 0.5s ease; }
-
-    /* Price animation */
     .price-pop { animation: pricePop 0.4s ease; }
     @keyframes pricePop { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
-
-    /* Checkout card */
     .card-input { background: #f9fafb; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 12px 14px; font-size: 14px; outline: none; transition: border-color 0.2s; width: 100%; }
     .card-input:focus { border-color: #22c55e; }
     .card-input::placeholder { color: #9ca3af; }
-
-    /* Success confetti */
     .confetti-piece { position: fixed; width: 10px; height: 10px; border-radius: 2px; animation: confetti-fall 3s ease forwards; pointer-events: none; z-index: 100; }
-    @keyframes confetti-fall {
-      0% { opacity: 1; transform: translateY(0) rotate(0deg); }
-      100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
-    }
-
-    /* Trust badges */
+    @keyframes confetti-fall { 0% { opacity: 1; transform: translateY(0) rotate(0deg); } 100% { opacity: 0; transform: translateY(100vh) rotate(720deg); } }
     .trust-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; background: #f0fdf4; border: 1px solid #bbf7d0; font-size: 12px; color: #166534; font-weight: 500; }
+    .check-svg { width: 16px; height: 16px; }
+    /* Frequency pills */
+    .freq-pill { cursor: pointer; border: 2px solid #e5e7eb; border-radius: 12px; padding: 12px 8px; text-align: center; transition: all 0.25s ease; background: white; min-width: 56px; }
+    .freq-pill:hover { border-color: #86efac; background: #f0fdf4; }
+    .freq-pill.selected { border-color: #22c55e; background: #f0fdf4; box-shadow: 0 0 0 3px rgba(34,197,94,0.15); }
+    /* Time slots */
+    .time-slot { cursor: pointer; border: 2px solid #e5e7eb; border-radius: 10px; padding: 10px 16px; transition: all 0.25s ease; background: white; text-align: center; }
+    .time-slot:hover:not(.unavailable) { border-color: #86efac; background: #f0fdf4; }
+    .time-slot.selected { border-color: #22c55e; background: #f0fdf4; box-shadow: 0 0 0 3px rgba(34,197,94,0.15); }
+    .time-slot.unavailable { opacity: 0.4; cursor: not-allowed; background: #f3f4f6; }
+    .time-slot.unavailable:hover { border-color: #e5e7eb; background: #f3f4f6; }
+    /* Day cells */
+    .day-cell { cursor: pointer; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.2s ease; }
+    .day-cell:hover:not(.empty):not(.unavailable) { background: #f0fdf4; }
+    .day-cell.selected { background: #22c55e; color: white; font-weight: 700; }
+    .day-cell.unavailable { color: #d1d5db; cursor: not-allowed; text-decoration: line-through; }
+    .day-cell.empty { cursor: default; }
+    .day-cell.today { font-weight: 700; box-shadow: inset 0 -2px 0 #22c55e; }
+    /* Back button */
+    .back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; background: white; border: 1.5px solid #e5e7eb; font-size: 13px; font-weight: 600; color: #6b7280; cursor: pointer; transition: all 0.2s; }
+    .back-btn:hover { border-color: #22c55e; color: #16a34a; }
   </style>
 </head>
 <body>
 
-  <!-- Back link -->
   <a href="../" class="fixed top-6 left-6 z-40 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur border border-gray-200 text-sm text-gray-600 hover:text-brand-600 hover:border-brand-300 transition shadow-sm">
     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
     Zurück
   </a>
 
-  <!-- Demo banner -->
   <div class="fixed top-0 inset-x-0 z-50 bg-brand-600 text-white text-center py-2 text-xs font-medium">
     Demo-Funnel. Zeigt wie ein Sales-Funnel mit Bedarfsanalyse, Angebot und Checkout aussehen kann.
   </div>
@@ -91,13 +87,13 @@
         <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
           <div id="progress-bar" class="progress-fill h-full bg-brand-500 rounded-full" style="width: 0%"></div>
         </div>
-        <div id="progress-label" class="text-xs text-gray-500 font-medium whitespace-nowrap pr-1">Schritt 1 von 6</div>
+        <div id="progress-label" class="text-xs text-gray-500 font-medium whitespace-nowrap pr-1">Schritt 1 von 8</div>
       </div>
     </div>
 
     <div class="max-w-2xl mx-auto px-6 py-12">
 
-      <!-- ============ STEP 1: Was brauchen Sie? ============ -->
+      <!-- ===== STEP 1: Leistung ===== -->
       <div class="step-panel active" data-step="1">
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
@@ -105,407 +101,281 @@
             Bedarfsanalyse
           </div>
           <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Was können wir für Sie tun?</h2>
-          <p class="text-gray-500">Wählen Sie die Leistung die Sie interessiert. Danach stellen wir Ihnen ein passendes Angebot zusammen.</p>
+          <p class="text-gray-500">Wählen Sie die Leistung die Sie interessiert.</p>
         </div>
         <div class="grid gap-3" id="step1-options">
-          <div class="opt-card" onclick="selectOption(1, this, 'buero')" data-value="buero">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">Büroreinigung</div>
-                <div class="text-sm text-gray-500">Regelmäßige Reinigung von Büros, Praxen oder Kanzleien</div>
-              </div>
-              <div class="text-2xl">🏢</div>
-            </div>
-          </div>
-          <div class="opt-card" onclick="selectOption(1, this, 'wohnung')" data-value="wohnung">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">Wohnungsreinigung</div>
-                <div class="text-sm text-gray-500">Einmalig oder regelmäßig für Privatwohnungen</div>
-              </div>
-              <div class="text-2xl">🏠</div>
-            </div>
-          </div>
-          <div class="opt-card" onclick="selectOption(1, this, 'grund')" data-value="grund">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">Grundreinigung</div>
-                <div class="text-sm text-gray-500">Einmalige Intensivreinigung (z.B. nach Umbau oder Einzug)</div>
-              </div>
-              <div class="text-2xl">✨</div>
-            </div>
-          </div>
-          <div class="opt-card" onclick="selectOption(1, this, 'fenster')" data-value="fenster">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">Fensterreinigung</div>
-                <div class="text-sm text-gray-500">Professionelle Fenster und Glasreinigung</div>
-              </div>
-              <div class="text-2xl">🪟</div>
-            </div>
-          </div>
+          <div class="opt-card" onclick="selectOption(1, this, 'buero')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Büroreinigung</div><div class="text-sm text-gray-500">Regelmäßige Reinigung von Büros, Praxen oder Kanzleien</div></div><div class="text-2xl">🏢</div></div></div>
+          <div class="opt-card" onclick="selectOption(1, this, 'wohnung')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Wohnungsreinigung</div><div class="text-sm text-gray-500">Einmalig oder regelmäßig für Privatwohnungen</div></div><div class="text-2xl">🏠</div></div></div>
+          <div class="opt-card" onclick="selectOption(1, this, 'grund')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Grundreinigung</div><div class="text-sm text-gray-500">Einmalige Intensivreinigung (z.B. nach Umbau oder Einzug)</div></div><div class="text-2xl">✨</div></div></div>
+          <div class="opt-card" onclick="selectOption(1, this, 'fenster')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Fensterreinigung</div><div class="text-sm text-gray-500">Professionelle Fenster und Glasreinigung</div></div><div class="text-2xl">🪟</div></div></div>
         </div>
       </div>
 
-      <!-- ============ STEP 2: Wie groß? ============ -->
+      <!-- ===== STEP 2: Fläche ===== -->
       <div class="step-panel" data-step="2">
+        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
             Fläche
           </div>
           <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Wie groß ist die Fläche?</h2>
-          <p class="text-gray-500">Ungefähre Angabe reicht. Wir passen das Angebot entsprechend an.</p>
+          <p class="text-gray-500">Ungefähre Angabe reicht.</p>
         </div>
         <div class="grid gap-3" id="step2-options">
-          <div class="opt-card" onclick="selectOption(2, this, 'klein')">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">Bis 50 m²</div>
-                <div class="text-sm text-gray-500">Kleine Wohnung, einzelnes Büro, Praxis</div>
-              </div>
-            </div>
-          </div>
-          <div class="opt-card" onclick="selectOption(2, this, 'mittel')">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">50 bis 150 m²</div>
-                <div class="text-sm text-gray-500">Mittlere Wohnung, Büroetage, kleines Geschäft</div>
-              </div>
-            </div>
-          </div>
-          <div class="opt-card" onclick="selectOption(2, this, 'gross')">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">150 bis 400 m²</div>
-                <div class="text-sm text-gray-500">Große Wohnung, mehrere Büros, Restaurant</div>
-              </div>
-            </div>
-          </div>
-          <div class="opt-card" onclick="selectOption(2, this, 'sehr_gross')">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">Über 400 m²</div>
-                <div class="text-sm text-gray-500">Gebäude, Lagerhalle, große Gewerbefläche</div>
-              </div>
-            </div>
-          </div>
+          <div class="opt-card" onclick="selectOption(2, this, 'klein')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Bis 50 m²</div><div class="text-sm text-gray-500">Kleine Wohnung, einzelnes Büro, Praxis</div></div></div></div>
+          <div class="opt-card" onclick="selectOption(2, this, 'mittel')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">50 bis 150 m²</div><div class="text-sm text-gray-500">Mittlere Wohnung, Büroetage, kleines Geschäft</div></div></div></div>
+          <div class="opt-card" onclick="selectOption(2, this, 'gross')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">150 bis 400 m²</div><div class="text-sm text-gray-500">Große Wohnung, mehrere Büros, Restaurant</div></div></div></div>
+          <div class="opt-card" onclick="selectOption(2, this, 'sehr_gross')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Über 400 m²</div><div class="text-sm text-gray-500">Gebäude, Lagerhalle, große Gewerbefläche</div></div></div></div>
         </div>
       </div>
 
-      <!-- ============ STEP 3: Wie oft? ============ -->
+      <!-- ===== STEP 3: Häufigkeit ===== -->
       <div class="step-panel" data-step="3">
+        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M2.985 14.652V19.644"/></svg>
             Häufigkeit
           </div>
           <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Wie oft soll gereinigt werden?</h2>
-          <p class="text-gray-500">Regelmäßige Reinigung ist günstiger pro Einsatz.</p>
+          <p class="text-gray-500">Je häufiger, desto günstiger pro Einsatz.</p>
         </div>
-        <div class="grid gap-3" id="step3-options">
-          <div class="opt-card" onclick="selectOption(3, this, 'einmalig')">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">Einmalig</div>
-                <div class="text-sm text-gray-500">Einmaliger Einsatz, z.B. nach Renovierung</div>
-              </div>
-            </div>
-          </div>
-          <div class="opt-card" onclick="selectOption(3, this, 'woechentlich')">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">Wöchentlich</div>
-                <div class="text-sm text-gray-500">Einmal pro Woche, fester Tag</div>
-              </div>
-              <div class="text-xs font-bold text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-200">Beliebteste Wahl</div>
-            </div>
-          </div>
-          <div class="opt-card" onclick="selectOption(3, this, '2x_woche')">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">2x pro Woche</div>
-                <div class="text-sm text-gray-500">Für Flächen mit viel Publikumsverkehr</div>
-              </div>
-            </div>
-          </div>
-          <div class="opt-card" onclick="selectOption(3, this, 'monatlich')">
-            <div class="flex items-center gap-4">
-              <div class="opt-check"><svg class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
-              <div class="flex-1">
-                <div class="font-bold text-gray-900">Monatlich</div>
-                <div class="text-sm text-gray-500">Einmal im Monat, perfekt als Ergänzung</div>
-              </div>
+
+        <!-- Einmalig option -->
+        <div class="opt-card mb-4" id="freq-einmalig" onclick="selectFreq('einmalig')">
+          <div class="flex items-center gap-4">
+            <div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
+            <div class="flex-1">
+              <div class="font-bold text-gray-900">Einmalig</div>
+              <div class="text-sm text-gray-500">Einmaliger Einsatz, z.B. nach Renovierung</div>
             </div>
           </div>
         </div>
+
+        <!-- Regelmäßig header -->
+        <div class="text-sm font-bold text-gray-700 mb-3 mt-6">Regelmäßig: Wie viele Tage pro Woche?</div>
+        <div class="flex gap-2 flex-wrap mb-3" id="freq-pills">
+          <div class="freq-pill" onclick="selectFreqDays(1)"><div class="text-lg font-bold text-gray-900">1</div><div class="text-[10px] text-gray-500">Tag</div></div>
+          <div class="freq-pill" onclick="selectFreqDays(2)"><div class="text-lg font-bold text-gray-900">2</div><div class="text-[10px] text-gray-500">Tage</div></div>
+          <div class="freq-pill selected" onclick="selectFreqDays(3)"><div class="text-lg font-bold text-gray-900">3</div><div class="text-[10px] text-gray-500">Tage</div></div>
+          <div class="freq-pill" onclick="selectFreqDays(4)"><div class="text-lg font-bold text-gray-900">4</div><div class="text-[10px] text-gray-500">Tage</div></div>
+          <div class="freq-pill" onclick="selectFreqDays(5)"><div class="text-lg font-bold text-gray-900">5</div><div class="text-[10px] text-gray-500">Tage</div></div>
+          <div class="freq-pill" onclick="selectFreqDays(6)"><div class="text-lg font-bold text-gray-900">6</div><div class="text-[10px] text-gray-500">Tage</div></div>
+          <div class="freq-pill" onclick="selectFreqDays(7)"><div class="text-lg font-bold text-gray-900">7</div><div class="text-[10px] text-gray-500">Tage</div></div>
+        </div>
+        <div class="bg-brand-50 border border-brand-200 rounded-xl p-4 mb-6 flex items-center justify-between">
+          <div class="text-sm text-brand-800 font-medium" id="freq-summary">3x pro Woche</div>
+          <div class="text-sm font-bold text-brand-700" id="freq-discount">Rabatt: 20%</div>
+        </div>
+
+        <button onclick="confirmFreq()" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">
+          Weiter
+        </button>
       </div>
 
-      <!-- ============ STEP 4: ERGEBNIS + EMPFEHLUNG ============ -->
+      <!-- ===== STEP 4: Ort ===== -->
       <div class="step-panel" data-step="4">
+        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            Reinigungsort
+          </div>
+          <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Wo soll gereinigt werden?</h2>
+          <p class="text-gray-500">Ihre Adresse. Wir prüfen ob wir in Ihrer Region verfügbar sind.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 mb-6 space-y-3">
+          <input id="loc-street" class="card-input" placeholder="Straße und Hausnummer" value="Königsallee 42" />
+          <div class="grid grid-cols-[120px,1fr] gap-3">
+            <input id="loc-plz" class="card-input" placeholder="PLZ" value="40215" />
+            <input id="loc-city" class="card-input" placeholder="Ort" value="Düsseldorf" />
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-gray-700 mb-2 mt-2">Gebäudetyp</div>
+            <div class="grid grid-cols-2 gap-2" id="building-type">
+              <div class="opt-card selected" onclick="selectBuilding(this, 'buero_gebaeude')" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Bürogebäude</span></div></div>
+              <div class="opt-card" onclick="selectBuilding(this, 'wohnhaus')" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg hidden" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Wohnhaus</span></div></div>
+              <div class="opt-card" onclick="selectBuilding(this, 'laden')" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg hidden" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Ladengeschäft</span></div></div>
+              <div class="opt-card" onclick="selectBuilding(this, 'sonstiges')" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg hidden" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Sonstiges</span></div></div>
+            </div>
+          </div>
+          <div>
+            <label class="text-sm font-semibold text-gray-700 mb-1 block mt-2">Besondere Hinweise (optional)</label>
+            <textarea id="loc-notes" class="card-input resize-none" rows="2" placeholder="z.B. Schlüssel beim Hausmeister, Zugang über Hintereingang..."></textarea>
+          </div>
+        </div>
+
+        <button onclick="confirmLocation()" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">
+          Verfügbarkeit prüfen
+        </button>
+      </div>
+
+      <!-- ===== STEP 5: Terminwahl ===== -->
+      <div class="step-panel" data-step="5">
+        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+            Terminwahl
+          </div>
+          <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Wann soll es losgehen?</h2>
+          <p class="text-gray-500">Wählen Sie einen Tag und eine Uhrzeit. Grau markierte Slots sind bereits vergeben.</p>
+        </div>
+
+        <!-- Availability check result -->
+        <div id="avail-msg" class="bg-brand-50 border border-brand-200 rounded-xl p-4 mb-6 flex items-center gap-3">
+          <svg class="w-5 h-5 text-brand-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <div class="text-sm text-brand-800"><strong>Düsseldorf</strong> ist in unserem Einzugsgebiet. Hier sind die verfügbaren Termine:</div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-5 mb-4">
+          <div class="flex items-center justify-between mb-4">
+            <button onclick="calMonth(-1)" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+            <div class="font-bold text-gray-900" id="cal-month-label">April 2026</div>
+            <button onclick="calMonth(1)" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+          <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-gray-400 mb-2">
+            <div>Mo</div><div>Di</div><div>Mi</div><div>Do</div><div>Fr</div><div>Sa</div><div>So</div>
+          </div>
+          <div class="grid grid-cols-7 gap-1" id="cal-grid"></div>
+        </div>
+
+        <!-- Time slots -->
+        <div id="time-section" class="hidden">
+          <div class="text-sm font-bold text-gray-700 mb-3">Verfügbare Uhrzeiten am <span id="selected-date-label" class="text-brand-600"></span></div>
+          <div class="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-6" id="time-slots"></div>
+        </div>
+
+        <!-- Unavailable message -->
+        <div id="unavail-msg" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
+          <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+            <div class="text-sm text-red-800">Dieser Zeitraum ist leider ausgebucht. Bitte wählen Sie einen anderen Tag oder eine andere Uhrzeit.</div>
+          </div>
+        </div>
+
+        <button id="time-confirm-btn" onclick="confirmTime()" disabled class="w-full bg-gray-300 text-gray-500 font-bold px-8 py-4 rounded-full transition text-lg cursor-not-allowed">
+          Bitte Tag und Uhrzeit wählen
+        </button>
+      </div>
+
+      <!-- ===== STEP 6: Ergebnis ===== -->
+      <div class="step-panel" data-step="6">
+        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.746 3.746 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.745 3.745 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
             Ihr Ergebnis
           </div>
           <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Unsere Empfehlung für Sie.</h2>
-          <p class="text-gray-500">Basierend auf Ihren Angaben haben wir das passende Paket zusammengestellt.</p>
         </div>
-
-        <!-- Result summary -->
-        <div class="bg-white rounded-2xl border-2 border-brand-200 p-6 mb-6 shadow-sm">
+        <div class="bg-white rounded-2xl border-2 border-brand-200 p-6 mb-4 shadow-sm">
           <div class="flex items-start justify-between mb-4">
-            <div>
-              <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-1">Empfohlenes Paket</div>
-              <div class="text-2xl font-bold text-gray-900" id="result-package">Büro Komfort</div>
-            </div>
-            <div class="text-right">
-              <div class="text-xs text-gray-500 mb-1">ab</div>
-              <div class="text-3xl font-bold text-brand-600" id="result-price">189 €</div>
-              <div class="text-xs text-gray-500" id="result-interval">pro Einsatz</div>
-            </div>
+            <div><div class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-1">Empfohlenes Paket</div><div class="text-2xl font-bold text-gray-900" id="result-package"></div></div>
+            <div class="text-right"><div class="text-xs text-gray-500 mb-1">ab</div><div class="text-3xl font-bold text-brand-600" id="result-price"></div><div class="text-xs text-gray-500" id="result-interval"></div></div>
+          </div>
+          <div class="border-t border-gray-100 pt-4 mb-4">
+            <div class="text-sm font-semibold text-gray-700 mb-2">Das ist dabei:</div>
+            <ul class="space-y-2 text-sm text-gray-600" id="result-features"></ul>
           </div>
           <div class="border-t border-gray-100 pt-4">
-            <div class="text-sm font-semibold text-gray-700 mb-2">Das ist dabei:</div>
-            <ul class="space-y-2 text-sm text-gray-600" id="result-features">
-              <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Staubsaugen und Wischen aller Böden</li>
-              <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Oberflächen abwischen und desinfizieren</li>
-              <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Sanitärbereiche reinigen</li>
-              <li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Mülleimer leeren</li>
-            </ul>
+            <div class="text-sm font-semibold text-gray-700 mb-2">Ihre Angaben:</div>
+            <div class="grid grid-cols-2 gap-2 text-sm" id="result-details"></div>
           </div>
         </div>
-
-        <div class="flex justify-center">
-          <button onclick="goToStep(5)" class="bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">
-            Paket auswählen und weiter
-          </button>
-        </div>
+        <button onclick="goToStep(7)" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">Paket auswählen und weiter</button>
       </div>
 
-      <!-- ============ STEP 5: UPSELLS ============ -->
-      <div class="step-panel" data-step="5">
+      <!-- ===== STEP 7: Upsells ===== -->
+      <div class="step-panel" data-step="7">
+        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
-          <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-            Zusatzleistungen
-          </div>
           <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Darf es etwas mehr sein?</h2>
-          <p class="text-gray-500">Optionale Extras die viele Kunden dazubuchen. Kein Muss.</p>
+          <p class="text-gray-500">Optionale Extras. Kein Muss.</p>
         </div>
-
-        <!-- Running total -->
         <div class="bg-brand-50 border border-brand-200 rounded-xl p-4 mb-6 flex items-center justify-between">
           <div class="text-sm text-brand-800 font-medium">Ihr aktuelles Paket</div>
-          <div class="font-bold text-brand-700 text-lg" id="running-total">189 €</div>
+          <div class="font-bold text-brand-700 text-lg" id="running-total"></div>
         </div>
-
         <div class="space-y-3 mb-8" id="upsells">
-          <div class="upsell-card" onclick="toggleUpsell(this, 'fenster', 49)">
-            <div class="flex items-center gap-4">
-              <div class="upsell-toggle"></div>
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <div class="font-bold text-gray-900">Fensterreinigung</div>
-                  <div class="font-bold text-brand-600">+ 49 €</div>
-                </div>
-                <div class="text-sm text-gray-500">Alle Fenster innen und außen, streifenfrei</div>
-              </div>
-            </div>
-          </div>
-          <div class="upsell-card" onclick="toggleUpsell(this, 'teppich', 39)">
-            <div class="flex items-center gap-4">
-              <div class="upsell-toggle"></div>
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <div class="font-bold text-gray-900">Teppichreinigung</div>
-                  <div class="font-bold text-brand-600">+ 39 €</div>
-                </div>
-                <div class="text-sm text-gray-500">Professionelle Tiefenreinigung aller Teppichböden</div>
-              </div>
-            </div>
-          </div>
-          <div class="upsell-card" onclick="toggleUpsell(this, 'kueche', 29)">
-            <div class="flex items-center gap-4">
-              <div class="upsell-toggle"></div>
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <div class="font-bold text-gray-900">Küche intensiv</div>
-                  <div class="font-bold text-brand-600">+ 29 €</div>
-                </div>
-                <div class="text-sm text-gray-500">Herd, Backofen, Kühlschrank von außen, Arbeitsflächen</div>
-              </div>
-            </div>
-          </div>
-          <div class="upsell-card" onclick="toggleUpsell(this, 'desinfektion', 35)">
-            <div class="flex items-center gap-4">
-              <div class="upsell-toggle"></div>
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <div class="font-bold text-gray-900">Desinfektion</div>
-                  <div class="font-bold text-brand-600">+ 35 €</div>
-                </div>
-                <div class="text-sm text-gray-500">Vollständige Desinfektion aller Kontaktflächen</div>
-              </div>
-            </div>
-          </div>
-          <div class="upsell-card" onclick="toggleUpsell(this, 'schluessel', 0)">
-            <div class="flex items-center gap-4">
-              <div class="upsell-toggle"></div>
-              <div class="flex-1">
-                <div class="flex items-center justify-between">
-                  <div class="font-bold text-gray-900">Schlüsselservice</div>
-                  <div class="font-bold text-brand-600">Kostenlos</div>
-                </div>
-                <div class="text-sm text-gray-500">Wir kommen auch wenn Sie nicht da sind. Schlüssel wird sicher verwahrt.</div>
-              </div>
-            </div>
-          </div>
+          <div class="upsell-card" onclick="toggleUpsell(this, 'fenster_extra', 49)"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Fensterreinigung</div><div class="font-bold text-brand-600">+ 49 €</div></div><div class="text-sm text-gray-500">Alle Fenster innen und außen, streifenfrei</div></div></div></div>
+          <div class="upsell-card" onclick="toggleUpsell(this, 'teppich', 39)"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Teppichreinigung</div><div class="font-bold text-brand-600">+ 39 €</div></div><div class="text-sm text-gray-500">Professionelle Tiefenreinigung aller Teppichböden</div></div></div></div>
+          <div class="upsell-card" onclick="toggleUpsell(this, 'kueche', 29)"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Küche intensiv</div><div class="font-bold text-brand-600">+ 29 €</div></div><div class="text-sm text-gray-500">Herd, Backofen, Kühlschrank von außen, Arbeitsflächen</div></div></div></div>
+          <div class="upsell-card" onclick="toggleUpsell(this, 'desinfektion', 35)"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Desinfektion</div><div class="font-bold text-brand-600">+ 35 €</div></div><div class="text-sm text-gray-500">Vollständige Desinfektion aller Kontaktflächen</div></div></div></div>
+          <div class="upsell-card" onclick="toggleUpsell(this, 'schluessel', 0)"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Schlüsselservice</div><div class="font-bold text-brand-600">Kostenlos</div></div><div class="text-sm text-gray-500">Wir kommen auch wenn Sie nicht da sind</div></div></div></div>
         </div>
-
-        <div class="flex flex-col items-center gap-3">
-          <button onclick="goToStep(6)" class="bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200 w-full max-w-sm">
-            Weiter zur Buchung
-          </button>
-          <button onclick="goToStep(6)" class="text-sm text-gray-400 hover:text-gray-600 transition">Ohne Extras weiter</button>
-        </div>
+        <button onclick="goToStep(8)" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">Weiter zur Buchung</button>
       </div>
 
-      <!-- ============ STEP 6: CHECKOUT ============ -->
-      <div class="step-panel" data-step="6">
+      <!-- ===== STEP 8: Checkout ===== -->
+      <div class="step-panel" data-step="8">
+        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
-          <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
-            Buchung
-          </div>
           <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Fast geschafft.</h2>
           <p class="text-gray-500">Ihre Buchung ist in 30 Sekunden erledigt.</p>
         </div>
-
         <div class="grid md:grid-cols-[1fr,340px] gap-6">
-          <!-- Form -->
           <div class="space-y-6">
             <div class="bg-white rounded-2xl border border-gray-200 p-6">
               <div class="text-sm font-bold text-gray-700 mb-4">Ihre Kontaktdaten</div>
               <div class="space-y-3">
-                <div class="grid grid-cols-2 gap-3">
-                  <input class="card-input" placeholder="Vorname" value="Anna" />
-                  <input class="card-input" placeholder="Nachname" value="Müller" />
-                </div>
+                <div class="grid grid-cols-2 gap-3"><input class="card-input" placeholder="Vorname" value="Anna" /><input class="card-input" placeholder="Nachname" value="Müller" /></div>
                 <input class="card-input" placeholder="E-Mail Adresse" value="anna@mueller-immo.de" />
                 <input class="card-input" placeholder="Telefon" value="+49 211 55512345" />
-                <input class="card-input" placeholder="Adresse (Straße, Nr.)" value="Königsallee 42" />
-                <div class="grid grid-cols-2 gap-3">
-                  <input class="card-input" placeholder="PLZ" value="40215" />
-                  <input class="card-input" placeholder="Ort" value="Düsseldorf" />
-                </div>
               </div>
             </div>
-
             <div class="bg-white rounded-2xl border border-gray-200 p-6">
               <div class="text-sm font-bold text-gray-700 mb-4">Zahlungsmethode</div>
               <div class="flex gap-2 mb-4">
                 <button class="px-4 py-2 rounded-lg border-2 border-brand-500 bg-brand-50 text-sm font-semibold text-brand-700" onclick="setPayment('card', this)">Karte</button>
-                <button class="px-4 py-2 rounded-lg border-2 border-gray-200 text-sm font-semibold text-gray-500 hover:border-gray-300 transition" onclick="setPayment('sepa', this)">SEPA Lastschrift</button>
+                <button class="px-4 py-2 rounded-lg border-2 border-gray-200 text-sm font-semibold text-gray-500 hover:border-gray-300 transition" onclick="setPayment('sepa', this)">SEPA</button>
                 <button class="px-4 py-2 rounded-lg border-2 border-gray-200 text-sm font-semibold text-gray-500 hover:border-gray-300 transition" onclick="setPayment('rechnung', this)">Rechnung</button>
               </div>
               <div id="payment-card" class="space-y-3">
-                <div class="relative">
-                  <input class="card-input pr-16" placeholder="Kartennummer" value="4242 4242 4242 4242" />
-                  <div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
-                    <div class="w-8 h-5 rounded bg-blue-600 text-white text-[8px] font-bold flex items-center justify-center">VISA</div>
-                    <div class="w-8 h-5 rounded bg-red-500 text-white text-[8px] font-bold flex items-center justify-center">MC</div>
-                  </div>
-                </div>
-                <div class="grid grid-cols-2 gap-3">
-                  <input class="card-input" placeholder="MM / JJ" value="12 / 28" />
-                  <input class="card-input" placeholder="CVC" value="123" />
-                </div>
+                <div class="relative"><input class="card-input pr-16" placeholder="Kartennummer" value="4242 4242 4242 4242" /><div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1"><div class="w-8 h-5 rounded bg-blue-600 text-white text-[8px] font-bold flex items-center justify-center">VISA</div><div class="w-8 h-5 rounded bg-red-500 text-white text-[8px] font-bold flex items-center justify-center">MC</div></div></div>
+                <div class="grid grid-cols-2 gap-3"><input class="card-input" placeholder="MM / JJ" value="12 / 28" /><input class="card-input" placeholder="CVC" value="123" /></div>
               </div>
-              <div id="payment-sepa" class="space-y-3 hidden">
-                <input class="card-input" placeholder="IBAN" value="DE89 3704 0044 0532 0130 00" />
-                <input class="card-input" placeholder="Kontoinhaber" value="Anna Müller" />
-              </div>
-              <div id="payment-rechnung" class="hidden">
-                <div class="text-sm text-gray-500 py-3">Rechnung wird per Mail zugestellt. Zahlungsziel: 14 Tage.</div>
-              </div>
+              <div id="payment-sepa" class="space-y-3 hidden"><input class="card-input" placeholder="IBAN" value="DE89 3704 0044 0532 0130 00" /><input class="card-input" placeholder="Kontoinhaber" value="Anna Müller" /></div>
+              <div id="payment-rechnung" class="hidden"><div class="text-sm text-gray-500 py-3">Rechnung wird per Mail zugestellt. Zahlungsziel: 14 Tage.</div></div>
             </div>
-
             <div class="flex flex-wrap gap-3">
-              <span class="trust-badge">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-                SSL verschlüsselt
-              </span>
-              <span class="trust-badge">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>
-                Sichere Zahlung
-              </span>
-              <span class="trust-badge">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"/></svg>
-                Kostenlos stornierbar
-              </span>
+              <span class="trust-badge"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg> SSL verschlüsselt</span>
+              <span class="trust-badge"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg> Sichere Zahlung</span>
+              <span class="trust-badge"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"/></svg> Kostenlos stornierbar</span>
             </div>
           </div>
-
-          <!-- Order Summary -->
           <div class="md:sticky md:top-24">
             <div class="bg-white rounded-2xl border border-gray-200 p-6">
               <div class="text-sm font-bold text-gray-700 mb-4">Zusammenfassung</div>
-              <div class="space-y-3 text-sm" id="checkout-summary">
-                <!-- Filled by JS -->
-              </div>
-              <div class="border-t border-gray-100 mt-4 pt-4 flex items-center justify-between">
-                <div class="font-bold text-gray-900">Gesamt</div>
-                <div class="text-2xl font-bold text-brand-600" id="checkout-total">189 €</div>
-              </div>
-              <button onclick="completePurchase()" id="pay-btn" class="mt-6 w-full bg-brand-600 text-white font-bold py-4 rounded-xl hover:bg-brand-700 transition text-base shadow-lg shadow-brand-200">
-                Jetzt verbindlich buchen
-              </button>
+              <div class="space-y-3 text-sm" id="checkout-summary"></div>
+              <div class="border-t border-gray-100 mt-4 pt-4 flex items-center justify-between"><div class="font-bold text-gray-900">Gesamt</div><div class="text-2xl font-bold text-brand-600" id="checkout-total"></div></div>
+              <button onclick="completePurchase()" id="pay-btn" class="mt-6 w-full bg-brand-600 text-white font-bold py-4 rounded-xl hover:bg-brand-700 transition text-base shadow-lg shadow-brand-200">Jetzt verbindlich buchen</button>
               <div class="text-[11px] text-gray-400 text-center mt-3">Sie erhalten sofort eine Bestätigung per Mail.</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ============ STEP 7: SUCCESS ============ -->
-      <div class="step-panel" data-step="7">
+      <!-- ===== STEP 9: Erfolg ===== -->
+      <div class="step-panel" data-step="9">
         <div class="text-center py-12">
           <div class="w-20 h-20 mx-auto rounded-full bg-brand-100 flex items-center justify-center mb-6">
             <svg class="w-10 h-10 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
           </div>
           <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Buchung bestätigt.</h2>
-          <p class="text-gray-500 max-w-md mx-auto mb-8">
-            Eine Bestätigung wurde an anna@mueller-immo.de gesendet.
-            Wir melden uns innerhalb eines Werktags um den Termin abzustimmen.
-          </p>
-
+          <p class="text-gray-500 max-w-md mx-auto mb-8">Eine Bestätigung wurde an anna@mueller-immo.de gesendet.</p>
           <div class="bg-white rounded-2xl border border-gray-200 p-6 max-w-md mx-auto mb-8 text-left">
             <div class="text-xs font-bold text-brand-600 uppercase tracking-wider mb-3">Buchungsübersicht</div>
             <div class="space-y-2 text-sm" id="success-summary"></div>
-            <div class="border-t border-gray-100 mt-3 pt-3 flex justify-between font-bold">
-              <span>Bezahlt</span>
-              <span class="text-brand-600" id="success-total"></span>
-            </div>
+            <div class="border-t border-gray-100 mt-3 pt-3 flex justify-between font-bold"><span>Bezahlt</span><span class="text-brand-600" id="success-total"></span></div>
           </div>
-
           <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 max-w-md mx-auto mb-8 text-left">
             <div class="text-xs font-bold text-amber-700 uppercase tracking-wider mb-2">Das ist eine Demo</div>
-            <div class="text-sm text-amber-800">
-              Keine echte Buchung, keine echte Zahlung. Dieser Funnel zeigt wie ein vollständiger Sales-Prozess auf Ihrer Website aussehen kann. Von der Bedarfsanalyse bis zur Zahlung. Alles automatisch.
-            </div>
+            <div class="text-sm text-amber-800">Keine echte Buchung, keine echte Zahlung. Dieser Funnel zeigt wie ein vollständiger Sales-Prozess auf Ihrer Website aussehen kann. Von der Bedarfsanalyse bis zur Zahlung. Alles automatisch.</div>
           </div>
-
           <div class="flex flex-wrap gap-4 justify-center">
             <button onclick="resetFunnel()" class="bg-brand-600 text-white font-bold px-6 py-3 rounded-full hover:bg-brand-700 transition">Nochmal ausprobieren</button>
             <a href="../" class="border border-gray-300 text-gray-700 font-bold px-6 py-3 rounded-full hover:bg-gray-50 transition">Zurück zum Showcase</a>
@@ -519,244 +389,335 @@
   <script>
     /* ===== STATE ===== */
     let currentStep = 1;
+    const stepHistory = [];
     const answers = {};
     const upsells = {};
     let basePrice = 0;
+    let freqDays = 3;
+    let freqMode = 'regular'; // 'einmalig' or 'regular'
+    let selectedDate = null;
+    let selectedTime = null;
+    let calYear, calMonth;
 
-    /* ===== PRICING ===== */
-    const pricing = {
-      buero:    { klein: 89,  mittel: 149, gross: 249, sehr_gross: 399 },
-      wohnung:  { klein: 69,  mittel: 119, gross: 199, sehr_gross: 329 },
-      grund:    { klein: 149, mittel: 249, gross: 399, sehr_gross: 599 },
-      fenster:  { klein: 59,  mittel: 99,  gross: 169, sehr_gross: 269 }
-    };
+    /* ===== DATA ===== */
+    const TOTAL_STEPS = 8;
+    const pricing = { buero:{klein:89,mittel:149,gross:249,sehr_gross:399}, wohnung:{klein:69,mittel:119,gross:199,sehr_gross:329}, grund:{klein:149,mittel:249,gross:399,sehr_gross:599}, fenster:{klein:59,mittel:99,gross:169,sehr_gross:269} };
+    const packageNames = { buero:{klein:'Büro Kompakt',mittel:'Büro Komfort',gross:'Büro Premium',sehr_gross:'Büro Enterprise'}, wohnung:{klein:'Wohnung Basis',mittel:'Wohnung Komfort',gross:'Wohnung Premium',sehr_gross:'Wohnung XL'}, grund:{klein:'Grundreinigung S',mittel:'Grundreinigung M',gross:'Grundreinigung L',sehr_gross:'Grundreinigung XL'}, fenster:{klein:'Fenster Basis',mittel:'Fenster Standard',gross:'Fenster Komplett',sehr_gross:'Fenster Gebäude'} };
+    const features = { buero:['Staubsaugen und Wischen aller Böden','Oberflächen abwischen und desinfizieren','Sanitärbereiche reinigen','Mülleimer leeren','Küche/Teeküche reinigen'], wohnung:['Alle Räume saugen und wischen','Bad und WC gründlich reinigen','Küche reinigen inkl. Arbeitsflächen','Staub wischen','Betten machen (auf Wunsch)'], grund:['Intensivreinigung aller Böden','Wände und Decken entstauben','Fenster innen reinigen','Alle Oberflächen tiefenreinigen','Sanitär komplett desinfizieren','Fugen und Ecken reinigen'], fenster:['Alle Fenster innen und außen','Rahmen und Fensterbänke','Streifenfreies Ergebnis','Sicherheitsglas und Spiegel'] };
+    const sizeLabels = { klein:'Bis 50 m²', mittel:'50–150 m²', gross:'150–400 m²', sehr_gross:'Über 400 m²' };
+    const typeLabels = { buero:'Büroreinigung', wohnung:'Wohnungsreinigung', grund:'Grundreinigung', fenster:'Fensterreinigung' };
+    const upsellNames = { fenster_extra:'Fensterreinigung', teppich:'Teppichreinigung', kueche:'Küche intensiv', desinfektion:'Desinfektion', schluessel:'Schlüsselservice' };
 
-    const freqMultiplier = { einmalig: 1, woechentlich: 0.85, '2x_woche': 0.75, monatlich: 0.95 };
-    const freqLabel = { einmalig: 'einmalig', woechentlich: 'pro Woche', '2x_woche': '2x pro Woche', monatlich: 'pro Monat' };
+    function getFreqDiscount() {
+      if (freqMode === 'einmalig') return 0;
+      const d = freqDays;
+      if (d === 1) return 5;
+      if (d === 2) return 12;
+      if (d === 3) return 20;
+      if (d === 4) return 25;
+      if (d === 5) return 30;
+      if (d === 6) return 33;
+      return 35;
+    }
 
-    const packageNames = {
-      buero:   { klein: 'Büro Kompakt', mittel: 'Büro Komfort', gross: 'Büro Premium', sehr_gross: 'Büro Enterprise' },
-      wohnung: { klein: 'Wohnung Basis', mittel: 'Wohnung Komfort', gross: 'Wohnung Premium', sehr_gross: 'Wohnung XL' },
-      grund:   { klein: 'Grundreinigung S', mittel: 'Grundreinigung M', gross: 'Grundreinigung L', sehr_gross: 'Grundreinigung XL' },
-      fenster: { klein: 'Fenster Basis', mittel: 'Fenster Standard', gross: 'Fenster Komplett', sehr_gross: 'Fenster Gebäude' }
-    };
+    function getFreqLabel() {
+      if (freqMode === 'einmalig') return 'einmalig';
+      return freqDays + 'x pro Woche';
+    }
 
-    const features = {
-      buero: ['Staubsaugen und Wischen aller Böden', 'Oberflächen abwischen und desinfizieren', 'Sanitärbereiche reinigen', 'Mülleimer leeren', 'Küche/Teeküche reinigen'],
-      wohnung: ['Alle Räume saugen und wischen', 'Bad und WC gründlich reinigen', 'Küche reinigen inkl. Arbeitsflächen', 'Staub wischen', 'Betten machen (auf Wunsch)'],
-      grund: ['Intensivreinigung aller Böden', 'Wände und Decken entstauben', 'Fenster innen reinigen', 'Alle Oberflächen tiefenreinigen', 'Sanitär komplett desinfizieren', 'Fugen und Ecken reinigen'],
-      fenster: ['Alle Fenster innen und außen', 'Rahmen und Fensterbänke', 'Streifenfreies Ergebnis', 'Sicherheitsglas und Spiegel']
-    };
-
-    /* ===== NAVIGATION ===== */
+    /* ===== NAV ===== */
     function goToStep(n) {
-      const current = document.querySelector(`.step-panel[data-step="${currentStep}"]`);
-      const next = document.querySelector(`.step-panel[data-step="${n}"]`);
-      if (!next) return;
+      const cur = document.querySelector(`.step-panel[data-step="${currentStep}"]`);
+      const nxt = document.querySelector(`.step-panel[data-step="${n}"]`);
+      if (!nxt) return;
+      if (n > currentStep) stepHistory.push(currentStep);
+      cur.classList.remove('active'); cur.classList.add('exit');
+      setTimeout(() => { cur.classList.remove('exit'); cur.style.display='none'; nxt.classList.add('active'); currentStep=n; updateProgress(); window.scrollTo({top:0,behavior:'smooth'}); }, 300);
+    }
 
-      current.classList.remove('active');
-      current.classList.add('exit');
-      setTimeout(() => {
-        current.classList.remove('exit');
-        current.style.display = 'none';
-        next.classList.add('active');
-        currentStep = n;
-        updateProgress();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 300);
+    function goBack() {
+      if (stepHistory.length === 0) return;
+      const prev = stepHistory.pop();
+      const cur = document.querySelector(`.step-panel[data-step="${currentStep}"]`);
+      const nxt = document.querySelector(`.step-panel[data-step="${prev}"]`);
+      cur.classList.remove('active'); cur.classList.add('exit');
+      setTimeout(() => { cur.classList.remove('exit'); cur.style.display='none'; nxt.classList.add('active'); currentStep=prev; updateProgress(); window.scrollTo({top:0,behavior:'smooth'}); }, 300);
     }
 
     function updateProgress() {
-      const total = 6;
-      const pct = Math.min(((currentStep) / total) * 100, 100);
+      const pct = Math.min((currentStep / TOTAL_STEPS) * 100, 100);
       document.getElementById('progress-bar').style.width = pct + '%';
-      if (currentStep <= 6) {
-        document.getElementById('progress-label').textContent = `Schritt ${currentStep} von ${total}`;
+      document.getElementById('progress-label').textContent = currentStep <= TOTAL_STEPS ? `Schritt ${currentStep} von ${TOTAL_STEPS}` : 'Fertig';
+    }
+
+    /* ===== STEP 1+2: Option select ===== */
+    function selectOption(step, el, value) {
+      el.parentElement.querySelectorAll('.opt-card').forEach(c => { c.classList.remove('selected'); c.querySelector('svg').classList.add('hidden'); });
+      el.classList.add('selected'); el.querySelector('svg').classList.remove('hidden');
+      answers[step] = value;
+      setTimeout(() => goToStep(step + 1), 350);
+    }
+
+    /* ===== STEP 3: Frequency ===== */
+    function selectFreq(mode) {
+      freqMode = mode;
+      document.getElementById('freq-einmalig').classList.toggle('selected', mode === 'einmalig');
+      document.getElementById('freq-einmalig').querySelector('svg').classList.toggle('hidden', mode !== 'einmalig');
+      document.querySelectorAll('.freq-pill').forEach(p => p.classList.remove('selected'));
+      updateFreqUI();
+    }
+
+    function selectFreqDays(n) {
+      freqMode = 'regular';
+      freqDays = n;
+      document.getElementById('freq-einmalig').classList.remove('selected');
+      document.getElementById('freq-einmalig').querySelector('svg').classList.add('hidden');
+      document.querySelectorAll('.freq-pill').forEach((p, i) => p.classList.toggle('selected', i + 1 === n));
+      updateFreqUI();
+    }
+
+    function updateFreqUI() {
+      const summary = document.getElementById('freq-summary');
+      const discount = document.getElementById('freq-discount');
+      if (freqMode === 'einmalig') {
+        summary.textContent = 'Einmaliger Einsatz';
+        discount.textContent = 'Kein Rabatt';
       } else {
-        document.getElementById('progress-label').textContent = 'Fertig';
+        summary.textContent = freqDays + 'x pro Woche';
+        discount.textContent = 'Rabatt: ' + getFreqDiscount() + '%';
       }
     }
 
-    /* ===== OPTION SELECT ===== */
-    function selectOption(step, el, value) {
-      const parent = el.parentElement;
-      parent.querySelectorAll('.opt-card').forEach(c => {
-        c.classList.remove('selected');
-        c.querySelector('svg').classList.add('hidden');
-      });
-      el.classList.add('selected');
-      el.querySelector('svg').classList.remove('hidden');
-      answers[step] = value;
-
-      setTimeout(() => {
-        if (step < 3) {
-          goToStep(step + 1);
-        } else if (step === 3) {
-          calculateResult();
-          goToStep(4);
-        }
-      }, 350);
+    function confirmFreq() {
+      answers[3] = freqMode === 'einmalig' ? 'einmalig' : 'regular_' + freqDays;
+      goToStep(4);
     }
 
-    /* ===== CALCULATE RESULT ===== */
+    /* ===== STEP 4: Location ===== */
+    function selectBuilding(el, val) {
+      document.querySelectorAll('#building-type .opt-card').forEach(c => { c.classList.remove('selected'); c.querySelector('svg').classList.add('hidden'); });
+      el.classList.add('selected'); el.querySelector('svg').classList.remove('hidden');
+      answers.building = val;
+    }
+
+    function confirmLocation() {
+      answers.street = document.getElementById('loc-street').value;
+      answers.plz = document.getElementById('loc-plz').value;
+      answers.city = document.getElementById('loc-city').value;
+      answers.notes = document.getElementById('loc-notes').value;
+      document.querySelector('#avail-msg strong').textContent = answers.city || 'Ihr Standort';
+      initCalendar();
+      goToStep(5);
+    }
+
+    /* ===== STEP 5: Calendar + Time ===== */
+    const months = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
+    function initCalendar() {
+      const now = new Date();
+      calYear = now.getFullYear();
+      calMonth = now.getMonth();
+      renderCalendar();
+    }
+
+    function calMonth_(delta) { calMonth += delta; if (calMonth > 11) { calMonth=0; calYear++; } if (calMonth < 0) { calMonth=11; calYear--; } renderCalendar(); }
+    window.calMonth = calMonth_;
+
+    function renderCalendar() {
+      document.getElementById('cal-month-label').textContent = months[calMonth] + ' ' + calYear;
+      const grid = document.getElementById('cal-grid');
+      grid.innerHTML = '';
+      const first = new Date(calYear, calMonth, 1);
+      let startDay = first.getDay(); if (startDay === 0) startDay = 7; startDay--;
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+      const today = new Date();
+
+      // Unavailable days (simulated: some random days are fully booked)
+      const seed = calYear * 100 + calMonth;
+      const unavailDays = new Set();
+      for (let i = 0; i < 5; i++) unavailDays.add(((seed * 7 + i * 13) % daysInMonth) + 1);
+
+      for (let i = 0; i < startDay; i++) grid.innerHTML += '<div class="day-cell empty"></div>';
+      for (let d = 1; d <= daysInMonth; d++) {
+        const date = new Date(calYear, calMonth, d);
+        const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const isUnavail = unavailDays.has(d) || isPast;
+        const isToday = date.toDateString() === today.toDateString();
+        const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+        const cls = ['day-cell'];
+        if (isUnavail) cls.push('unavailable');
+        if (isToday && !isPast) cls.push('today');
+        if (isSelected) cls.push('selected');
+        grid.innerHTML += `<div class="${cls.join(' ')}" onclick="pickDate(${calYear},${calMonth},${d},${isUnavail})">${d}</div>`;
+      }
+    }
+
+    window.pickDate = function(y, m, d, unavail) {
+      if (unavail) return;
+      selectedDate = new Date(y, m, d);
+      selectedTime = null;
+      renderCalendar();
+      showTimeSlots();
+      updateTimeBtn();
+    };
+
+    function showTimeSlots() {
+      const section = document.getElementById('time-section');
+      const grid = document.getElementById('time-slots');
+      const label = document.getElementById('selected-date-label');
+      section.classList.remove('hidden');
+      document.getElementById('unavail-msg').classList.add('hidden');
+
+      const dayStr = selectedDate.toLocaleDateString('de-DE', { weekday:'long', day:'numeric', month:'long' });
+      label.textContent = dayStr;
+
+      const slots = ['07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00'];
+      // Simulated unavailability: some slots are taken
+      const seed = selectedDate.getDate() * 31 + selectedDate.getMonth();
+      const takenSlots = new Set();
+      for (let i = 0; i < 4; i++) takenSlots.add(slots[(seed * 3 + i * 5) % slots.length]);
+
+      grid.innerHTML = slots.map(s => {
+        const taken = takenSlots.has(s);
+        const sel = selectedTime === s;
+        return `<div class="time-slot${taken ? ' unavailable' : ''}${sel ? ' selected' : ''}" onclick="pickTime('${s}',${taken})">${s}${taken ? '<div class=\\'text-[10px] text-gray-400\\'>belegt</div>' : ''}</div>`;
+      }).join('');
+    }
+
+    window.pickTime = function(t, unavail) {
+      if (unavail) {
+        document.getElementById('unavail-msg').classList.remove('hidden');
+        return;
+      }
+      document.getElementById('unavail-msg').classList.add('hidden');
+      selectedTime = t;
+      showTimeSlots();
+      updateTimeBtn();
+    };
+
+    function updateTimeBtn() {
+      const btn = document.getElementById('time-confirm-btn');
+      if (selectedDate && selectedTime) {
+        btn.disabled = false;
+        btn.className = 'w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200 cursor-pointer';
+        btn.textContent = 'Termin bestätigen und weiter';
+      } else {
+        btn.disabled = true;
+        btn.className = 'w-full bg-gray-300 text-gray-500 font-bold px-8 py-4 rounded-full transition text-lg cursor-not-allowed';
+        btn.textContent = selectedDate ? 'Bitte Uhrzeit wählen' : 'Bitte Tag und Uhrzeit wählen';
+      }
+    }
+
+    function confirmTime() {
+      if (!selectedDate || !selectedTime) return;
+      answers.date = selectedDate;
+      answers.time = selectedTime;
+      calculateResult();
+      goToStep(6);
+    }
+
+    /* ===== STEP 6: Calculate result ===== */
     function calculateResult() {
       const type = answers[1] || 'buero';
       const size = answers[2] || 'mittel';
-      const freq = answers[3] || 'woechentlich';
-
       const raw = pricing[type][size];
-      const mult = freqMultiplier[freq];
-      basePrice = Math.round(raw * mult);
+      const disc = getFreqDiscount();
+      basePrice = Math.round(raw * (1 - disc / 100));
       const name = packageNames[type][size];
-      const feats = features[type];
 
       document.getElementById('result-package').textContent = name;
       document.getElementById('result-price').textContent = basePrice + ' €';
-      document.getElementById('result-interval').textContent = freqLabel[freq];
+      document.getElementById('result-interval').textContent = freqMode === 'einmalig' ? 'einmalig' : 'pro Einsatz';
 
-      const list = document.getElementById('result-features');
-      list.innerHTML = feats.map(f =>
+      document.getElementById('result-features').innerHTML = features[type].map(f =>
         `<li class="flex items-center gap-2"><svg class="w-4 h-4 text-brand-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> ${f}</li>`
       ).join('');
 
-      updateRunningTotal();
+      const dateStr = selectedDate ? selectedDate.toLocaleDateString('de-DE',{weekday:'short',day:'numeric',month:'short'}) : '';
+      document.getElementById('result-details').innerHTML = `
+        <div class="text-gray-500">Leistung</div><div class="font-medium text-gray-900">${typeLabels[type]}</div>
+        <div class="text-gray-500">Fläche</div><div class="font-medium text-gray-900">${sizeLabels[size]}</div>
+        <div class="text-gray-500">Häufigkeit</div><div class="font-medium text-gray-900">${getFreqLabel()}</div>
+        <div class="text-gray-500">Ort</div><div class="font-medium text-gray-900">${answers.city || 'Düsseldorf'}</div>
+        <div class="text-gray-500">Termin</div><div class="font-medium text-gray-900">${dateStr}, ${selectedTime || ''} Uhr</div>
+        ${disc > 0 ? `<div class="text-gray-500">Rabatt</div><div class="font-medium text-brand-600">${disc}%</div>` : ''}
+      `;
     }
 
-    /* ===== UPSELLS ===== */
+    /* ===== STEP 7: Upsells ===== */
     function toggleUpsell(el, key, price) {
-      if (upsells[key]) {
-        delete upsells[key];
-        el.classList.remove('added');
-      } else {
-        upsells[key] = price;
-        el.classList.add('added');
-      }
+      if (upsells[key] !== undefined) { delete upsells[key]; el.classList.remove('added'); } else { upsells[key] = price; el.classList.add('added'); }
       updateRunningTotal();
     }
 
     function updateRunningTotal() {
-      const extras = Object.values(upsells).reduce((a, b) => a + b, 0);
-      const total = basePrice + extras;
+      const extras = Object.values(upsells).reduce((a,b) => a+b, 0);
       const el = document.getElementById('running-total');
-      if (el) {
-        el.textContent = total + ' €';
-        el.classList.remove('price-pop');
-        void el.offsetWidth;
-        el.classList.add('price-pop');
-      }
+      if (el) { el.textContent = (basePrice + extras) + ' €'; el.classList.remove('price-pop'); void el.offsetWidth; el.classList.add('price-pop'); }
     }
 
-    function getTotal() {
-      return basePrice + Object.values(upsells).reduce((a, b) => a + b, 0);
-    }
+    function getTotal() { return basePrice + Object.values(upsells).reduce((a,b) => a+b, 0); }
 
-    /* ===== PAYMENT TABS ===== */
-    function setPayment(method, btn) {
-      ['card', 'sepa', 'rechnung'].forEach(m => {
-        document.getElementById('payment-' + m).classList.toggle('hidden', m !== method);
-      });
-      btn.parentElement.querySelectorAll('button').forEach(b => {
-        b.className = 'px-4 py-2 rounded-lg border-2 border-gray-200 text-sm font-semibold text-gray-500 hover:border-gray-300 transition';
-      });
-      btn.className = 'px-4 py-2 rounded-lg border-2 border-brand-500 bg-brand-50 text-sm font-semibold text-brand-700';
-    }
-
-    /* ===== CHECKOUT SUMMARY ===== */
-    function buildCheckoutSummary() {
-      const type = answers[1] || 'buero';
-      const size = answers[2] || 'mittel';
-      const freq = answers[3] || 'woechentlich';
-      const name = packageNames[type][size];
-      const total = getTotal();
-      const extras = Object.values(upsells).reduce((a, b) => a + b, 0);
-
-      const upsellNames = { fenster: 'Fensterreinigung', teppich: 'Teppichreinigung', kueche: 'Küche intensiv', desinfektion: 'Desinfektion', schluessel: 'Schlüsselservice' };
-      let html = `<div class="flex justify-between"><span class="text-gray-600">${name}</span><span class="font-semibold">${basePrice} €</span></div>`;
-      for (const [k, v] of Object.entries(upsells)) {
-        html += `<div class="flex justify-between"><span class="text-gray-600">${upsellNames[k]}</span><span class="font-semibold">${v === 0 ? 'Gratis' : '+ ' + v + ' €'}</span></div>`;
-      }
-      html += `<div class="flex justify-between text-xs text-gray-400"><span>${freqLabel[freq]}</span><span></span></div>`;
-
-      document.getElementById('checkout-summary').innerHTML = html;
-      document.getElementById('checkout-total').textContent = total + ' €';
-    }
-
-    /* ===== STEP 5→6 HOOK ===== */
-    const origGoToStep = goToStep;
+    /* ===== STEP 7→8 HOOK ===== */
+    const _goToStep = goToStep;
     goToStep = function(n) {
-      if (n === 5) {
-        document.getElementById('running-total').textContent = basePrice + ' €';
-      }
-      if (n === 6) {
-        buildCheckoutSummary();
-      }
-      origGoToStep(n);
+      if (n === 7) updateRunningTotal();
+      if (n === 8) buildCheckoutSummary();
+      _goToStep(n);
     };
 
-    /* ===== COMPLETE PURCHASE ===== */
+    /* ===== STEP 8: Checkout ===== */
+    function setPayment(method, btn) {
+      ['card','sepa','rechnung'].forEach(m => document.getElementById('payment-'+m).classList.toggle('hidden', m!==method));
+      btn.parentElement.querySelectorAll('button').forEach(b => b.className='px-4 py-2 rounded-lg border-2 border-gray-200 text-sm font-semibold text-gray-500 hover:border-gray-300 transition');
+      btn.className='px-4 py-2 rounded-lg border-2 border-brand-500 bg-brand-50 text-sm font-semibold text-brand-700';
+    }
+
+    function buildCheckoutSummary() {
+      const type = answers[1]||'buero', size = answers[2]||'mittel';
+      const name = packageNames[type][size];
+      let html = `<div class="flex justify-between"><span class="text-gray-600">${name}</span><span class="font-semibold">${basePrice} €</span></div>`;
+      for (const [k,v] of Object.entries(upsells)) html += `<div class="flex justify-between"><span class="text-gray-600">${upsellNames[k]}</span><span class="font-semibold">${v===0?'Gratis':'+ '+v+' €'}</span></div>`;
+      const dateStr = selectedDate ? selectedDate.toLocaleDateString('de-DE',{day:'numeric',month:'short'}) : '';
+      html += `<div class="flex justify-between text-xs text-gray-400"><span>${getFreqLabel()} ab ${dateStr}</span><span></span></div>`;
+      document.getElementById('checkout-summary').innerHTML = html;
+      document.getElementById('checkout-total').textContent = getTotal() + ' €';
+    }
+
     function completePurchase() {
       const btn = document.getElementById('pay-btn');
       btn.disabled = true;
       btn.innerHTML = '<span class="inline-flex items-center gap-2"><svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg> Wird verarbeitet...</span>';
-
       setTimeout(() => {
-        // Build success summary
-        const type = answers[1] || 'buero';
-        const size = answers[2] || 'mittel';
-        const name = packageNames[type][size];
-        const total = getTotal();
-        const upsellNames = { fenster: 'Fensterreinigung', teppich: 'Teppichreinigung', kueche: 'Küche intensiv', desinfektion: 'Desinfektion', schluessel: 'Schlüsselservice' };
-
+        const type=answers[1]||'buero', size=answers[2]||'mittel', name=packageNames[type][size], total=getTotal();
         let html = `<div class="flex justify-between"><span class="text-gray-600">${name}</span><span class="font-semibold">${basePrice} €</span></div>`;
-        for (const [k, v] of Object.entries(upsells)) {
-          html += `<div class="flex justify-between"><span class="text-gray-600">${upsellNames[k]}</span><span class="font-semibold">${v === 0 ? 'Gratis' : v + ' €'}</span></div>`;
-        }
+        for (const [k,v] of Object.entries(upsells)) html += `<div class="flex justify-between"><span class="text-gray-600">${upsellNames[k]}</span><span class="font-semibold">${v===0?'Gratis':v+' €'}</span></div>`;
         document.getElementById('success-summary').innerHTML = html;
         document.getElementById('success-total').textContent = total + ' €';
-
-        goToStep(7);
-        launchConfetti();
-
-        btn.disabled = false;
-        btn.innerHTML = 'Jetzt verbindlich buchen';
+        goToStep(9); launchConfetti();
+        btn.disabled=false; btn.innerHTML='Jetzt verbindlich buchen';
       }, 2000);
     }
 
-    /* ===== CONFETTI ===== */
     function launchConfetti() {
-      const colors = ['#22c55e', '#f59e0b', '#3b82f6', '#ec4899', '#8b5cf6', '#14b8a6'];
-      for (let i = 0; i < 60; i++) {
-        const el = document.createElement('div');
-        el.classList.add('confetti-piece');
-        el.style.left = Math.random() * 100 + 'vw';
-        el.style.top = '-10px';
-        el.style.background = colors[Math.floor(Math.random() * colors.length)];
-        el.style.animationDelay = Math.random() * 0.8 + 's';
-        el.style.animationDuration = (2 + Math.random() * 2) + 's';
-        el.style.width = (6 + Math.random() * 8) + 'px';
-        el.style.height = (6 + Math.random() * 8) + 'px';
-        el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 4000);
-      }
+      const colors=['#22c55e','#f59e0b','#3b82f6','#ec4899','#8b5cf6','#14b8a6'];
+      for (let i=0;i<60;i++){const el=document.createElement('div');el.classList.add('confetti-piece');el.style.left=Math.random()*100+'vw';el.style.top='-10px';el.style.background=colors[Math.floor(Math.random()*colors.length)];el.style.animationDelay=Math.random()*0.8+'s';el.style.animationDuration=(2+Math.random()*2)+'s';el.style.width=(6+Math.random()*8)+'px';el.style.height=(6+Math.random()*8)+'px';el.style.borderRadius=Math.random()>0.5?'50%':'2px';document.body.appendChild(el);setTimeout(()=>el.remove(),4000);}
     }
 
-    /* ===== RESET ===== */
     function resetFunnel() {
-      Object.keys(answers).forEach(k => delete answers[k]);
-      Object.keys(upsells).forEach(k => delete upsells[k]);
-      basePrice = 0;
-      document.querySelectorAll('.opt-card').forEach(c => { c.classList.remove('selected'); c.querySelector('svg').classList.add('hidden'); });
-      document.querySelectorAll('.upsell-card').forEach(c => c.classList.remove('added'));
-      document.querySelectorAll('.step-panel').forEach(p => { p.classList.remove('active', 'exit'); p.style.display = 'none'; });
-      document.querySelector('.step-panel[data-step="1"]').classList.add('active');
-      document.querySelector('.step-panel[data-step="1"]').style.display = '';
-      currentStep = 1;
-      updateProgress();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      Object.keys(answers).forEach(k=>delete answers[k]); Object.keys(upsells).forEach(k=>delete upsells[k]); basePrice=0; freqDays=3; freqMode='regular'; selectedDate=null; selectedTime=null; stepHistory.length=0;
+      document.querySelectorAll('.opt-card').forEach(c=>{c.classList.remove('selected'); const s=c.querySelector('svg'); if(s) s.classList.add('hidden');});
+      document.querySelectorAll('.upsell-card').forEach(c=>c.classList.remove('added'));
+      document.querySelectorAll('.freq-pill').forEach((p,i)=>p.classList.toggle('selected',i===2));
+      document.getElementById('freq-einmalig').classList.remove('selected'); document.getElementById('freq-einmalig').querySelector('svg').classList.add('hidden');
+      updateFreqUI();
+      document.querySelectorAll('.step-panel').forEach(p=>{p.classList.remove('active','exit');p.style.display='none';});
+      document.querySelector('.step-panel[data-step="1"]').classList.add('active'); document.querySelector('.step-panel[data-step="1"]').style.display='';
+      currentStep=1; updateProgress(); window.scrollTo({top:0,behavior:'smooth'});
     }
 
     updateProgress();
+    answers.building = 'buero_gebaeude';
   </script>
 
 </body>
