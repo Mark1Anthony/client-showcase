@@ -510,15 +510,31 @@
     const prefTimeLabels = { frueh:'6:00–9:00', vormittag:'9:00–12:00', nachmittag:'12:00–16:00', abend:'16:00–20:00' };
 
     function selectFreq(mode) {
-      freqMode = mode;
       const ein = document.getElementById('freq-einmalig');
-      ein.classList.toggle('selected', mode === 'einmalig');
-      ein.querySelector('svg').classList.toggle('hidden', mode !== 'einmalig');
-      if (mode === 'einmalig') {
+      const ws = document.getElementById('weekday-section');
+      // Toggle: if already einmalig, switch back to regular
+      if (freqMode === 'einmalig') {
+        freqMode = 'regular';
+        ein.classList.remove('selected');
+        ein.querySelector('svg').classList.add('hidden');
+        ws.style.opacity = '1';
+        ws.style.pointerEvents = 'auto';
+        // Restore default days if none selected
+        if (selectedDays.size === 0) {
+          selectedDays.add(2); selectedDays.add(4);
+          const pills = document.querySelectorAll('#weekday-grid .freq-pill');
+          pills.forEach((p, i) => p.classList.toggle('selected', i === 2 || i === 4));
+          freqDays = 2;
+        }
+      } else {
+        freqMode = 'einmalig';
+        ein.classList.add('selected');
+        ein.querySelector('svg').classList.remove('hidden');
         selectedDays.clear();
         document.querySelectorAll('#weekday-grid .freq-pill').forEach(p => p.classList.remove('selected'));
-        document.getElementById('weekday-section').style.opacity = '0.4';
-        document.getElementById('weekday-section').style.pointerEvents = 'none';
+        ws.style.opacity = '0.4';
+        ws.style.pointerEvents = 'none';
+        freqDays = 0;
       }
       updateFreqUI();
     }
