@@ -238,22 +238,22 @@
         </button>
       </div>
 
-      <!-- ===== STEP 5: Terminwahl ===== -->
+      <!-- ===== STEP 5: Startdatum ===== -->
       <div class="step-panel" data-step="5">
         <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
-            Terminwahl
+            Startdatum
           </div>
-          <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Wann soll es losgehen?</h2>
-          <p class="text-gray-500">Wählen Sie einen Tag und eine Uhrzeit. Grau markierte Slots sind bereits vergeben.</p>
+          <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Ab wann soll es losgehen?</h2>
+          <p class="text-gray-500">Wählen Sie den gewünschten Starttermin. Grau markierte Tage sind ausgebucht.</p>
         </div>
 
         <!-- Availability check result -->
         <div id="avail-msg" class="bg-brand-50 border border-brand-200 rounded-xl p-4 mb-6 flex items-center gap-3">
           <svg class="w-5 h-5 text-brand-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          <div class="text-sm text-brand-800"><strong>Düsseldorf</strong> ist in unserem Einzugsgebiet. Hier sind die verfügbaren Termine:</div>
+          <div class="text-sm text-brand-800"><strong>Düsseldorf</strong> ist in unserem Einzugsgebiet. Kapazitäten verfügbar.</div>
         </div>
 
         <!-- Calendar -->
@@ -269,22 +269,22 @@
           <div class="grid grid-cols-7 gap-1" id="cal-grid"></div>
         </div>
 
-        <!-- Time slots -->
-        <div id="time-section" class="hidden">
-          <div class="text-sm font-bold text-gray-700 mb-3">Verfügbare Uhrzeiten am <span id="selected-date-label" class="text-brand-600"></span></div>
-          <div class="grid grid-cols-3 sm:grid-cols-4 gap-2 mb-6" id="time-slots"></div>
+        <!-- Selected date display -->
+        <div id="selected-date-box" class="hidden bg-white rounded-xl border border-gray-200 p-4 mb-4 flex items-center justify-between">
+          <div><div class="text-xs text-gray-500">Gewählter Start</div><div class="font-bold text-gray-900" id="selected-date-label"></div></div>
+          <svg class="w-5 h-5 text-brand-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
         </div>
 
         <!-- Unavailable message -->
-        <div id="unavail-msg" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
+        <div id="unavail-msg" class="hidden bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
           <div class="flex items-center gap-3">
             <svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
-            <div class="text-sm text-red-800">Dieser Zeitraum ist leider ausgebucht. Bitte wählen Sie einen anderen Tag oder eine andere Uhrzeit.</div>
+            <div class="text-sm text-red-800">Dieser Tag ist leider ausgebucht. Bitte wählen Sie einen anderen.</div>
           </div>
         </div>
 
         <button id="time-confirm-btn" onclick="confirmTime()" disabled class="w-full bg-gray-300 text-gray-500 font-bold px-8 py-4 rounded-full transition text-lg cursor-not-allowed">
-          Bitte Tag und Uhrzeit wählen
+          Bitte Startdatum wählen
         </button>
       </div>
 
@@ -457,26 +457,36 @@
     }
 
     /* ===== NAV ===== */
+    function switchPanel(from, to) {
+      const cur = document.querySelector('.step-panel[data-step="' + from + '"]');
+      const nxt = document.querySelector('.step-panel[data-step="' + to + '"]');
+      if (!cur || !nxt) return;
+      // Immediately hide current, show next — no animation race conditions
+      cur.classList.remove('active', 'exit');
+      cur.style.display = 'none';
+      nxt.style.display = 'block';
+      nxt.classList.remove('exit');
+      nxt.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function goToStep(n) {
       // Pre-step hooks
-      if (n === 7) setTimeout(updateRunningTotal, 350);
-      if (n === 8) setTimeout(buildCheckoutSummary, 350);
+      if (n === 7) setTimeout(updateRunningTotal, 100);
+      if (n === 8) setTimeout(buildCheckoutSummary, 100);
 
-      const cur = document.querySelector(`.step-panel[data-step="${currentStep}"]`);
-      const nxt = document.querySelector(`.step-panel[data-step="${n}"]`);
-      if (!nxt) return;
       if (n > currentStep) stepHistory.push(currentStep);
-      cur.classList.remove('active'); cur.classList.add('exit');
-      setTimeout(() => { cur.classList.remove('exit'); cur.style.display='none'; nxt.classList.add('active'); currentStep=n; updateProgress(); window.scrollTo({top:0,behavior:'smooth'}); }, 300);
+      switchPanel(currentStep, n);
+      currentStep = n;
+      updateProgress();
     }
 
     function goBack() {
       if (stepHistory.length === 0) return;
       const prev = stepHistory.pop();
-      const cur = document.querySelector(`.step-panel[data-step="${currentStep}"]`);
-      const nxt = document.querySelector(`.step-panel[data-step="${prev}"]`);
-      cur.classList.remove('active'); cur.classList.add('exit');
-      setTimeout(() => { cur.classList.remove('exit'); cur.style.display='none'; nxt.classList.add('active'); currentStep=prev; updateProgress(); window.scrollTo({top:0,behavior:'smooth'}); }, 300);
+      switchPanel(currentStep, prev);
+      currentStep = prev;
+      updateProgress();
     }
 
     function updateProgress() {
@@ -656,67 +666,30 @@
     }
 
     window.pickDate = function(y, m, d, unavail) {
-      if (unavail) return;
-      selectedDate = new Date(y, m, d);
-      selectedTime = null;
-      renderCalendar();
-      showTimeSlots();
-      updateTimeBtn();
-    };
-
-    function showTimeSlots() {
-      const section = document.getElementById('time-section');
-      const grid = document.getElementById('time-slots');
-      const label = document.getElementById('selected-date-label');
-      section.classList.remove('hidden');
-      document.getElementById('unavail-msg').classList.add('hidden');
-
-      const dayStr = selectedDate.toLocaleDateString('de-DE', { weekday:'long', day:'numeric', month:'long' });
-      label.textContent = dayStr;
-
-      const slots = ['07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00'];
-      // Simulated unavailability: some slots are taken
-      const seed = selectedDate.getDate() * 31 + selectedDate.getMonth();
-      const takenSlots = new Set();
-      for (let i = 0; i < 4; i++) takenSlots.add(slots[(seed * 3 + i * 5) % slots.length]);
-
-      grid.innerHTML = slots.map(s => {
-        const taken = takenSlots.has(s);
-        const sel = selectedTime === s;
-        const cls = 'time-slot' + (taken ? ' unavailable' : '') + (sel ? ' selected' : '');
-        const label = taken ? s + '<div class="text-[10px] text-gray-400">belegt</div>' : s;
-        return '<div class="' + cls + '" onclick="pickTime(\'' + s + '\',' + taken + ')">' + label + '</div>';
-      }).join('');
-    }
-
-    window.pickTime = function(t, unavail) {
       if (unavail) {
         document.getElementById('unavail-msg').classList.remove('hidden');
         return;
       }
       document.getElementById('unavail-msg').classList.add('hidden');
-      selectedTime = t;
-      showTimeSlots();
-      updateTimeBtn();
+      selectedDate = new Date(y, m, d);
+      renderCalendar();
+
+      // Show selected date
+      const box = document.getElementById('selected-date-box');
+      const label = document.getElementById('selected-date-label');
+      box.classList.remove('hidden');
+      label.textContent = selectedDate.toLocaleDateString('de-DE', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+      // Enable button
+      const btn = document.getElementById('time-confirm-btn');
+      btn.disabled = false;
+      btn.className = 'w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200 cursor-pointer';
+      btn.textContent = 'Startdatum bestätigen und weiter';
     };
 
-    function updateTimeBtn() {
-      const btn = document.getElementById('time-confirm-btn');
-      if (selectedDate && selectedTime) {
-        btn.disabled = false;
-        btn.className = 'w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200 cursor-pointer';
-        btn.textContent = 'Termin bestätigen und weiter';
-      } else {
-        btn.disabled = true;
-        btn.className = 'w-full bg-gray-300 text-gray-500 font-bold px-8 py-4 rounded-full transition text-lg cursor-not-allowed';
-        btn.textContent = selectedDate ? 'Bitte Uhrzeit wählen' : 'Bitte Tag und Uhrzeit wählen';
-      }
-    }
-
     function confirmTime() {
-      if (!selectedDate || !selectedTime) return;
+      if (!selectedDate) return;
       answers.date = selectedDate;
-      answers.time = selectedTime;
       calculateResult();
       goToStep(6);
     }
@@ -747,7 +720,7 @@
         <div class="text-gray-500">Häufigkeit</div><div class="font-medium text-gray-900">${getFreqLabel()}</div>
         <div class="text-gray-500">Uhrzeit</div><div class="font-medium text-gray-900">${getPrefTimeLabel()}</div>
         <div class="text-gray-500">Ort</div><div class="font-medium text-gray-900">${answers.city || 'Düsseldorf'}</div>
-        <div class="text-gray-500">Start ab</div><div class="font-medium text-gray-900">${dateStr}, ${selectedTime || ''} Uhr</div>
+        <div class="text-gray-500">Start ab</div><div class="font-medium text-gray-900">${dateStr}</div>
         ${disc > 0 ? `<div class="text-gray-500">Rabatt</div><div class="font-medium text-brand-600">${disc}%</div>` : ''}
         ${freqMode !== 'einmalig' ? `<div class="text-gray-500">Pro Woche</div><div class="font-medium text-gray-900">${weekTotal} €</div>
         <div class="text-gray-500">Ca. pro Monat</div><div class="font-medium text-gray-900">${monthTotal} €</div>` : ''}
