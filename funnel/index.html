@@ -233,9 +233,9 @@
         <!-- Calendar -->
         <div class="bg-white rounded-2xl border border-gray-200 p-5 mb-4">
           <div class="flex items-center justify-between mb-4">
-            <button onclick="calMonth(-1)" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+            <button onclick="changeCalMonth(-1)" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
             <div class="font-bold text-gray-900" id="cal-month-label">April 2026</div>
-            <button onclick="calMonth(1)" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+            <button onclick="changeCalMonth(1)" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
           </div>
           <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-gray-400 mb-2">
             <div>Mo</div><div>Di</div><div>Mi</div><div>Do</div><div>Fr</div><div>Sa</div><div>So</div>
@@ -427,6 +427,10 @@
 
     /* ===== NAV ===== */
     function goToStep(n) {
+      // Pre-step hooks
+      if (n === 7) setTimeout(updateRunningTotal, 350);
+      if (n === 8) setTimeout(buildCheckoutSummary, 350);
+
       const cur = document.querySelector(`.step-panel[data-step="${currentStep}"]`);
       const nxt = document.querySelector(`.step-panel[data-step="${n}"]`);
       if (!nxt) return;
@@ -520,8 +524,7 @@
       renderCalendar();
     }
 
-    function calMonth_(delta) { calMonth += delta; if (calMonth > 11) { calMonth=0; calYear++; } if (calMonth < 0) { calMonth=11; calYear--; } renderCalendar(); }
-    window.calMonth = calMonth_;
+    function changeCalMonth(delta) { calMonth += delta; if (calMonth > 11) { calMonth=0; calYear++; } if (calMonth < 0) { calMonth=11; calYear--; } renderCalendar(); }
 
     function renderCalendar() {
       document.getElementById('cal-month-label').textContent = months[calMonth] + ' ' + calYear;
@@ -580,7 +583,9 @@
       grid.innerHTML = slots.map(s => {
         const taken = takenSlots.has(s);
         const sel = selectedTime === s;
-        return `<div class="time-slot${taken ? ' unavailable' : ''}${sel ? ' selected' : ''}" onclick="pickTime('${s}',${taken})">${s}${taken ? '<div class=\\'text-[10px] text-gray-400\\'>belegt</div>' : ''}</div>`;
+        const cls = 'time-slot' + (taken ? ' unavailable' : '') + (sel ? ' selected' : '');
+        const label = taken ? s + '<div class="text-[10px] text-gray-400">belegt</div>' : s;
+        return '<div class="' + cls + '" onclick="pickTime(\'' + s + '\',' + taken + ')">' + label + '</div>';
       }).join('');
     }
 
@@ -657,14 +662,6 @@
     }
 
     function getTotal() { return basePrice + Object.values(upsells).reduce((a,b) => a+b, 0); }
-
-    /* ===== STEP 7→8 HOOK ===== */
-    const _goToStep = goToStep;
-    goToStep = function(n) {
-      if (n === 7) updateRunningTotal();
-      if (n === 8) buildCheckoutSummary();
-      _goToStep(n);
-    };
 
     /* ===== STEP 8: Checkout ===== */
     function setPayment(method, btn) {
