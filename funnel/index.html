@@ -130,20 +130,20 @@
         </div>
       </div>
 
-      <!-- ===== STEP 3: Häufigkeit ===== -->
+      <!-- ===== STEP 3: Häufigkeit + Wochentage + Uhrzeit ===== -->
       <div class="step-panel" data-step="3">
         <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M2.985 14.652V19.644"/></svg>
-            Häufigkeit
+            Häufigkeit und Zeitplan
           </div>
-          <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Wie oft soll gereinigt werden?</h2>
+          <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Wann und wie oft?</h2>
           <p class="text-gray-500">Je häufiger, desto günstiger pro Einsatz.</p>
         </div>
 
-        <!-- Einmalig option -->
-        <div class="opt-card mb-4" id="freq-einmalig" onclick="selectFreq('einmalig')">
+        <!-- Einmalig toggle -->
+        <div class="opt-card mb-6" id="freq-einmalig" onclick="selectFreq('einmalig')">
           <div class="flex items-center gap-4">
             <div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
             <div class="flex-1">
@@ -153,23 +153,49 @@
           </div>
         </div>
 
-        <!-- Regelmäßig header -->
-        <div class="text-sm font-bold text-gray-700 mb-3 mt-6">Regelmäßig: Wie viele Tage pro Woche?</div>
-        <div class="flex gap-2 flex-wrap mb-3" id="freq-pills">
-          <div class="freq-pill" onclick="selectFreqDays(1)"><div class="text-lg font-bold text-gray-900">1</div><div class="text-[10px] text-gray-500">Tag</div></div>
-          <div class="freq-pill" onclick="selectFreqDays(2)"><div class="text-lg font-bold text-gray-900">2</div><div class="text-[10px] text-gray-500">Tage</div></div>
-          <div class="freq-pill selected" onclick="selectFreqDays(3)"><div class="text-lg font-bold text-gray-900">3</div><div class="text-[10px] text-gray-500">Tage</div></div>
-          <div class="freq-pill" onclick="selectFreqDays(4)"><div class="text-lg font-bold text-gray-900">4</div><div class="text-[10px] text-gray-500">Tage</div></div>
-          <div class="freq-pill" onclick="selectFreqDays(5)"><div class="text-lg font-bold text-gray-900">5</div><div class="text-[10px] text-gray-500">Tage</div></div>
-          <div class="freq-pill" onclick="selectFreqDays(6)"><div class="text-lg font-bold text-gray-900">6</div><div class="text-[10px] text-gray-500">Tage</div></div>
-          <div class="freq-pill" onclick="selectFreqDays(7)"><div class="text-lg font-bold text-gray-900">7</div><div class="text-[10px] text-gray-500">Tage</div></div>
-        </div>
-        <div class="bg-brand-50 border border-brand-200 rounded-xl p-4 mb-6 flex items-center justify-between">
-          <div class="text-sm text-brand-800 font-medium" id="freq-summary">3x pro Woche</div>
-          <div class="text-sm font-bold text-brand-700" id="freq-discount">Rabatt: 20%</div>
+        <!-- Weekday selector -->
+        <div id="weekday-section">
+          <div class="text-sm font-bold text-gray-700 mb-3">Regelmäßig: An welchen Tagen?</div>
+          <div class="grid grid-cols-7 gap-2 mb-4" id="weekday-grid">
+            <div class="freq-pill" onclick="toggleWeekday(this, 0)"><div class="text-base font-bold text-gray-900">Mo</div></div>
+            <div class="freq-pill" onclick="toggleWeekday(this, 1)"><div class="text-base font-bold text-gray-900">Di</div></div>
+            <div class="freq-pill selected" onclick="toggleWeekday(this, 2)"><div class="text-base font-bold text-gray-900">Mi</div></div>
+            <div class="freq-pill" onclick="toggleWeekday(this, 3)"><div class="text-base font-bold text-gray-900">Do</div></div>
+            <div class="freq-pill selected" onclick="toggleWeekday(this, 4)"><div class="text-base font-bold text-gray-900">Fr</div></div>
+            <div class="freq-pill" onclick="toggleWeekday(this, 5)"><div class="text-base font-bold text-gray-900">Sa</div></div>
+            <div class="freq-pill" onclick="toggleWeekday(this, 6)"><div class="text-base font-bold text-gray-900">So</div></div>
+          </div>
+
+          <!-- Preferred time -->
+          <div class="text-sm font-bold text-gray-700 mb-3">Gewünschte Uhrzeit</div>
+          <div class="grid grid-cols-4 gap-2 mb-4" id="pref-time-grid">
+            <div class="freq-pill" onclick="selectPrefTime(this, 'frueh')"><div class="text-sm font-bold text-gray-900">Früh</div><div class="text-[10px] text-gray-500">6:00–9:00</div></div>
+            <div class="freq-pill selected" onclick="selectPrefTime(this, 'vormittag')"><div class="text-sm font-bold text-gray-900">Vormittag</div><div class="text-[10px] text-gray-500">9:00–12:00</div></div>
+            <div class="freq-pill" onclick="selectPrefTime(this, 'nachmittag')"><div class="text-sm font-bold text-gray-900">Nachmittag</div><div class="text-[10px] text-gray-500">12:00–16:00</div></div>
+            <div class="freq-pill" onclick="selectPrefTime(this, 'abend')"><div class="text-sm font-bold text-gray-900">Abend</div><div class="text-[10px] text-gray-500">16:00–20:00</div></div>
+          </div>
         </div>
 
-        <button onclick="confirmFreq()" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">
+        <!-- Price summary box -->
+        <div class="bg-brand-50 border border-brand-200 rounded-2xl p-5 mb-6">
+          <div class="flex items-center justify-between mb-2">
+            <div class="text-sm text-brand-800 font-medium" id="freq-summary">2x pro Woche (Mi, Fr)</div>
+            <div class="text-sm font-bold text-brand-700" id="freq-discount">Rabatt: 12%</div>
+          </div>
+          <div class="border-t border-brand-200 pt-3 mt-2 grid grid-cols-2 gap-3">
+            <div>
+              <div class="text-[11px] text-brand-700 uppercase font-semibold">Pro Einsatz</div>
+              <div class="text-2xl font-bold text-brand-800" id="freq-price-single">–</div>
+            </div>
+            <div>
+              <div class="text-[11px] text-brand-700 uppercase font-semibold">Pro Woche</div>
+              <div class="text-2xl font-bold text-brand-800" id="freq-price-week">–</div>
+            </div>
+          </div>
+          <div class="text-[11px] text-brand-600 mt-2" id="freq-price-month"></div>
+        </div>
+
+        <button id="freq-confirm-btn" onclick="confirmFreq()" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">
           Weiter
         </button>
       </div>
@@ -393,7 +419,7 @@
     const answers = {};
     const upsells = {};
     let basePrice = 0;
-    let freqDays = 3;
+    let freqDays = 2;
     let freqMode = 'regular'; // 'einmalig' or 'regular'
     let selectedDate = null;
     let selectedTime = null;
@@ -422,7 +448,12 @@
 
     function getFreqLabel() {
       if (freqMode === 'einmalig') return 'einmalig';
-      return freqDays + 'x pro Woche';
+      const days = (answers.weekdays || []).map(i => weekdayNames[i]).join(', ');
+      return freqDays + 'x pro Woche' + (days ? ' (' + days + ')' : '');
+    }
+
+    function getPrefTimeLabel() {
+      return prefTimeLabels[answers.prefTime || prefTime] || '';
     }
 
     /* ===== NAV ===== */
@@ -462,38 +493,107 @@
       setTimeout(() => goToStep(step + 1), 350);
     }
 
-    /* ===== STEP 3: Frequency ===== */
+    /* ===== STEP 3: Frequency + Weekdays + Time ===== */
+    const weekdayNames = ['Mo','Di','Mi','Do','Fr','Sa','So'];
+    const selectedDays = new Set([2, 4]); // Mi, Fr default
+    let prefTime = 'vormittag';
+    const prefTimeLabels = { frueh:'6:00–9:00', vormittag:'9:00–12:00', nachmittag:'12:00–16:00', abend:'16:00–20:00' };
+
     function selectFreq(mode) {
       freqMode = mode;
-      document.getElementById('freq-einmalig').classList.toggle('selected', mode === 'einmalig');
-      document.getElementById('freq-einmalig').querySelector('svg').classList.toggle('hidden', mode !== 'einmalig');
-      document.querySelectorAll('.freq-pill').forEach(p => p.classList.remove('selected'));
+      const ein = document.getElementById('freq-einmalig');
+      ein.classList.toggle('selected', mode === 'einmalig');
+      ein.querySelector('svg').classList.toggle('hidden', mode !== 'einmalig');
+      if (mode === 'einmalig') {
+        selectedDays.clear();
+        document.querySelectorAll('#weekday-grid .freq-pill').forEach(p => p.classList.remove('selected'));
+        document.getElementById('weekday-section').style.opacity = '0.4';
+        document.getElementById('weekday-section').style.pointerEvents = 'none';
+      }
       updateFreqUI();
     }
 
-    function selectFreqDays(n) {
+    function toggleWeekday(el, idx) {
+      // If was in einmalig mode, switch back
       freqMode = 'regular';
-      freqDays = n;
       document.getElementById('freq-einmalig').classList.remove('selected');
       document.getElementById('freq-einmalig').querySelector('svg').classList.add('hidden');
-      document.querySelectorAll('.freq-pill').forEach((p, i) => p.classList.toggle('selected', i + 1 === n));
+      document.getElementById('weekday-section').style.opacity = '1';
+      document.getElementById('weekday-section').style.pointerEvents = 'auto';
+
+      if (selectedDays.has(idx)) {
+        selectedDays.delete(idx);
+        el.classList.remove('selected');
+      } else {
+        selectedDays.add(idx);
+        el.classList.add('selected');
+      }
+      freqDays = selectedDays.size;
+      updateFreqUI();
+    }
+
+    function selectPrefTime(el, val) {
+      document.querySelectorAll('#pref-time-grid .freq-pill').forEach(p => p.classList.remove('selected'));
+      el.classList.add('selected');
+      prefTime = val;
       updateFreqUI();
     }
 
     function updateFreqUI() {
       const summary = document.getElementById('freq-summary');
       const discount = document.getElementById('freq-discount');
+      const priceSingle = document.getElementById('freq-price-single');
+      const priceWeek = document.getElementById('freq-price-week');
+      const priceMonth = document.getElementById('freq-price-month');
+      const btn = document.getElementById('freq-confirm-btn');
+
+      const type = answers[1] || 'buero';
+      const size = answers[2] || 'mittel';
+      const raw = pricing[type] ? pricing[type][size] || 149 : 149;
+
       if (freqMode === 'einmalig') {
         summary.textContent = 'Einmaliger Einsatz';
         discount.textContent = 'Kein Rabatt';
-      } else {
-        summary.textContent = freqDays + 'x pro Woche';
-        discount.textContent = 'Rabatt: ' + getFreqDiscount() + '%';
+        priceSingle.textContent = raw + ' €';
+        priceWeek.textContent = raw + ' €';
+        priceMonth.textContent = '';
+        btn.disabled = false;
+        btn.className = 'w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200';
+        return;
       }
+
+      const n = selectedDays.size;
+      if (n === 0) {
+        summary.textContent = 'Bitte Tage wählen';
+        discount.textContent = '';
+        priceSingle.textContent = '–';
+        priceWeek.textContent = '–';
+        priceMonth.textContent = '';
+        btn.disabled = true;
+        btn.className = 'w-full bg-gray-300 text-gray-500 font-bold px-8 py-4 rounded-full transition text-lg cursor-not-allowed';
+        return;
+      }
+
+      const dayStr = [...selectedDays].sort().map(i => weekdayNames[i]).join(', ');
+      const disc = getFreqDiscount();
+      const single = Math.round(raw * (1 - disc / 100));
+      const week = single * n;
+      const month = Math.round(week * 4.33);
+
+      summary.textContent = n + 'x pro Woche (' + dayStr + ')';
+      discount.textContent = disc > 0 ? 'Rabatt: ' + disc + '%' : '';
+      priceSingle.textContent = single + ' €';
+      priceWeek.textContent = week + ' €';
+      priceMonth.textContent = 'Ca. ' + month + ' € pro Monat';
+      btn.disabled = false;
+      btn.className = 'w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200';
     }
 
     function confirmFreq() {
+      if (freqMode !== 'einmalig' && selectedDays.size === 0) return;
       answers[3] = freqMode === 'einmalig' ? 'einmalig' : 'regular_' + freqDays;
+      answers.weekdays = freqMode === 'einmalig' ? [] : [...selectedDays].sort();
+      answers.prefTime = prefTime;
       goToStep(4);
     }
 
@@ -639,13 +739,18 @@
       ).join('');
 
       const dateStr = selectedDate ? selectedDate.toLocaleDateString('de-DE',{weekday:'short',day:'numeric',month:'short'}) : '';
+      const weekTotal = freqMode === 'einmalig' ? basePrice : basePrice * freqDays;
+      const monthTotal = freqMode === 'einmalig' ? basePrice : Math.round(weekTotal * 4.33);
       document.getElementById('result-details').innerHTML = `
         <div class="text-gray-500">Leistung</div><div class="font-medium text-gray-900">${typeLabels[type]}</div>
         <div class="text-gray-500">Fläche</div><div class="font-medium text-gray-900">${sizeLabels[size]}</div>
         <div class="text-gray-500">Häufigkeit</div><div class="font-medium text-gray-900">${getFreqLabel()}</div>
+        <div class="text-gray-500">Uhrzeit</div><div class="font-medium text-gray-900">${getPrefTimeLabel()}</div>
         <div class="text-gray-500">Ort</div><div class="font-medium text-gray-900">${answers.city || 'Düsseldorf'}</div>
-        <div class="text-gray-500">Termin</div><div class="font-medium text-gray-900">${dateStr}, ${selectedTime || ''} Uhr</div>
+        <div class="text-gray-500">Start ab</div><div class="font-medium text-gray-900">${dateStr}, ${selectedTime || ''} Uhr</div>
         ${disc > 0 ? `<div class="text-gray-500">Rabatt</div><div class="font-medium text-brand-600">${disc}%</div>` : ''}
+        ${freqMode !== 'einmalig' ? `<div class="text-gray-500">Pro Woche</div><div class="font-medium text-gray-900">${weekTotal} €</div>
+        <div class="text-gray-500">Ca. pro Monat</div><div class="font-medium text-gray-900">${monthTotal} €</div>` : ''}
       `;
     }
 
@@ -702,11 +807,14 @@
     }
 
     function resetFunnel() {
-      Object.keys(answers).forEach(k=>delete answers[k]); Object.keys(upsells).forEach(k=>delete upsells[k]); basePrice=0; freqDays=3; freqMode='regular'; selectedDate=null; selectedTime=null; stepHistory.length=0;
+      Object.keys(answers).forEach(k=>delete answers[k]); Object.keys(upsells).forEach(k=>delete upsells[k]); basePrice=0; freqDays=2; freqMode='regular'; selectedDate=null; selectedTime=null; stepHistory.length=0; prefTime='vormittag';
+      selectedDays.clear(); selectedDays.add(2); selectedDays.add(4);
       document.querySelectorAll('.opt-card').forEach(c=>{c.classList.remove('selected'); const s=c.querySelector('svg'); if(s) s.classList.add('hidden');});
       document.querySelectorAll('.upsell-card').forEach(c=>c.classList.remove('added'));
-      document.querySelectorAll('.freq-pill').forEach((p,i)=>p.classList.toggle('selected',i===2));
+      document.querySelectorAll('#weekday-grid .freq-pill').forEach((p,i)=>p.classList.toggle('selected', i===2||i===4));
+      document.querySelectorAll('#pref-time-grid .freq-pill').forEach((p,i)=>p.classList.toggle('selected', i===1));
       document.getElementById('freq-einmalig').classList.remove('selected'); document.getElementById('freq-einmalig').querySelector('svg').classList.add('hidden');
+      document.getElementById('weekday-section').style.opacity='1'; document.getElementById('weekday-section').style.pointerEvents='auto';
       updateFreqUI();
       document.querySelectorAll('.step-panel').forEach(p=>{p.classList.remove('active','exit');p.style.display='none';});
       document.querySelector('.step-panel[data-step="1"]').classList.add('active'); document.querySelector('.step-panel[data-step="1"]').style.display='';
@@ -715,6 +823,8 @@
 
     updateProgress();
     answers.building = 'buero_gebaeude';
+    // Init freq UI after page load
+    setTimeout(updateFreqUI, 100);
   </script>
 
 </body>
