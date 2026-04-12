@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>AI Automatisierung. Live Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0a0a0a; --fg: #f5f5f5; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--fg); -webkit-font-smoothing: antialiased; }
+    .serif { font-family: 'Playfair Display', serif; }
+    .grain::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .04; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .glass { background: #111113; border: 1px solid #1f1f23; border-radius: 16px; }
+    .gradient-text { background: linear-gradient(135deg, #f59e0b, #f97316); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: #1a1a1f; border: 1px solid #2a2a30; font-size: 11px; font-weight: 500; color: #a1a1aa; letter-spacing: .04em; text-transform: uppercase; }
+    .pulse-dot { width: 8px; height: 8px; border-radius: 999px; background: #22c55e; box-shadow: 0 0 0 0 rgba(34,197,94,.6); animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(34,197,94,.6); }
+      70% { box-shadow: 0 0 0 12px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    /* Pipeline steps */
+    .p-step { padding: 14px; border-radius: 12px; border: 1px solid #1f1f23; background: rgba(17,17,19,0.5); transition: all 0.4s ease; }
+    .p-step.active { border-color: rgba(245,158,11,0.5); background: rgba(245,158,11,0.06); }
+    .p-step.active .step-ico { background: linear-gradient(135deg, #f59e0b, #d97706); border-color: #f59e0b; color: #0a0a0a; box-shadow: 0 0 20px rgba(245,158,11,0.35); }
+    .p-step.active .step-name { color: #f5f5f5; }
+    .p-step.active .step-time { color: #f59e0b; }
+    .p-step.pending { border-color: rgba(245,158,11,0.2); }
+    .p-step.pending .step-ico { animation: glow 1.2s ease infinite alternate; }
+    @keyframes glow { from { box-shadow: 0 0 8px rgba(245,158,11,0.2); } to { box-shadow: 0 0 16px rgba(245,158,11,0.5); } }
+    .step-ico { width: 36px; height: 36px; border-radius: 10px; background: #1a1a1f; border: 1px solid #2a2a30; display: flex; align-items: center; justify-content: center; color: #71717a; font-size: 12px; font-weight: 800; font-family: 'Inter'; transition: all 0.4s ease; flex-shrink: 0; }
+
+    /* Phone mockup */
+    .phone { width: 280px; border-radius: 38px; background: #18181b; border: 12px solid #000; position: relative; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 0 1px #2a2a30; }
+    .phone::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 90px; height: 22px; background: #000; border-radius: 999px; z-index: 10; }
+
+    /* Notification slide in */
+    .notif-wrap { opacity: 0; transform: translateY(16px); transition: all 0.5s ease; }
+    .notif-wrap.show { opacity: 1; transform: translateY(0); }
+
+    /* Mail preview */
+    .mail-preview { opacity: 0; transform: scale(0.95); transition: all 0.5s ease; }
+    .mail-preview.show { opacity: 1; transform: scale(1); }
+
+    /* Typing animation */
+    .typing span { display: inline-block; width: 6px; height: 6px; background: #71717a; border-radius: 50%; animation: typing-bounce 1.4s infinite; }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing-bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+
+    /* Priority colors */
+    .priority-hot { color: #ef4444; }
+    .priority-warm { color: #f59e0b; }
+    .priority-cold { color: #3b82f6; }
+    .priority-bg-hot { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.3); }
+    .priority-bg-warm { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.3); }
+    .priority-bg-cold { background: rgba(59,130,246,0.12); border-color: rgba(59,130,246,0.3); }
+  </style>
+</head>
+<body class="grain">
+
+  <!-- Back link -->
+  <a href="../" class="fixed top-6 left-6 z-40 inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md bg-black/40 border border-white/10 text-sm text-zinc-300 hover:text-amber-500 hover:border-amber-500/40 transition">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+    Zurück
+  </a>
+
+  <div class="min-h-screen py-20 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Header -->
+      <div class="mb-14 text-center">
+        <span class="badge mx-auto mb-4"><span class="pulse-dot"></span> Interaktive Demo</span>
+        <h1 class="serif font-bold text-4xl md:text-5xl lg:text-6xl mt-4 mb-5 leading-tight">
+          Anfrage gesendet.<br><span class="gradient-text">Alles danach passiert von allein.</span>
+        </h1>
+        <p class="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          Füllen Sie das Formular links aus und beobachten Sie rechts, was im Hintergrund passiert.
+          Die AI liest die Nachricht, bewertet wie dringend sie ist und löst alles Weitere automatisch aus.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6 items-start">
+
+        <!-- FORM SIDE -->
+        <div class="glass p-6 md:p-8">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-black font-bold text-sm">1</div>
+            <div>
+              <div class="font-bold text-zinc-100">Kunde füllt Formular aus</div>
+              <div class="text-zinc-500 text-xs">auf einer typischen Betriebs-Website</div>
+            </div>
+          </div>
+
+          <form id="auto-form" onsubmit="return false" class="space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+              <input required id="af-name" placeholder="Name" value="Anna Müller" class="bg-zinc-900 border border-zinc-700 text-zinc-100 px-4 py-2.5 rounded-lg text-sm outline-none focus:border-amber-500 placeholder:text-zinc-600" />
+              <input id="af-company" placeholder="Firma (optional)" value="Müller Immobilien" class="bg-zinc-900 border border-zinc-700 text-zinc-100 px-4 py-2.5 rounded-lg text-sm outline-none focus:border-amber-500 placeholder:text-zinc-600" />
+            </div>
+            <input required id="af-email" type="email" placeholder="Email" value="anna@mueller-immo.de" class="w-full bg-zinc-900 border border-zinc-700 text-zinc-100 px-4 py-2.5 rounded-lg text-sm outline-none focus:border-amber-500 placeholder:text-zinc-600" />
+            <input id="af-phone" placeholder="Telefon" value="+49 211 55512345" class="w-full bg-zinc-900 border border-zinc-700 text-zinc-100 px-4 py-2.5 rounded-lg text-sm outline-none focus:border-amber-500 placeholder:text-zinc-600" />
+
+            <div class="relative">
+              <label class="block text-xs text-zinc-500 mb-1.5">Beispiel-Szenarien zum Testen:</label>
+              <div class="flex flex-wrap gap-1.5 mb-3">
+                <button type="button" onclick="setScenario('hot')" class="px-3 py-1.5 text-xs rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition">Dringend</button>
+                <button type="button" onclick="setScenario('warm')" class="px-3 py-1.5 text-xs rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-400 hover:bg-amber-500/20 transition">Interessiert</button>
+                <button type="button" onclick="setScenario('cold')" class="px-3 py-1.5 text-xs rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 hover:bg-blue-500/20 transition">Allgemein</button>
+              </div>
+              <textarea required id="af-message" rows="4" class="w-full bg-zinc-900 border border-zinc-700 text-zinc-100 px-4 py-2.5 rounded-lg text-sm outline-none focus:border-amber-500 placeholder:text-zinc-600 resize-none">Wir haben 4 Bürogebäude in Düsseldorf die ab nächsten Monat regelmäßig gereinigt werden müssen. Können Sie uns diese Woche ein Angebot schicken? Budget ist freigegeben.</textarea>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <span class="text-[11px] text-zinc-500">Felder können geändert werden</span>
+              <button type="button" id="send-btn" onclick="runPipeline()" class="bg-amber-500 text-black font-bold text-sm py-2.5 px-6 rounded-full hover:bg-amber-400 transition flex items-center gap-2">
+                Anfrage senden
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+              </button>
+            </div>
+          </form>
+
+          <!-- What the AI does explanation -->
+          <div class="mt-6 pt-5 border-t border-white/5">
+            <div class="text-[10px] text-zinc-500 uppercase tracking-widest mb-3 font-medium">Was die AI im Hintergrund macht</div>
+            <div class="space-y-2 text-xs text-zinc-400">
+              <div class="flex gap-2">
+                <span class="text-amber-500">●</span>
+                <span>Liest die Nachricht und erkennt ob es eilig ist oder nicht</span>
+              </div>
+              <div class="flex gap-2">
+                <span class="text-amber-500">●</span>
+                <span>Bewertet die Anfrage: dringend, interessiert, oder allgemein</span>
+              </div>
+              <div class="flex gap-2">
+                <span class="text-amber-500">●</span>
+                <span>Schreibt eine persönliche Bestätigungsmail im Namen des Betriebs</span>
+              </div>
+              <div class="flex gap-2">
+                <span class="text-amber-500">●</span>
+                <span>Entscheidet wie schnell Sie zurückrufen sollten</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PIPELINE SIDE -->
+        <div class="lg:sticky lg:top-8 space-y-5">
+          <div class="glass p-6">
+            <div class="flex items-center justify-between mb-5">
+              <div>
+                <div class="font-bold text-zinc-100">Was gerade passiert</div>
+                <div class="text-zinc-500 text-xs">Läuft direkt im Browser. Kein Server nötig.</div>
+              </div>
+              <div id="pipe-status" class="px-3 py-1 rounded-full bg-zinc-800 border border-white/10 text-[10px] font-medium text-zinc-500 uppercase tracking-wider">
+                Bereit
+              </div>
+            </div>
+
+            <div class="space-y-2" id="pipeline">
+
+              <div class="p-step" data-step="1">
+                <div class="flex items-start gap-3">
+                  <div class="step-ico">01</div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                      <div class="font-semibold text-sm text-zinc-300 step-name">Formular geprüft</div>
+                      <div class="text-[10px] text-zinc-600 step-time"></div>
+                    </div>
+                    <div class="text-xs text-zinc-500 step-detail">Alle Pflichtfelder ausgefüllt? Keine Spam-Nachricht?</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-step" data-step="2">
+                <div class="flex items-start gap-3">
+                  <div class="step-ico">02</div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                      <div class="font-semibold text-sm text-zinc-300 step-name">AI liest die Nachricht</div>
+                      <div class="text-[10px] text-zinc-600 step-time"></div>
+                    </div>
+                    <div class="text-xs text-zinc-500 step-detail">Wie dringend ist das? Was braucht der Kunde?</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-step" data-step="3">
+                <div class="flex items-start gap-3">
+                  <div class="step-ico">03</div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                      <div class="font-semibold text-sm text-zinc-300 step-name">Bestätigung an den Kunden</div>
+                      <div class="text-[10px] text-zinc-600 step-time"></div>
+                    </div>
+                    <div class="text-xs text-zinc-500 step-detail">Persönliche Antwort-Mail wird automatisch verschickt</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-step" data-step="4">
+                <div class="flex items-start gap-3">
+                  <div class="step-ico">04</div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                      <div class="font-semibold text-sm text-zinc-300 step-name">Sie werden benachrichtigt</div>
+                      <div class="text-[10px] text-zinc-600 step-time"></div>
+                    </div>
+                    <div class="text-xs text-zinc-500 step-detail">Nachricht auf Ihr Handy mit allen wichtigen Details</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-step" data-step="5">
+                <div class="flex items-start gap-3">
+                  <div class="step-ico">05</div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                      <div class="font-semibold text-sm text-zinc-300 step-name">Anfrage abgelegt</div>
+                      <div class="text-[10px] text-zinc-600 step-time"></div>
+                    </div>
+                    <div class="text-xs text-zinc-500 step-detail">Alles sauber gespeichert mit Datum und Status</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-step" data-step="6">
+                <div class="flex items-start gap-3">
+                  <div class="step-ico">06</div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                      <div class="font-semibold text-sm text-zinc-300 step-name">Rückruf geplant</div>
+                      <div class="text-[10px] text-zinc-600 step-time"></div>
+                    </div>
+                    <div class="text-xs text-zinc-500 step-detail">Termin im Kalender, je nach Dringlichkeit</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- AI Result Card -->
+          <div id="ai-result" class="glass p-6 opacity-0 transform translate-y-4 transition-all duration-500" style="pointer-events:none">
+            <div class="text-[10px] text-zinc-500 uppercase tracking-widest mb-3 font-medium">AI Bewertung</div>
+            <div id="ai-result-inner"></div>
+          </div>
+
+          <!-- Phone Notification -->
+          <div class="notif-wrap" id="phone-notif">
+            <div class="text-zinc-500 text-[10px] uppercase tracking-widest mb-2 ml-2 font-medium">Auf Ihrem Handy</div>
+            <div class="glass p-4">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.546 21.2c-.072.304.229.582.527.487l3.86-1.203A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between">
+                    <div class="text-zinc-100 text-sm font-semibold">WhatsApp</div>
+                    <div class="text-zinc-600 text-[10px]">gerade eben</div>
+                  </div>
+                  <div class="text-zinc-300 text-sm mt-0.5" id="notif-text"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Email Preview -->
+          <div class="mail-preview" id="mail-preview">
+            <div class="text-zinc-500 text-[10px] uppercase tracking-widest mb-2 ml-2 font-medium">Mail an den Kunden</div>
+            <div class="glass p-5">
+              <div class="flex items-center gap-2 mb-3 pb-3 border-b border-white/5">
+                <div class="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-500 text-xs font-bold">✉</div>
+                <div class="flex-1 min-w-0">
+                  <div class="text-zinc-200 text-sm font-semibold" id="mail-subject"></div>
+                  <div class="text-zinc-500 text-xs" id="mail-from"></div>
+                </div>
+              </div>
+              <div class="text-zinc-300 text-sm leading-relaxed" id="mail-body"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- What you can automate -->
+      <div class="mt-24 mb-12 text-center">
+        <span class="badge mb-4">Möglichkeiten</span>
+        <h2 class="serif text-3xl md:text-4xl font-bold mb-4">Was wir für Ihren Betrieb automatisieren können.</h2>
+        <p class="text-zinc-400 max-w-xl mx-auto">Jeder Betrieb ist anders. Hier sind die häufigsten Bausteine, die wir einsetzen.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-24">
+
+        <div class="glass p-6 hover:border-amber-500/30 transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">AI Anfragen-Bewertung</h3>
+          <p class="text-sm text-zinc-400">Die AI liest jede Anfrage und sagt Ihnen sofort: das ist dringend, das hat Zeit, das ist Spam. Sie wissen immer was zuerst kommt.</p>
+        </div>
+
+        <div class="glass p-6 hover:border-amber-500/30 transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Automatische Antwort-Mails</h3>
+          <p class="text-sm text-zinc-400">Kein Kunde wartet mehr auf eine Antwort. Innerhalb von Sekunden bekommt er eine persönliche Bestätigung in Ihrem Namen.</p>
+        </div>
+
+        <div class="glass p-6 hover:border-amber-500/30 transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Sofort-Benachrichtigung</h3>
+          <p class="text-sm text-zinc-400">Neue Anfrage? Ihr Handy klingelt. Per WhatsApp, Telegram oder Mail. Sie entscheiden wo und wann.</p>
+        </div>
+
+        <div class="glass p-6 hover:border-amber-500/30 transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Termin-Vorschläge</h3>
+          <p class="text-sm text-zinc-400">Die AI schlägt passende Zeiten vor, der Kunde wählt aus, der Termin landet direkt in Ihrem Kalender. Ohne Telefon-Pingpong.</p>
+        </div>
+
+        <div class="glass p-6 hover:border-amber-500/30 transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Kunden-Übersicht</h3>
+          <p class="text-sm text-zinc-400">Alle Anfragen an einem Ort. Sortiert, mit Status, mit Notizen. Kein Zettel geht mehr verloren, kein Rückruf wird vergessen.</p>
+        </div>
+
+        <div class="glass p-6 hover:border-amber-500/30 transition">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M2.985 14.652V19.644"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Automatische Erinnerungen</h3>
+          <p class="text-sm text-zinc-400">Wenn ein Kunde nach 3 Tagen nicht geantwortet hat, schickt das System eine freundliche Erinnerung. Ohne dass Sie daran denken müssen.</p>
+        </div>
+
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center pb-12">
+        <a href="mailto:markamaechi.dev@gmail.com?subject=Anfrage%20AI%20Automatisierung" class="inline-block bg-amber-500 text-black font-bold px-8 py-4 rounded-full hover:bg-amber-400 transition text-lg">
+          Erstgespräch anfragen
+        </a>
+        <p class="text-xs text-zinc-500 mt-4">Kostenlos und unverbindlich. markamaechi.dev@gmail.com</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /* --- Scenario presets --- */
+    const scenarios = {
+      hot: {
+        name: 'Anna Müller', company: 'Müller Immobilien', email: 'anna@mueller-immo.de', phone: '+49 211 55512345',
+        message: 'Wir haben 4 Bürogebäude in Düsseldorf die ab nächsten Monat regelmäßig gereinigt werden müssen. Können Sie uns diese Woche ein Angebot schicken? Budget ist freigegeben.'
+      },
+      warm: {
+        name: 'Thomas Weber', company: '', email: 'weber.thomas@web.de', phone: '+49 171 9988776',
+        message: 'Ich habe Ihre Seite gesehen und bin interessiert an einer regelmäßigen Reinigung für unser Büro. Könnten Sie mir Infos zu den Preisen schicken?'
+      },
+      cold: {
+        name: 'Lisa Braun', company: '', email: 'l.braun@gmail.com', phone: '',
+        message: 'Hallo, machen Sie auch Fensterreinigung? Wie sind Ihre Öffnungszeiten?'
+      }
+    };
+
+    function setScenario(key) {
+      const s = scenarios[key];
+      document.getElementById('af-name').value = s.name;
+      document.getElementById('af-company').value = s.company;
+      document.getElementById('af-email').value = s.email;
+      document.getElementById('af-phone').value = s.phone;
+      document.getElementById('af-message').value = s.message;
+    }
+
+    /* --- Classifier (runs in browser) --- */
+    function classify(msg, company) {
+      const text = (company + ' ' + msg).toLowerCase();
+      const HOT_KW = ['dringend','sofort','diese woche','nächsten monat','budget','freigegeben','vertrag','morgen','schnell','asap','urgent','approved','budget ist'];
+      const WARM_KW = ['interessiert','angebot','preise','infos','beratung','termin','demo','vergleich','exploring','offer'];
+      const NEGS = ['nicht','kein','keine','never','not','ohne'];
+
+      const tokens = text.split(/\s+/);
+      let hot = false;
+      for (const k of HOT_KW) {
+        if (text.includes(k)) {
+          const idx = text.indexOf(k);
+          const before = text.slice(Math.max(0, idx - 10), idx);
+          if (NEGS.some(n => before.includes(n))) continue;
+          hot = true; break;
+        }
+      }
+      if (hot) return { priority: 'DRINGEND', color: 'hot', label: 'Sofort reagieren. Diesen Kunden heute noch anrufen.', emoji: '🔴' };
+
+      const warm = WARM_KW.some(k => text.includes(k));
+      if (warm || msg.length > 100) return { priority: 'INTERESSIERT', color: 'warm', label: 'Guter Kontakt. Diese Woche nachfassen.', emoji: '🟡' };
+
+      return { priority: 'ALLGEMEIN', color: 'cold', label: 'Allgemeine Frage. Innerhalb weniger Tage antworten.', emoji: '🔵' };
+    }
+
+    /* --- Auto-reply mail templates --- */
+    function generateMail(name, priority, company) {
+      const firstName = name.split(' ')[0];
+      const betrieb = 'Strahlkraft Clean';
+      if (priority === 'DRINGEND') {
+        return {
+          subject: `${firstName}, Ihre Anfrage hat Priorität`,
+          body: `Guten Tag ${firstName},\n\nvielen Dank für Ihre Nachricht. Wir haben gesehen, dass es bei Ihnen zeitnah losgehen soll.\n\nEin Mitarbeiter wird sich noch heute bei Ihnen melden, um die Details zu besprechen.\n\nMit freundlichen Grüßen,\n${betrieb}`
+        };
+      }
+      if (priority === 'INTERESSIERT') {
+        return {
+          subject: `Danke für Ihr Interesse, ${firstName}`,
+          body: `Guten Tag ${firstName},\n\nvielen Dank für Ihre Anfrage. Wir freuen uns über Ihr Interesse.\n\nWir schauen uns Ihre Nachricht an und melden uns in den nächsten 1 bis 2 Werktagen mit einem passenden Angebot.\n\nMit freundlichen Grüßen,\n${betrieb}`
+        };
+      }
+      return {
+        subject: `Ihre Anfrage bei ${betrieb}`,
+        body: `Guten Tag ${firstName},\n\nvielen Dank, dass Sie sich bei uns gemeldet haben. Wir haben Ihre Nachricht erhalten und antworten Ihnen so bald wie möglich.\n\nMit freundlichen Grüßen,\n${betrieb}`
+      };
+    }
+
+    /* --- Pipeline runner --- */
+    const steps = Array.from(document.querySelectorAll('.p-step'));
+    const statusEl = document.getElementById('pipe-status');
+    const notifWrap = document.getElementById('phone-notif');
+    const notifText = document.getElementById('notif-text');
+    const aiResult = document.getElementById('ai-result');
+    const aiResultInner = document.getElementById('ai-result-inner');
+    const mailPreview = document.getElementById('mail-preview');
+    const mailSubject = document.getElementById('mail-subject');
+    const mailFrom = document.getElementById('mail-from');
+    const mailBody = document.getElementById('mail-body');
+    let running = false;
+
+    function setStep(n, state, time, detail) {
+      const s = steps[n - 1];
+      if (!s) return;
+      s.classList.remove('pending', 'active');
+      if (state === 'reset') return;
+      s.classList.add(state);
+      if (time) s.querySelector('.step-time').textContent = time;
+      if (detail) s.querySelector('.step-detail').textContent = detail;
+    }
+
+    function setStatus(label, color) {
+      statusEl.textContent = label;
+      statusEl.style.color = color;
+      statusEl.style.borderColor = color + '66';
+      statusEl.style.background = color + '1a';
+    }
+
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    const now = () => new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+    window.runPipeline = async function() {
+      if (running) return;
+      running = true;
+
+      const name = document.getElementById('af-name').value.trim();
+      const company = document.getElementById('af-company').value.trim();
+      const email = document.getElementById('af-email').value.trim();
+      const phone = document.getElementById('af-phone').value.trim();
+      const message = document.getElementById('af-message').value.trim();
+      if (!name || !email || !message) { running = false; return; }
+
+      // Reset
+      steps.forEach(s => { s.classList.remove('active', 'pending'); s.querySelector('.step-time').textContent = ''; });
+      notifWrap.classList.remove('show');
+      mailPreview.classList.remove('show');
+      aiResult.style.opacity = '0'; aiResult.style.transform = 'translateY(16px)'; aiResult.style.pointerEvents = 'none';
+      setStatus('Läuft...', '#fbbf24');
+
+      // Step 1: Validate
+      setStep(1, 'pending', now(), 'Pflichtfelder werden geprüft...');
+      await sleep(400);
+      setStep(1, 'active', now(), '✓ Alles ausgefüllt, kein Spam erkannt');
+
+      // Step 2: AI Classify
+      setStep(2, 'pending', now(), 'AI liest die Nachricht...');
+      await sleep(1000);
+      const result = classify(message, company);
+      setStep(2, 'active', now(), '✓ Bewertung: ' + result.priority);
+
+      // Show AI result card
+      aiResultInner.innerHTML = `
+        <div class="flex items-center gap-3 mb-3">
+          <div class="text-2xl">${result.emoji}</div>
+          <div>
+            <div class="font-bold text-lg priority-${result.color}">${result.priority}</div>
+            <div class="text-sm text-zinc-400">${result.label}</div>
+          </div>
+        </div>
+        <div class="p-3 rounded-lg border priority-bg-${result.color} mt-2">
+          <div class="text-xs text-zinc-400 mb-1">Die AI hat erkannt:</div>
+          <div class="text-sm text-zinc-200">${
+            result.color === 'hot' ? 'Zeitdruck, konkreter Bedarf, Budget vorhanden. Dieser Kunde ist bereit.' :
+            result.color === 'warm' ? 'Echtes Interesse, fragt nach Details. Guter Zeitpunkt zum Nachfassen.' :
+            'Allgemeine Frage, noch kein konkreter Bedarf. Normal beantworten.'
+          }</div>
+        </div>
+      `;
+      aiResult.style.opacity = '1'; aiResult.style.transform = 'translateY(0)'; aiResult.style.pointerEvents = 'auto';
+
+      // Step 3: Auto-reply
+      setStep(3, 'pending', now(), 'Bestätigungs-Mail wird geschrieben...');
+      await sleep(700);
+      const mail = generateMail(name, result.priority, company);
+      setStep(3, 'active', now(), '✓ Mail an ' + email + ' gesendet');
+
+      // Show mail preview
+      mailSubject.textContent = mail.subject;
+      mailFrom.textContent = 'Von: info@strahlkraft-clean.de';
+      mailBody.innerHTML = mail.body.replace(/\n/g, '<br>');
+      mailPreview.classList.add('show');
+
+      // Step 4: Notify owner
+      setStep(4, 'pending', now(), 'Benachrichtigung wird gesendet...');
+      await sleep(500);
+      setStep(4, 'active', now(), '✓ WhatsApp Nachricht zugestellt');
+
+      const firstName = name.split(' ')[0];
+      const preview = message.length > 50 ? message.slice(0, 47) + '...' : message;
+      notifText.innerHTML = `<span class="priority-${result.color} font-bold">[${result.priority}]</span> Neue Anfrage von <strong class="text-zinc-100">${firstName}</strong>${company ? ' (' + company + ')' : ''}: "${preview}"`;
+      notifWrap.classList.add('show');
+
+      // Step 5: Store
+      setStep(5, 'pending', now(), 'Anfrage wird gespeichert...');
+      await sleep(400);
+      const leadNum = Math.floor(Math.random() * 200) + 100;
+      setStep(5, 'active', now(), '✓ Anfrage Nr. ' + leadNum + ' gespeichert. Status: offen');
+
+      // Step 6: Calendar
+      setStep(6, 'pending', now(), 'Kalender-Eintrag wird erstellt...');
+      await sleep(400);
+      const when = result.color === 'hot' ? 'heute Nachmittag' : result.color === 'warm' ? 'morgen Vormittag' : 'nächsten Montag';
+      setStep(6, 'active', now(), '✓ Rückruf geplant für ' + when);
+
+      setStatus('Fertig', '#34d399');
+      running = false;
+    };
+  </script>
+
+</body>
+</html>
