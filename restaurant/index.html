@@ -388,24 +388,24 @@
     <form class="bg-cream-50 rounded-xl p-8 md:p-12 shadow-2xl fade-in space-y-6" onsubmit="event.preventDefault(); alert('Vielen Dank. Dies ist eine Demo. Ihre Reservierung wurde nicht gesendet.');">
       <div class="grid md:grid-cols-2 gap-6">
         <div>
-          <label class="block text-sm font-semibold text-terracotta-800 mb-2">Name</label>
-          <input type="text" required placeholder="Ihr Name" class="input-field w-full px-4 py-3 rounded-md" />
+          <label class="block text-sm font-semibold text-terracotta-800 mb-2" for="restaurant-name">Name</label>
+          <input id="restaurant-name" type="text" required placeholder="Ihr Name" class="input-field w-full px-4 py-3 rounded-md" />
         </div>
         <div>
-          <label class="block text-sm font-semibold text-terracotta-800 mb-2">Telefon</label>
-          <input type="tel" required placeholder="+49 123 456 789" class="input-field w-full px-4 py-3 rounded-md" />
+          <label class="block text-sm font-semibold text-terracotta-800 mb-2" for="restaurant-telefon">Telefon</label>
+          <input id="restaurant-telefon" type="tel" required placeholder="+49 123 456 789" class="input-field w-full px-4 py-3 rounded-md" />
         </div>
         <div>
-          <label class="block text-sm font-semibold text-terracotta-800 mb-2">Datum</label>
-          <input type="date" required class="input-field w-full px-4 py-3 rounded-md" />
+          <label class="block text-sm font-semibold text-terracotta-800 mb-2" for="restaurant-datum">Datum</label>
+          <input id="restaurant-datum" type="date" required class="input-field w-full px-4 py-3 rounded-md" />
         </div>
         <div>
-          <label class="block text-sm font-semibold text-terracotta-800 mb-2">Uhrzeit</label>
-          <input type="time" required class="input-field w-full px-4 py-3 rounded-md" />
+          <label class="block text-sm font-semibold text-terracotta-800 mb-2" for="restaurant-uhrzeit">Uhrzeit</label>
+          <input id="restaurant-uhrzeit" type="time" required class="input-field w-full px-4 py-3 rounded-md" />
         </div>
         <div class="md:col-span-2">
-          <label class="block text-sm font-semibold text-terracotta-800 mb-2">Personen</label>
-          <select required class="input-field w-full px-4 py-3 rounded-md">
+          <label class="block text-sm font-semibold text-terracotta-800 mb-2" for="restaurant-personen">Personen</label>
+          <select id="restaurant-personen" required class="input-field w-full px-4 py-3 rounded-md">
             <option value="">Bitte wählen</option>
             <option>1 Person</option>
             <option>2 Personen</option>

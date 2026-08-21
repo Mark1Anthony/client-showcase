@@ -674,27 +674,27 @@ tailwind.config = {
         <div class="space-y-5">
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-semibold text-slate2-700 mb-2">Name *</label>
-              <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none" placeholder="Max Mustermann">
+              <label class="block text-sm font-semibold text-slate2-700 mb-2" for="strahlkraft-name">Name *</label>
+              <input id="strahlkraft-name" type="text" required class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none" placeholder="Max Mustermann">
             </div>
             <div>
-              <label class="block text-sm font-semibold text-slate2-700 mb-2">Firma</label>
-              <input type="text" class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none" placeholder="Musterfirma GmbH">
+              <label class="block text-sm font-semibold text-slate2-700 mb-2" for="strahlkraft-firma">Firma</label>
+              <input id="strahlkraft-firma" type="text" class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none" placeholder="Musterfirma GmbH">
             </div>
           </div>
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-semibold text-slate2-700 mb-2">E-Mail *</label>
-              <input type="email" required class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none" placeholder="max@email.de">
+              <label class="block text-sm font-semibold text-slate2-700 mb-2" for="strahlkraft-e-mail">E-Mail *</label>
+              <input id="strahlkraft-e-mail" type="email" required class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none" placeholder="max@email.de">
             </div>
             <div>
-              <label class="block text-sm font-semibold text-slate2-700 mb-2">Telefon</label>
-              <input type="tel" class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none" placeholder="040 123456">
+              <label class="block text-sm font-semibold text-slate2-700 mb-2" for="strahlkraft-telefon">Telefon</label>
+              <input id="strahlkraft-telefon" type="tel" class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none" placeholder="040 123456">
             </div>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-slate2-700 mb-2">Leistung</label>
-            <select class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none">
+            <label class="block text-sm font-semibold text-slate2-700 mb-2" for="strahlkraft-leistung">Leistung</label>
+            <select id="strahlkraft-leistung" class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none">
               <option>Unterhaltsreinigung</option>
               <option>Grundreinigung</option>
               <option>Glasreinigung</option>
@@ -705,8 +705,8 @@ tailwind.config = {
             </select>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-slate2-700 mb-2">Objekt (Art & Größe)</label>
-            <textarea rows="3" class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none resize-none" placeholder="z. B. 280 m² Büroetage, 3 Toiletten, Teeküche…"></textarea>
+            <label class="block text-sm font-semibold text-slate2-700 mb-2" for="strahlkraft-objekt-art-grosse">Objekt (Art & Größe)</label>
+            <textarea id="strahlkraft-objekt-art-grosse" rows="3" class="w-full px-4 py-3 rounded-xl bg-white border border-slate2-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition outline-none resize-none" placeholder="z. B. 280 m² Büroetage, 3 Toiletten, Teeküche…"></textarea>
           </div>
           <label class="flex items-start gap-3 text-sm text-slate2-600">
             <input type="checkbox" required class="mt-1 rounded border-slate2-300 text-teal-600 focus:ring-teal-500">

@@ -597,21 +597,21 @@ tailwind.config = {
         <div class="space-y-5">
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-semibold text-ink-700 mb-2">Name *</label>
-              <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white border border-ink-200 focus:border-clay-500 focus:ring-2 focus:ring-clay-200 transition outline-none" placeholder="Max Mustermann">
+              <label class="block text-sm font-semibold text-ink-700 mb-2" for="krueger-dach-name">Name *</label>
+              <input id="krueger-dach-name" type="text" required class="w-full px-4 py-3 rounded-xl bg-white border border-ink-200 focus:border-clay-500 focus:ring-2 focus:ring-clay-200 transition outline-none" placeholder="Max Mustermann">
             </div>
             <div>
-              <label class="block text-sm font-semibold text-ink-700 mb-2">Telefon *</label>
-              <input type="tel" required class="w-full px-4 py-3 rounded-xl bg-white border border-ink-200 focus:border-clay-500 focus:ring-2 focus:ring-clay-200 transition outline-none" placeholder="040 123456">
+              <label class="block text-sm font-semibold text-ink-700 mb-2" for="krueger-dach-telefon">Telefon *</label>
+              <input id="krueger-dach-telefon" type="tel" required class="w-full px-4 py-3 rounded-xl bg-white border border-ink-200 focus:border-clay-500 focus:ring-2 focus:ring-clay-200 transition outline-none" placeholder="040 123456">
             </div>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-ink-700 mb-2">E-Mail *</label>
-            <input type="email" required class="w-full px-4 py-3 rounded-xl bg-white border border-ink-200 focus:border-clay-500 focus:ring-2 focus:ring-clay-200 transition outline-none" placeholder="max@email.de">
+            <label class="block text-sm font-semibold text-ink-700 mb-2" for="krueger-dach-e-mail">E-Mail *</label>
+            <input id="krueger-dach-e-mail" type="email" required class="w-full px-4 py-3 rounded-xl bg-white border border-ink-200 focus:border-clay-500 focus:ring-2 focus:ring-clay-200 transition outline-none" placeholder="max@email.de">
           </div>
           <div>
-            <label class="block text-sm font-semibold text-ink-700 mb-2">Leistung</label>
-            <select class="w-full px-4 py-3 rounded-xl bg-white border border-ink-200 focus:border-clay-500 focus:ring-2 focus:ring-clay-200 transition outline-none">
+            <label class="block text-sm font-semibold text-ink-700 mb-2" for="krueger-dach-leistung">Leistung</label>
+            <select id="krueger-dach-leistung" class="w-full px-4 py-3 rounded-xl bg-white border border-ink-200 focus:border-clay-500 focus:ring-2 focus:ring-clay-200 transition outline-none">
               <option>Steildach — Neueindeckung</option>
               <option>Flachdach — Abdichtung</option>
               <option>Dachsanierung / energetisch</option>
@@ -622,8 +622,8 @@ tailwind.config = {
             </select>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-ink-700 mb-2">Nachricht</label>
-            <textarea rows="4" class="w-full px-4 py-3 rounded-xl bg-white border border-ink-200 focus:border-clay-500 focus:ring-2 focus:ring-clay-200 transition outline-none resize-none" placeholder="Beschreiben Sie Ihr Projekt oder Anliegen…"></textarea>
+            <label class="block text-sm font-semibold text-ink-700 mb-2" for="krueger-dach-nachricht">Nachricht</label>
+            <textarea id="krueger-dach-nachricht" rows="4" class="w-full px-4 py-3 rounded-xl bg-white border border-ink-200 focus:border-clay-500 focus:ring-2 focus:ring-clay-200 transition outline-none resize-none" placeholder="Beschreiben Sie Ihr Projekt oder Anliegen…"></textarea>
           </div>
           <label class="flex items-start gap-3 text-sm text-ink-600">
             <input type="checkbox" required class="mt-1 rounded border-ink-300 text-clay-600 focus:ring-clay-500">

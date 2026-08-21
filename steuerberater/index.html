@@ -337,20 +337,20 @@
 
     <form class="fade-in bg-white p-8 md:p-12 rounded-sm shadow-2xl grid md:grid-cols-2 gap-6" onsubmit="event.preventDefault(); alert('Vielen Dank. Dies ist eine Demo.');">
       <div>
-        <label class="block text-sm font-semibold text-navy-700 mb-2">Name</label>
-        <input type="text" class="w-full border border-navy-200 px-4 py-3 rounded-sm focus:outline-none focus:border-gold-500 transition" placeholder="Ihr vollständiger Name" />
+        <label class="block text-sm font-semibold text-navy-700 mb-2" for="steuerberater-name">Name</label>
+        <input id="steuerberater-name" type="text" class="w-full border border-navy-200 px-4 py-3 rounded-sm focus:outline-none focus:border-gold-500 transition" placeholder="Ihr vollständiger Name" />
       </div>
       <div>
-        <label class="block text-sm font-semibold text-navy-700 mb-2">E-Mail</label>
-        <input type="email" class="w-full border border-navy-200 px-4 py-3 rounded-sm focus:outline-none focus:border-gold-500 transition" placeholder="ihre@email.de" />
+        <label class="block text-sm font-semibold text-navy-700 mb-2" for="steuerberater-e-mail">E-Mail</label>
+        <input id="steuerberater-e-mail" type="email" class="w-full border border-navy-200 px-4 py-3 rounded-sm focus:outline-none focus:border-gold-500 transition" placeholder="ihre@email.de" />
       </div>
       <div>
-        <label class="block text-sm font-semibold text-navy-700 mb-2">Telefon</label>
-        <input type="tel" class="w-full border border-navy-200 px-4 py-3 rounded-sm focus:outline-none focus:border-gold-500 transition" placeholder="+49 ..." />
+        <label class="block text-sm font-semibold text-navy-700 mb-2" for="steuerberater-telefon">Telefon</label>
+        <input id="steuerberater-telefon" type="tel" class="w-full border border-navy-200 px-4 py-3 rounded-sm focus:outline-none focus:border-gold-500 transition" placeholder="+49 ..." />
       </div>
       <div>
-        <label class="block text-sm font-semibold text-navy-700 mb-2">Anliegen</label>
-        <select class="w-full border border-navy-200 px-4 py-3 rounded-sm focus:outline-none focus:border-gold-500 transition bg-white">
+        <label class="block text-sm font-semibold text-navy-700 mb-2" for="steuerberater-anliegen">Anliegen</label>
+        <select id="steuerberater-anliegen" class="w-full border border-navy-200 px-4 py-3 rounded-sm focus:outline-none focus:border-gold-500 transition bg-white">
           <option>Bitte wählen</option>
           <option>Steuererklärung</option>
           <option>Buchhaltung</option>
@@ -362,8 +362,8 @@
         </select>
       </div>
       <div class="md:col-span-2">
-        <label class="block text-sm font-semibold text-navy-700 mb-2">Nachricht</label>
-        <textarea rows="5" class="w-full border border-navy-200 px-4 py-3 rounded-sm focus:outline-none focus:border-gold-500 transition" placeholder="Beschreiben Sie kurz Ihr Anliegen."></textarea>
+        <label class="block text-sm font-semibold text-navy-700 mb-2" for="steuerberater-nachricht">Nachricht</label>
+        <textarea id="steuerberater-nachricht" rows="5" class="w-full border border-navy-200 px-4 py-3 rounded-sm focus:outline-none focus:border-gold-500 transition" placeholder="Beschreiben Sie kurz Ihr Anliegen."></textarea>
       </div>
       <div class="md:col-span-2 flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
         <p class="text-sm text-navy-500">Ihre Anfrage wird selbstverständlich vertraulich behandelt.</p>
