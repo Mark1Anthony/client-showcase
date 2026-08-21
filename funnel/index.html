@@ -112,16 +112,16 @@
           <p class="text-gray-500">Wählen Sie die Leistung die Sie interessiert.</p>
         </div>
         <div class="grid gap-3" id="step1-options">
-          <div class="opt-card" onclick="selectOption(1, this, 'buero')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Büroreinigung</div><div class="text-sm text-gray-500">Regelmäßige Reinigung von Büros, Praxen oder Kanzleien</div></div><div class="text-2xl">🏢</div></div></div>
-          <div class="opt-card" onclick="selectOption(1, this, 'wohnung')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Wohnungsreinigung</div><div class="text-sm text-gray-500">Einmalig oder regelmäßig für Privatwohnungen</div></div><div class="text-2xl">🏠</div></div></div>
-          <div class="opt-card" onclick="selectOption(1, this, 'grund')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Grundreinigung</div><div class="text-sm text-gray-500">Einmalige Intensivreinigung (z.B. nach Umbau oder Einzug)</div></div><div class="text-2xl">✨</div></div></div>
-          <div class="opt-card" onclick="selectOption(1, this, 'fenster')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Fensterreinigung</div><div class="text-sm text-gray-500">Professionelle Fenster und Glasreinigung</div></div><div class="text-2xl">🪟</div></div></div>
+          <div role="button" tabindex="0" class="opt-card" data-action="select-option" data-step="1" data-value="buero"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Büroreinigung</div><div class="text-sm text-gray-500">Regelmäßige Reinigung von Büros, Praxen oder Kanzleien</div></div><div class="text-2xl">🏢</div></div></div>
+          <div role="button" tabindex="0" class="opt-card" data-action="select-option" data-step="1" data-value="wohnung"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Wohnungsreinigung</div><div class="text-sm text-gray-500">Einmalig oder regelmäßig für Privatwohnungen</div></div><div class="text-2xl">🏠</div></div></div>
+          <div role="button" tabindex="0" class="opt-card" data-action="select-option" data-step="1" data-value="grund"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Grundreinigung</div><div class="text-sm text-gray-500">Einmalige Intensivreinigung (z.B. nach Umbau oder Einzug)</div></div><div class="text-2xl">✨</div></div></div>
+          <div role="button" tabindex="0" class="opt-card" data-action="select-option" data-step="1" data-value="fenster"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Fensterreinigung</div><div class="text-sm text-gray-500">Professionelle Fenster und Glasreinigung</div></div><div class="text-2xl">🪟</div></div></div>
         </div>
       </div>
 
       <!-- ===== STEP 2: Fläche ===== -->
       <div class="step-panel" data-step="2">
-        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
+        <button class="back-btn mb-6" data-action="go-back"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/></svg>
@@ -131,16 +131,16 @@
           <p class="text-gray-500">Ungefähre Angabe reicht.</p>
         </div>
         <div class="grid gap-3" id="step2-options">
-          <div class="opt-card" onclick="selectOption(2, this, 'klein')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Bis 50 m²</div><div class="text-sm text-gray-500">Kleine Wohnung, einzelnes Büro, Praxis</div></div></div></div>
-          <div class="opt-card" onclick="selectOption(2, this, 'mittel')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">50 bis 150 m²</div><div class="text-sm text-gray-500">Mittlere Wohnung, Büroetage, kleines Geschäft</div></div></div></div>
-          <div class="opt-card" onclick="selectOption(2, this, 'gross')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">150 bis 400 m²</div><div class="text-sm text-gray-500">Große Wohnung, mehrere Büros, Restaurant</div></div></div></div>
-          <div class="opt-card" onclick="selectOption(2, this, 'sehr_gross')"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Über 400 m²</div><div class="text-sm text-gray-500">Gebäude, Lagerhalle, große Gewerbefläche</div></div></div></div>
+          <div role="button" tabindex="0" class="opt-card" data-action="select-option" data-step="2" data-value="klein"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Bis 50 m²</div><div class="text-sm text-gray-500">Kleine Wohnung, einzelnes Büro, Praxis</div></div></div></div>
+          <div role="button" tabindex="0" class="opt-card" data-action="select-option" data-step="2" data-value="mittel"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">50 bis 150 m²</div><div class="text-sm text-gray-500">Mittlere Wohnung, Büroetage, kleines Geschäft</div></div></div></div>
+          <div role="button" tabindex="0" class="opt-card" data-action="select-option" data-step="2" data-value="gross"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">150 bis 400 m²</div><div class="text-sm text-gray-500">Große Wohnung, mehrere Büros, Restaurant</div></div></div></div>
+          <div role="button" tabindex="0" class="opt-card" data-action="select-option" data-step="2" data-value="sehr_gross"><div class="flex items-center gap-4"><div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><div class="flex-1"><div class="font-bold text-gray-900">Über 400 m²</div><div class="text-sm text-gray-500">Gebäude, Lagerhalle, große Gewerbefläche</div></div></div></div>
         </div>
       </div>
 
       <!-- ===== STEP 3: Häufigkeit + Wochentage + Uhrzeit ===== -->
       <div class="step-panel" data-step="3">
-        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
+        <button class="back-btn mb-6" data-action="go-back"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M2.985 14.652V19.644"/></svg>
@@ -151,7 +151,7 @@
         </div>
 
         <!-- Einmalig toggle -->
-        <div class="opt-card mb-6" id="freq-einmalig" onclick="selectFreq('einmalig')">
+        <div role="button" tabindex="0" class="opt-card mb-6" id="freq-einmalig" data-action="select-freq" data-value="einmalig">
           <div class="flex items-center gap-4">
             <div class="opt-check"><svg class="check-svg hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div>
             <div class="flex-1">
@@ -165,22 +165,22 @@
         <div id="weekday-section">
           <div class="text-sm font-bold text-gray-700 mb-3">Regelmäßig: An welchen Tagen?</div>
           <div class="grid grid-cols-7 gap-2 mb-4" id="weekday-grid">
-            <div class="freq-pill" onclick="toggleWeekday(this, 0)"><div class="text-base font-bold text-gray-900">Mo</div></div>
-            <div class="freq-pill" onclick="toggleWeekday(this, 1)"><div class="text-base font-bold text-gray-900">Di</div></div>
-            <div class="freq-pill selected" onclick="toggleWeekday(this, 2)"><div class="text-base font-bold text-gray-900">Mi</div></div>
-            <div class="freq-pill" onclick="toggleWeekday(this, 3)"><div class="text-base font-bold text-gray-900">Do</div></div>
-            <div class="freq-pill selected" onclick="toggleWeekday(this, 4)"><div class="text-base font-bold text-gray-900">Fr</div></div>
-            <div class="freq-pill" onclick="toggleWeekday(this, 5)"><div class="text-base font-bold text-gray-900">Sa</div></div>
-            <div class="freq-pill" onclick="toggleWeekday(this, 6)"><div class="text-base font-bold text-gray-900">So</div></div>
+            <div role="button" tabindex="0" class="freq-pill" data-action="toggle-weekday" data-day="0"><div class="text-base font-bold text-gray-900">Mo</div></div>
+            <div role="button" tabindex="0" class="freq-pill" data-action="toggle-weekday" data-day="1"><div class="text-base font-bold text-gray-900">Di</div></div>
+            <div role="button" tabindex="0" class="freq-pill selected" data-action="toggle-weekday" data-day="2"><div class="text-base font-bold text-gray-900">Mi</div></div>
+            <div role="button" tabindex="0" class="freq-pill" data-action="toggle-weekday" data-day="3"><div class="text-base font-bold text-gray-900">Do</div></div>
+            <div role="button" tabindex="0" class="freq-pill selected" data-action="toggle-weekday" data-day="4"><div class="text-base font-bold text-gray-900">Fr</div></div>
+            <div role="button" tabindex="0" class="freq-pill" data-action="toggle-weekday" data-day="5"><div class="text-base font-bold text-gray-900">Sa</div></div>
+            <div role="button" tabindex="0" class="freq-pill" data-action="toggle-weekday" data-day="6"><div class="text-base font-bold text-gray-900">So</div></div>
           </div>
 
           <!-- Preferred time -->
           <div class="text-sm font-bold text-gray-700 mb-3">Gewünschte Uhrzeit</div>
           <div class="grid grid-cols-4 gap-2 mb-4" id="pref-time-grid">
-            <div class="freq-pill" onclick="selectPrefTime(this, 'frueh')"><div class="text-sm font-bold text-gray-900">Früh</div><div class="text-[10px] text-gray-500">6:00–9:00</div></div>
-            <div class="freq-pill selected" onclick="selectPrefTime(this, 'vormittag')"><div class="text-sm font-bold text-gray-900">Vormittag</div><div class="text-[10px] text-gray-500">9:00–12:00</div></div>
-            <div class="freq-pill" onclick="selectPrefTime(this, 'nachmittag')"><div class="text-sm font-bold text-gray-900">Nachmittag</div><div class="text-[10px] text-gray-500">12:00–16:00</div></div>
-            <div class="freq-pill" onclick="selectPrefTime(this, 'abend')"><div class="text-sm font-bold text-gray-900">Abend</div><div class="text-[10px] text-gray-500">16:00–20:00</div></div>
+            <div role="button" tabindex="0" class="freq-pill" data-action="select-pref-time" data-value="frueh"><div class="text-sm font-bold text-gray-900">Früh</div><div class="text-[10px] text-gray-500">6:00–9:00</div></div>
+            <div role="button" tabindex="0" class="freq-pill selected" data-action="select-pref-time" data-value="vormittag"><div class="text-sm font-bold text-gray-900">Vormittag</div><div class="text-[10px] text-gray-500">9:00–12:00</div></div>
+            <div role="button" tabindex="0" class="freq-pill" data-action="select-pref-time" data-value="nachmittag"><div class="text-sm font-bold text-gray-900">Nachmittag</div><div class="text-[10px] text-gray-500">12:00–16:00</div></div>
+            <div role="button" tabindex="0" class="freq-pill" data-action="select-pref-time" data-value="abend"><div class="text-sm font-bold text-gray-900">Abend</div><div class="text-[10px] text-gray-500">16:00–20:00</div></div>
           </div>
         </div>
 
@@ -203,14 +203,14 @@
           <div class="text-[11px] text-brand-600 mt-2" id="freq-price-month"></div>
         </div>
 
-        <button id="freq-confirm-btn" onclick="confirmFreq()" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">
+        <button id="freq-confirm-btn" data-action="confirm-freq" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">
           Weiter
         </button>
       </div>
 
       <!-- ===== STEP 4: Ort ===== -->
       <div class="step-panel" data-step="4">
-        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
+        <button class="back-btn mb-6" data-action="go-back"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
@@ -229,10 +229,10 @@
           <div>
             <div class="text-sm font-semibold text-gray-700 mb-2 mt-2">Gebäudetyp</div>
             <div class="grid grid-cols-2 gap-2" id="building-type">
-              <div class="opt-card selected" onclick="selectBuilding(this, 'buero_gebaeude')" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Bürogebäude</span></div></div>
-              <div class="opt-card" onclick="selectBuilding(this, 'wohnhaus')" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg hidden" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Wohnhaus</span></div></div>
-              <div class="opt-card" onclick="selectBuilding(this, 'laden')" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg hidden" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Ladengeschäft</span></div></div>
-              <div class="opt-card" onclick="selectBuilding(this, 'sonstiges')" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg hidden" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Sonstiges</span></div></div>
+              <div role="button" tabindex="0" class="opt-card selected" data-action="select-building" data-value="buero_gebaeude" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Bürogebäude</span></div></div>
+              <div role="button" tabindex="0" class="opt-card" data-action="select-building" data-value="wohnhaus" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg hidden" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Wohnhaus</span></div></div>
+              <div role="button" tabindex="0" class="opt-card" data-action="select-building" data-value="laden" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg hidden" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Ladengeschäft</span></div></div>
+              <div role="button" tabindex="0" class="opt-card" data-action="select-building" data-value="sonstiges" style="padding:12px"><div class="flex items-center gap-3"><div class="opt-check" style="width:20px;height:20px"><svg class="check-svg hidden" style="width:12px;height:12px" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></div><span class="text-sm font-medium text-gray-900">Sonstiges</span></div></div>
             </div>
             <input id="building-other" class="card-input mt-2 hidden" placeholder="Was für ein Gebäude ist es?" />
           </div>
@@ -242,14 +242,14 @@
           </div>
         </div>
 
-        <button onclick="confirmLocation()" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">
+        <button data-action="confirm-location" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">
           Verfügbarkeit prüfen
         </button>
       </div>
 
       <!-- ===== STEP 5: Startdatum ===== -->
       <div class="step-panel" data-step="5">
-        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
+        <button class="back-btn mb-6" data-action="go-back"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
@@ -268,9 +268,9 @@
         <!-- Calendar -->
         <div class="bg-white rounded-2xl border border-gray-200 p-5 mb-4">
           <div class="flex items-center justify-between mb-4">
-            <button onclick="changeCalMonth(-1)" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+            <button data-action="change-cal-month" data-delta="-1" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
             <div class="font-bold text-gray-900" id="cal-month-label">April 2026</div>
-            <button onclick="changeCalMonth(1)" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+            <button data-action="change-cal-month" data-delta="1" class="p-2 rounded-lg hover:bg-gray-100 transition"><svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
           </div>
           <div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-gray-400 mb-2">
             <div>Mo</div><div>Di</div><div>Mi</div><div>Do</div><div>Fr</div><div>Sa</div><div>So</div>
@@ -292,14 +292,14 @@
           </div>
         </div>
 
-        <button id="time-confirm-btn" onclick="confirmTime()" disabled class="w-full bg-gray-300 text-gray-500 font-bold px-8 py-4 rounded-full transition text-lg cursor-not-allowed">
+        <button id="time-confirm-btn" data-action="confirm-time" disabled class="w-full bg-gray-300 text-gray-500 font-bold px-8 py-4 rounded-full transition text-lg cursor-not-allowed">
           Bitte Startdatum wählen
         </button>
       </div>
 
       <!-- ===== STEP 6: Ergebnis ===== -->
       <div class="step-panel" data-step="6">
-        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
+        <button class="back-btn mb-6" data-action="go-back"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <div class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold mb-3">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.746 3.746 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.745 3.745 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
@@ -321,12 +321,12 @@
             <div class="grid grid-cols-2 gap-2 text-sm" id="result-details"></div>
           </div>
         </div>
-        <button onclick="goToStep(7)" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">Paket auswählen und weiter</button>
+        <button data-action="go-to-step" data-step="7" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">Paket auswählen und weiter</button>
       </div>
 
       <!-- ===== STEP 7: Upsells ===== -->
       <div class="step-panel" data-step="7">
-        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
+        <button class="back-btn mb-6" data-action="go-back"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Darf es etwas mehr sein?</h2>
           <p class="text-gray-500">Optionale Extras. Kein Muss.</p>
@@ -336,18 +336,18 @@
           <div class="font-bold text-brand-700 text-lg" id="running-total"></div>
         </div>
         <div class="space-y-3 mb-8" id="upsells">
-          <div class="upsell-card" onclick="toggleUpsell(this, 'fenster_extra', 49)"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Fensterreinigung</div><div class="font-bold text-brand-600">+ 49 €</div></div><div class="text-sm text-gray-500">Alle Fenster innen und außen, streifenfrei</div></div></div></div>
-          <div class="upsell-card" onclick="toggleUpsell(this, 'teppich', 39)"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Teppichreinigung</div><div class="font-bold text-brand-600">+ 39 €</div></div><div class="text-sm text-gray-500">Professionelle Tiefenreinigung aller Teppichböden</div></div></div></div>
-          <div class="upsell-card" onclick="toggleUpsell(this, 'kueche', 29)"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Küche intensiv</div><div class="font-bold text-brand-600">+ 29 €</div></div><div class="text-sm text-gray-500">Herd, Backofen, Kühlschrank von außen, Arbeitsflächen</div></div></div></div>
-          <div class="upsell-card" onclick="toggleUpsell(this, 'desinfektion', 35)"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Desinfektion</div><div class="font-bold text-brand-600">+ 35 €</div></div><div class="text-sm text-gray-500">Vollständige Desinfektion aller Kontaktflächen</div></div></div></div>
-          <div class="upsell-card" onclick="toggleUpsell(this, 'schluessel', 0)"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Schlüsselservice</div><div class="font-bold text-brand-600">Kostenlos</div></div><div class="text-sm text-gray-500">Wir kommen auch wenn Sie nicht da sind</div></div></div></div>
+          <div role="button" tabindex="0" class="upsell-card" data-action="toggle-upsell" data-key="fenster_extra" data-price="49"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Fensterreinigung</div><div class="font-bold text-brand-600">+ 49 €</div></div><div class="text-sm text-gray-500">Alle Fenster innen und außen, streifenfrei</div></div></div></div>
+          <div role="button" tabindex="0" class="upsell-card" data-action="toggle-upsell" data-key="teppich" data-price="39"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Teppichreinigung</div><div class="font-bold text-brand-600">+ 39 €</div></div><div class="text-sm text-gray-500">Professionelle Tiefenreinigung aller Teppichböden</div></div></div></div>
+          <div role="button" tabindex="0" class="upsell-card" data-action="toggle-upsell" data-key="kueche" data-price="29"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Küche intensiv</div><div class="font-bold text-brand-600">+ 29 €</div></div><div class="text-sm text-gray-500">Herd, Backofen, Kühlschrank von außen, Arbeitsflächen</div></div></div></div>
+          <div role="button" tabindex="0" class="upsell-card" data-action="toggle-upsell" data-key="desinfektion" data-price="35"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Desinfektion</div><div class="font-bold text-brand-600">+ 35 €</div></div><div class="text-sm text-gray-500">Vollständige Desinfektion aller Kontaktflächen</div></div></div></div>
+          <div role="button" tabindex="0" class="upsell-card" data-action="toggle-upsell" data-key="schluessel" data-price="0"><div class="flex items-center gap-4"><div class="upsell-toggle"></div><div class="flex-1"><div class="flex items-center justify-between"><div class="font-bold text-gray-900">Schlüsselservice</div><div class="font-bold text-brand-600">Kostenlos</div></div><div class="text-sm text-gray-500">Wir kommen auch wenn Sie nicht da sind</div></div></div></div>
         </div>
-        <button onclick="goToStep(8)" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">Weiter zur Buchung</button>
+        <button data-action="go-to-step" data-step="8" class="w-full bg-brand-600 text-white font-bold px-8 py-4 rounded-full hover:bg-brand-700 transition text-lg shadow-lg shadow-brand-200">Weiter zur Buchung</button>
       </div>
 
       <!-- ===== STEP 8: Checkout ===== -->
       <div class="step-panel" data-step="8">
-        <button class="back-btn mb-6" onclick="goBack()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
+        <button class="back-btn mb-6" data-action="go-back"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg> Zurück</button>
         <div class="text-center mb-8">
           <h2 class="serif text-3xl md:text-4xl font-bold text-gray-900 mb-3">Fast geschafft.</h2>
           <p class="text-gray-500">Ihre Buchung ist in 30 Sekunden erledigt.</p>
@@ -365,9 +365,9 @@
             <div class="bg-white rounded-2xl border border-gray-200 p-6">
               <div class="text-sm font-bold text-gray-700 mb-4">Zahlungsmethode</div>
               <div class="flex gap-2 mb-4">
-                <button class="px-4 py-2 rounded-lg border-2 border-brand-500 bg-brand-50 text-sm font-semibold text-brand-700" onclick="setPayment('card', this)">Karte</button>
-                <button class="px-4 py-2 rounded-lg border-2 border-gray-200 text-sm font-semibold text-gray-500 hover:border-gray-300 transition" onclick="setPayment('sepa', this)">SEPA</button>
-                <button class="px-4 py-2 rounded-lg border-2 border-gray-200 text-sm font-semibold text-gray-500 hover:border-gray-300 transition" onclick="setPayment('rechnung', this)">Rechnung</button>
+                <button class="px-4 py-2 rounded-lg border-2 border-brand-500 bg-brand-50 text-sm font-semibold text-brand-700" data-action="set-payment" data-value="card">Karte</button>
+                <button class="px-4 py-2 rounded-lg border-2 border-gray-200 text-sm font-semibold text-gray-500 hover:border-gray-300 transition" data-action="set-payment" data-value="sepa">SEPA</button>
+                <button class="px-4 py-2 rounded-lg border-2 border-gray-200 text-sm font-semibold text-gray-500 hover:border-gray-300 transition" data-action="set-payment" data-value="rechnung">Rechnung</button>
               </div>
               <div id="payment-card" class="space-y-3">
                 <div class="relative"><input class="card-input pr-16" placeholder="Kartennummer" value="4242 4242 4242 4242" /><div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1"><div class="w-8 h-5 rounded bg-blue-600 text-white text-[8px] font-bold flex items-center justify-center">VISA</div><div class="w-8 h-5 rounded bg-red-500 text-white text-[8px] font-bold flex items-center justify-center">MC</div></div></div>
@@ -387,7 +387,7 @@
               <div class="text-sm font-bold text-gray-700 mb-4">Zusammenfassung</div>
               <div class="space-y-3 text-sm" id="checkout-summary"></div>
               <div class="border-t border-gray-100 mt-4 pt-4 flex items-center justify-between"><div class="font-bold text-gray-900">Gesamt</div><div class="text-2xl font-bold text-brand-600" id="checkout-total"></div></div>
-              <button onclick="completePurchase()" id="pay-btn" class="mt-6 w-full bg-brand-600 text-white font-bold py-4 rounded-xl hover:bg-brand-700 transition text-base shadow-lg shadow-brand-200">Jetzt verbindlich buchen</button>
+              <button data-action="complete-purchase" id="pay-btn" class="mt-6 w-full bg-brand-600 text-white font-bold py-4 rounded-xl hover:bg-brand-700 transition text-base shadow-lg shadow-brand-200">Jetzt verbindlich buchen</button>
               <div class="text-[11px] text-gray-400 text-center mt-3">Sie erhalten sofort eine Bestätigung per Mail.</div>
             </div>
           </div>
@@ -412,7 +412,7 @@
             <div class="text-sm text-amber-800">Keine echte Buchung, keine echte Zahlung. Dieser Funnel zeigt wie ein vollständiger Sales-Prozess auf Ihrer Website aussehen kann. Von der Bedarfsanalyse bis zur Zahlung. Alles automatisch.</div>
           </div>
           <div class="flex flex-wrap gap-4 justify-center">
-            <button onclick="resetFunnel()" class="bg-brand-600 text-white font-bold px-6 py-3 rounded-full hover:bg-brand-700 transition">Nochmal ausprobieren</button>
+            <button data-action="reset-funnel" class="bg-brand-600 text-white font-bold px-6 py-3 rounded-full hover:bg-brand-700 transition">Nochmal ausprobieren</button>
             <a href="../" class="border border-gray-300 text-gray-700 font-bold px-6 py-3 rounded-full hover:bg-gray-50 transition">Zurück zum Showcase</a>
           </div>
         </div>
@@ -688,7 +688,7 @@
         if (isUnavail) cls.push('unavailable');
         if (isToday && !isPast) cls.push('today');
         if (isSelected) cls.push('selected');
-        grid.innerHTML += `<div class="${cls.join(' ')}" onclick="pickDate(${calYear},${calMonth},${d},${isUnavail})">${d}</div>`;
+        grid.innerHTML += `<div class="${cls.join(' ')}" role="button" tabindex="0" data-action="pick-date" data-y="${calYear}" data-m="${calMonth}" data-d="${d}" data-unavail="${isUnavail}">${d}</div>`;
       }
     }
 
@@ -825,6 +825,49 @@
     answers.building = 'buero_gebaeude';
     // Init freq UI after page load
     setTimeout(updateFreqUI, 100);
+
+    // ─── Event delegation ────────────────────────────────────────
+    // Every clickable element carries data-action instead of an inline
+    // onclick: one listener handles them all, the calendar days included even
+    // though they are built with innerHTML after this runs. Cards are plain
+    // <div>s, so they also need Enter and Space to be operable by keyboard.
+
+    function runAction(el) {
+      const d = el.dataset;
+      switch (d.action) {
+        case 'select-option':     selectOption(Number(d.step), el, d.value); break;
+        case 'select-building':   selectBuilding(el, d.value); break;
+        case 'select-pref-time':  selectPrefTime(el, d.value); break;
+        case 'select-freq':       selectFreq(d.value); break;
+        case 'toggle-weekday':    toggleWeekday(el, Number(d.day)); break;
+        case 'toggle-upsell':     toggleUpsell(el, d.key, Number(d.price)); break;
+        case 'set-payment':       setPayment(d.value, el); break;
+        case 'go-to-step':        goToStep(Number(d.step)); break;
+        case 'go-back':           goBack(); break;
+        case 'change-cal-month':  changeCalMonth(Number(d.delta)); break;
+        case 'pick-date':         pickDate(Number(d.y), Number(d.m), Number(d.d), d.unavail === 'true'); break;
+        case 'confirm-location':  confirmLocation(); break;
+        case 'confirm-freq':      confirmFreq(); break;
+        case 'confirm-time':      confirmTime(); break;
+        case 'complete-purchase': completePurchase(); break;
+        case 'reset-funnel':      resetFunnel(); break;
+      }
+    }
+
+    document.addEventListener('click', (event) => {
+      const el = event.target.closest('[data-action]');
+      if (el) runAction(el);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      // Only for the div-based cards. Real <button>s already turn Enter and
+      // Space into a click, and handling them here would fire twice.
+      const el = event.target.closest('[data-action][role="button"]');
+      if (!el) return;
+      event.preventDefault();
+      runAction(el);
+    });
   </script>
 
 <footer style="padding:1.5rem 1rem">
