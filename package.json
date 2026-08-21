@@ -1,0 +1,12 @@
+{
+  "name": "client-showcase",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo websites for client conversations. Static HTML, no framework.",
+  "scripts": {
+    "build:css": "node build-css.js"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

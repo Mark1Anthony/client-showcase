@@ -49,16 +49,39 @@ Bedienbar mit Maus und Tastatur: die Auswahlkarten sind `role="button"` mit
 
 ## Technik
 
-Statisches HTML, kein Build-Schritt, kein Framework. Tailwind wird derzeit über
-das CDN geladen, JavaScript ist Vanilla und liegt inline in der jeweiligen Seite.
-Interaktionen laufen über Event-Delegation (`data-action`-Attribute) statt über
-`onclick` im Markup.
+Statisches HTML, kein Framework. JavaScript ist Vanilla und liegt inline in der
+jeweiligen Seite; Interaktionen laufen über Event-Delegation
+(`data-action`-Attribute) statt über `onclick` im Markup.
 
 ```bash
 # Lokal ansehen - es reicht ein beliebiger statischer Server
 python -m http.server 8000
-# oder eine Datei direkt im Browser öffnen
 ```
+
+Die Seiten müssen über einen Server laufen, nicht per Doppelklick: jede lädt ihr
+Stylesheet über einen relativen Pfad.
+
+### Stylesheets
+
+Jede Seite lädt ihr eigenes, vorkompiliertes `site.css`. Diese Dateien sind
+eingecheckt, damit GitHub Pages ohne Build-Schritt funktioniert. Nach Änderungen
+an den Klassen im Markup:
+
+```bash
+npm install
+npm run build:css
+```
+
+Das erzeugt für jede Seite ein auf ihre tatsächlich verwendeten Klassen
+reduziertes Stylesheet (10–23 KB statt des kompletten Frameworks zur Laufzeit).
+
+Warum ein Stylesheet **pro Seite** statt einem gemeinsamen: die Seiten haben
+unvereinbare Themes. Vier belegen `font-display` mit drei verschiedenen Schriften
+(Fraunces, Playfair Display, Instrument Serif), und `strahlkraft` überschreibt
+Tailwinds eingebaute `teal`-Palette. Ein gemeinsames Stylesheet müsste diese
+Konflikte auflösen und würde damit das Design ändern. Die Themes stehen in
+[`tailwind.themes.js`](tailwind.themes.js), der Build in
+[`build-css.js`](build-css.js).
 
 ### `glanz-klar/`
 

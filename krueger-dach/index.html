@@ -12,64 +12,11 @@
 <meta property="og:image" content="https://images.unsplash.com/photo-1632759145351-1d592919f522?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" />
 <meta property="og:locale" content="de_DE" />
 <meta name="twitter:card" content="summary_large_image" />
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="site.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fraunces:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Fraunces', 'serif'],
-      },
-      colors: {
-        clay: {
-          50:  '#fdf6f3',
-          100: '#fbe9e1',
-          200: '#f7d0c0',
-          300: '#f0ac92',
-          400: '#e67f5a',
-          500: '#d95d36',
-          600: '#c7462a',
-          700: '#a53722',
-          800: '#863022',
-          900: '#6e2b21',
-          950: '#3b130e',
-        },
-        ink: {
-          50:  '#f6f6f5',
-          100: '#e7e6e4',
-          200: '#cfcdc8',
-          300: '#aeaaa3',
-          400: '#87827a',
-          500: '#6b665e',
-          600: '#55514b',
-          700: '#45413d',
-          800: '#3a3733',
-          900: '#27241f',
-          950: '#15130f',
-        }
-      },
-      animation: {
-        'fade-up': 'fadeUp 0.8s ease-out forwards',
-        'fade-in': 'fadeIn 1s ease-out forwards',
-      },
-      keyframes: {
-        fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(24px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        }
-      }
-    }
-  }
-}
-</script>
+
 <style>
   html { scroll-behavior: smooth; }
   body { font-family: 'Inter', sans-serif; }

@@ -12,79 +12,11 @@
 <meta property="og:image" content="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" />
 <meta property="og:locale" content="de_DE" />
 <meta name="twitter:card" content="summary_large_image" />
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="site.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['"Instrument Serif"', 'serif'],
-      },
-      colors: {
-        teal: {
-          50:  '#ecfdf9',
-          100: '#d0faf1',
-          200: '#a4f3e3',
-          300: '#6ce6d1',
-          400: '#36d0b9',
-          500: '#17b5a0',
-          600: '#0f9283',
-          700: '#12746b',
-          800: '#135c57',
-          900: '#144c49',
-          950: '#052c2c',
-        },
-        mint: {
-          50:  '#f0fdf6',
-          100: '#dbfce9',
-          200: '#b9f7d3',
-          300: '#83eead',
-          400: '#46dc82',
-          500: '#1fc362',
-          600: '#14a24d',
-        },
-        slate2: {
-          50:  '#f7f8f8',
-          100: '#eceeee',
-          200: '#d5dada',
-          300: '#b0baba',
-          400: '#859393',
-          500: '#697878',
-          600: '#536161',
-          700: '#444f4f',
-          800: '#3a4343',
-          900: '#1f2727',
-          950: '#0f1414',
-        }
-      },
-      animation: {
-        'fade-up': 'fadeUp 0.8s ease-out forwards',
-        'fade-in': 'fadeIn 1s ease-out forwards',
-        'float': 'float 6s ease-in-out infinite',
-        'float-delayed': 'float 7s ease-in-out 1s infinite',
-      },
-      keyframes: {
-        fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(24px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        float: {
-          '0%,100%': { transform: 'translateY(0) scale(1)' },
-          '50%': { transform: 'translateY(-20px) scale(1.05)' },
-        }
-      }
-    }
-  }
-}
-</script>
+
 <style>
   html { scroll-behavior: smooth; }
   body { font-family: 'Inter', sans-serif; }
